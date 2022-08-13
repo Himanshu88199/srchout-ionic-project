@@ -1,0 +1,15 @@
+.bg-grey{
+    background-color:  #324755;
+    /* height: 91px; */
+}
+
+.bg-custom{
+    --background: #324755
+}
+
+.white-head{
+    height: 25px;
+    background-color: #ffffff;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}

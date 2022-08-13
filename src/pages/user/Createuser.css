@@ -1,0 +1,33 @@
+.bg-grey{
+    height: 91px;
+}
+
+.bg-fix{
+    background-color: #324755;
+}
+
+.white-head{
+    height: 25px;
+    background-color: #ffffff;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}
+
+.center{
+    text-align: center;
+}
+
+.text-grey{
+    margin-bottom: 16px;
+    font-size: 16px;
+    color:#808080;
+    font-weight: bold;
+}
+
+.mt-56{
+    margin-top: 56px;
+}
+
+.sign-btn{
+    background:rgba(76, 161, 216, 1);
+}

@@ -1,0 +1,61 @@
+.login-background {
+    background-image: url("/public/assets/login-background.png");
+}
+
+.logo-outer {
+    position: relative;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 61px;
+    height: 81px;
+    width: 81px;
+    border-radius: 50%;
+    background: #EEEEEE;
+}
+
+.fs-25{
+    font-size: 25px;
+    margin-top: 19px;
+    color: white;
+}
+
+
+
+.empty{
+    padding: 36px 0px;
+    margin-top: 19px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    background: #FFFFFF;
+}
+
+.logo {
+    Width: 50px;
+    Height: 50px;
+    position: absolute;
+    left: 18px;
+    top:15px;
+}
+
+.sign-with{
+    text-align: center;
+    margin-top: 35px;
+    font-size: 14px;
+    color: #808080;
+}
+
+
+.light-text{
+    font-size: 14px;
+    color: #808080;
+}
+
+.center{
+    text-align: center;
+}
+
+.dark-text{
+    font-weight: bold;
+    font-size: 14px;
+    color: #808080;
+}

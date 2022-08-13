@@ -1,0 +1,43 @@
+.sign-in {
+    font-size: 16px;
+    color: #707070;
+    text-align: center;
+    font-weight: 700;
+    height: 36px;
+    padding-top: 0%;
+}
+
+.input-border {
+    border: 1px solid lightgrey;
+    border-radius: 9px;
+    width: 90vw;
+    margin:auto;
+}
+
+.remember-forgot{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    color: #808080;
+    width: 88vw;
+    margin: auto;
+    font-size: 14px;
+}
+
+.remember-forgot a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #808080;
+}
+
+.m-auto{
+    margin:auto;
+}
+
+.mt-67{
+    margin-top: 67px;
+}
+
+.sign-btn{
+    background:rgba(76, 161, 216, 1);
+}
