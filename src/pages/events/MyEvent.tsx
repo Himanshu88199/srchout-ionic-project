@@ -7,7 +7,7 @@ const MyEvent: React.FC = () => {
         <>
             <IonPage className='pg-grey'>
                 <Header />
-                <IonContent>
+                <IonContent className='border-radius'>
                     <IonRow>
                         <IonCol className='center text-grey'>
                             EVENTS

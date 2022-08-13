@@ -10,3 +10,8 @@
 .center{
     margin: auto;
 }
+
+.logo-size{
+    height: 35px !important;
+    width: 35px !important;
+}

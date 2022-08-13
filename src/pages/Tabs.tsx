@@ -7,6 +7,7 @@ import Setting from './settings/Setting';
 import Createuser from './user/Createuser';
 
 import './Tabs.css';
+import Header from './Header';
 
 const Tabs: React.FC = () => {
     return (
@@ -15,29 +16,37 @@ const Tabs: React.FC = () => {
 
                 <IonTabs>
                     <IonRouterOutlet >
-                        <Route exact path="/tab1">
-                            <Setting />
+                        <Route exact path="/home">
+
                         </Route>
-                        <Route exact path="/tab2">
+                        <Route exact path="/event">
                             <MyEvent />
                         </Route>
-                        <Route path="/tab3">
-                            <Createuser />
+                        <Route path="/task">
+                            <Setting />
                         </Route>
-                        <Route exact path="/">
+                        <Route path="/setting">
+                            <Setting />
+                        </Route>
+                        <Route exact path="/app">
                             <Redirect to="/tab1" />
                         </Route>
                     </IonRouterOutlet>
+                    
                     <IonTabBar className='dark-tabbar' slot="bottom">
-                        <IonTabButton tab="tab1" href="/settings/Setting">
+                        <IonTabButton tab="tab1" href="/home">
                             <IonIcon src='../assets/home.svg' />
                             <IonLabel className='c-fff'>Home</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab2" href="/tab2">
+                        <IonTabButton tab="tab2" href="/event">
                             <IonIcon src='../assets/events.svg' />
                             <IonLabel className='c-fff'>Events</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab3" href="/tab3">
+                        <IonTabButton tab="tab3" href="/task">
+                            <IonIcon src='../assets/task.svg' />
+                            <IonLabel className='c-fff'>Task</IonLabel>
+                        </IonTabButton>
+                        <IonTabButton tab="tab4" href="/setting">
                             <IonIcon src='../assets/setting.svg' />
                             <IonLabel className='c-fff'>Settings</IonLabel>
                         </IonTabButton>

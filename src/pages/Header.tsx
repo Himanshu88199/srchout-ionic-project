@@ -7,8 +7,12 @@ const Header: React.FC = () => {
             <IonRow>
                 <IonCol size='12'>
                     <IonItem className='bg-custom'>
-                        <IonIcon slot='start' src='../assets/back.svg' />
-                        <IonIcon slot='end' src='../assets/bell.svg' />
+                        <IonButton className='pl-0' slot='start' size='default' fill='clear'>
+                        <IonIcon className='size' src='../assets/back.svg' />
+                        </IonButton>
+                        <IonButton className='pr-0' slot='end' size='default' fill='clear'>
+                        <IonIcon className='size' src='../assets/bell.svg' />
+                        </IonButton>
                     </IonItem>
                 </IonCol>
                 <IonCol className='white-head'></IonCol>

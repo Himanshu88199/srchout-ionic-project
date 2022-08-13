@@ -7,17 +7,17 @@ const LoginIcons: React.FC = () => {
             <IonRow className='center'>
                 <IonCol>
                     <IonButton className="round-logo-buttons" size="small" shape="round" fill="outline">
-                        <IonIcon  src='../assets/google.svg' />
+                        <IonIcon className='logo-size' src='../assets/google.svg' />
                     </IonButton> 
                 </IonCol>
                 <IonCol>
                     <IonButton className="round-logo-buttons" size="small" shape="round" fill="outline">
-                        <IonIcon  src='../assets/apple.svg' />
+                        <IonIcon className='logo-size' src='../assets/apple.svg' />
                     </IonButton> 
                 </IonCol>
                 <IonCol>
                     <IonButton className="round-logo-buttons" size="small" shape="round" fill="outline">
-                        <IonIcon  src='../assets/facebook.svg' />
+                        <IonIcon className='logo-size' src='../assets/facebook.svg' />
                     </IonButton> 
                 </IonCol>
             </IonRow>

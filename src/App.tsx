@@ -27,6 +27,14 @@ import Tabs from './pages/Tabs';
 import Setting from './pages/settings/Setting';
 import ChangePassword from './pages/settings/ChangePassword';
 import MyEvent from './pages/events/MyEvent';
+import ContactUs from './pages/settings/ContactUs';
+import MyProfile from './pages/settings/MyProfile';
+import Notifications from './pages/Notifications';
+import CreatePersonalTask from './pages/task/CreatePersonalTask';
+import CreateEventTask from './pages/task/CreateEventTask';
+import CreateEvent from './pages/events/CreateEvent';
+import InviteAttendees from './pages/events/InviteAttendees';
+import EventDetails from './pages/events/EventDetails';
 
 setupIonicReact();
 
@@ -42,7 +50,15 @@ const App: React.FC = () => (
         <Route exact path="/home" component={Home}  />
         <Route exact path="/createuser" component={Createuser} />
         <Route exact path="/events" component={MyEvent} />
-        {/* <Route exact path="/changepassword" component={ChangePassword} /> */}
+        <Route exact path="/eventdetails" component={EventDetails} />
+        <Route exact path="/createpersonaltask" component={CreatePersonalTask} />
+        <Route exact path="/createeventtask" component={CreateEventTask} />
+        <Route exact path="/createevent" component={CreateEvent} />
+        <Route exact path="/contactus" component={ContactUs} />
+        <Route exact path="/notifications" component={Notifications} />
+        <Route exact path="/myprofile" component={MyProfile} />
+        <Route exact path="/inviteattendees" component={InviteAttendees} />
+        <Route exact path="/changepassword" component={ChangePassword} />
         {/* <Route exact path="/setting" component={Setting} /> */}
         <Route exact path="/app" component={Tabs} />
       </IonRouterOutlet>
