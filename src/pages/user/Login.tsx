@@ -1,5 +1,6 @@
 import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import './login.css';
+import LoginIcons from './loginIcons';
 
 const Login: React.FC = () => {
   return (
@@ -34,6 +35,15 @@ const Login: React.FC = () => {
       <IonCol className='m-auto mt-67' size='11'>
         <IonButton className='sign-btn' size='default' expand="block">Sign In</IonButton>
       </IonCol>
+        <IonCol size='12' className='sign-with'>
+          Or sign in with
+        </IonCol>
+      <IonRow>
+        <LoginIcons />
+      </IonRow>
+        <IonCol className='center'>
+          <span className='light-text'>Don't have an account?</span><a href='/createuser'><span className='dark-text'>Sign Up</span></a>
+        </IonCol>
 
     </>
   );

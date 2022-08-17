@@ -9,10 +9,10 @@ const Createuser: React.FC = () => {
         <>
             <IonPage >
                 <IonContent>
-                <IonRow className='bg-fix'>
-                    <IonCol size='12' className='bg-grey'></IonCol>
-                    <IonCol size='12' className='white-head'></IonCol>
-                </IonRow>
+                    <IonRow className='bg-fix'>
+                        <IonCol size='12' className='bg-grey'></IonCol>
+                        <IonCol size='12' className='white-head'></IonCol>
+                    </IonRow>
                     <IonRow>
                         <IonCol className='center text-grey'>
                             CREATE YOUR ACCOUNT
@@ -31,7 +31,13 @@ const Createuser: React.FC = () => {
                         </IonCol>
                         <IonCol>
                             <IonItem className='input-border'>
-                                <IonIcon slot='start' src='../assets/email.svg'></IonIcon>
+                                <IonSelect>
+                                    <IonSelectOption value="+1">+1</IonSelectOption>
+                                    <IonSelectOption value="+91">+91</IonSelectOption>
+                                    <IonSelectOption value="+92">+92</IonSelectOption>
+                                    <IonSelectOption value="+11">+11</IonSelectOption>
+                                </IonSelect>
+                                {/* <IonIcon slot='start' src='../assets/email.svg'></IonIcon> */}
                                 <IonInput value={''} placeholder="Phone Number"></IonInput>
                             </IonItem>
                         </IonCol>
@@ -64,7 +70,7 @@ const Createuser: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol className='center'>
-                            <span className='light-text'>Don't have an account?</span><span className='dark-text'>Sign Up</span>
+                            <span className='light-text'>Already have an account?</span><a href='/'><span className='dark-text'>Sign In</span></a>
                         </IonCol>
                     </IonRow>
                 </IonContent>

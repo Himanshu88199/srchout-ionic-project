@@ -23,19 +23,7 @@ const Home: React.FC = () => {
           <IonRow>
             <Login />
           </IonRow>
-          <IonRow>
-            <IonCol size='12' className='sign-with'>
-              Or sign in with
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <LoginIcons />
-          </IonRow>
-          <IonRow>
-            <IonCol className='center'>
-              <span className='light-text'>Don't have an account?</span><span className='dark-text'>Sign Up</span>
-            </IonCol>
-          </IonRow>
+          
         </IonGrid>
       </IonContent>
     </IonPage>

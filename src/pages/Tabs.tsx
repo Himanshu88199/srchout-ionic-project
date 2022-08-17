@@ -8,6 +8,7 @@ import Createuser from './user/Createuser';
 
 import './Tabs.css';
 import Header from './Header';
+import EventsPage from './events/EventsPage';
 
 const Tabs: React.FC = () => {
     return (
@@ -31,6 +32,7 @@ const Tabs: React.FC = () => {
                         <Route exact path="/app">
                             <Redirect to="/tab1" />
                         </Route>
+
                     </IonRouterOutlet>
                     
                     <IonTabBar className='dark-tabbar' slot="bottom">

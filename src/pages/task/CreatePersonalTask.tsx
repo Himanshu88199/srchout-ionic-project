@@ -26,7 +26,7 @@ const CreatePersonalTask: React.FC = () => {
                             Task Description:
                         </IonCol>
                         <IonCol className='pd-0' size='12'>
-                            <IonTextarea rows={6} className='input-border-2'></IonTextarea>
+                            <IonTextarea rows={3} className='input-border-2'></IonTextarea>
                         </IonCol>
                     </IonRow>
                     <IonRow>
