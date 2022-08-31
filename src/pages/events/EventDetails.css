@@ -9,32 +9,19 @@
   margin-bottom: 12px;
 }
 
-.icon-size {
-  width: 25px;
+.icon-size-2 {
+  width: 15px;
   height: 18px;
   /* margin-left: 34px; */
 }
 
-<<<<<<< HEAD
-.icon-size-2{
-    width: 15px;
-    height: 18px;
-    /* margin-left: 34px; */
+.p-0 {
+  padding-right: 0px;
 }
 
-.p-0{
-    padding-right: 0px;
-}
-
-.btn-right{
-    padding-right: 0px;
-    margin-left: auto;
-    margin-right:0px;
-=======
 .btn-right {
   margin-left: auto;
   margin-right: 0px;
->>>>>>> 0721e7287e8e01960e2efd85fb553f92d6f5305a
 }
 
 .dark-text {

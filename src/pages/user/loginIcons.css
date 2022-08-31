@@ -1,20 +1,10 @@
-<<<<<<< HEAD
-.round-logo-buttons{
-    --padding: 0 !important;
-    border-radius: 50%;
-    height: 50px;
-    margin: 23px 20px;
-    width: 50px;
-    --border-color:rgba(112, 112, 112, 1);
-=======
 .round-logo-buttons {
-  padding: 0%;
+  --padding: 0 !important;
   border-radius: 50%;
   height: 50px;
   margin: 23px 20px;
   width: 50px;
   --border-color: rgba(112, 112, 112, 1);
->>>>>>> 0721e7287e8e01960e2efd85fb553f92d6f5305a
 }
 
 .center {
@@ -26,7 +16,7 @@
   width: 35px !important;
 }
 
-.round-logo-buttons .button-native{
-    padding-inline-start: 0 !important;
-    padding-inline-end: 0 !important;
+.round-logo-buttons .button-native {
+  padding-inline-start: 0 !important;
+  padding-inline-end: 0 !important;
 }

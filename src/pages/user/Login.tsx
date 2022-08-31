@@ -64,19 +64,6 @@ const Login: React.FC = () => {
           <a href="">Forgot Password</a>
         </div>
       </IonRow>
-<<<<<<< HEAD
-      <IonCol className='m-auto mt-51' size='11'>
-        <IonButton className='sign-btn' size='default' expand="block">Sign In</IonButton>
-      </IonCol>
-        <IonCol size='12' className='sign-with'>
-          Or sign in with
-        </IonCol>
-      <IonRow className='center'>
-        <LoginIcons />
-      </IonRow>
-        <IonCol size='12' className='center'>
-          <span className='light-text'>Don't have an account?</span><a href='/createuser'><span className='dark-text'>Sign Up</span></a>
-=======
       <IonCol className="m-auto mt-67" size="11">
         <IonButton className="sign-btn" size="default" expand="block">
           Sign In
@@ -94,10 +81,8 @@ const Login: React.FC = () => {
           <a href="/createuser">
             <span className="dark-text">Sign Up</span>
           </a>
->>>>>>> 0721e7287e8e01960e2efd85fb553f92d6f5305a
         </IonCol>
       </IonRow>
-   
     </>
   );
 };
