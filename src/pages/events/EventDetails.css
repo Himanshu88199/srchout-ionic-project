@@ -1,41 +1,51 @@
 .bg-light-grey {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    margin: auto;
-    padding: 12px 12px 0px 12px;
-    width: 85vw;
-    background: rgb(238, 238, 238, 1);
-    color: rgba(238, 238, 238, 1);
-    margin-bottom: 12px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  margin: auto;
+  padding: 12px 12px 0px 12px;
+  width: 85vw;
+  background: rgb(238, 238, 238, 1);
+  color: rgba(238, 238, 238, 1);
+  margin-bottom: 12px;
 }
 
-.icon-size{
-    width: 25px;
-    height: 18px;
-    /* margin-left: 34px; */
+.icon-size {
+  width: 25px;
+  height: 18px;
+  /* margin-left: 34px; */
 }
 
-.btn-right{
-    margin-left: auto;
-    margin-right: 0px;
+.btn-right {
+  margin-left: auto;
+  margin-right: 0px;
 }
 
 .dark-text {
-    font-weight: 600;
+  font-weight: 600;
+  color: #324755;
+}
+
+.invite-text {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.event-text {
+  font-weight: 400;
 }
 
 .mt-11 {
-    margin-top: 11px;
+  margin-top: 11px;
 }
 
 .mt-9 {
-    margin-top: 9px;
+  margin-top: 9px;
 }
 
 .mt-8 {
-    margin-top: 8px;
+  margin-top: 8px;
 }
 
 .mt-16 {
-    margin-top: 16px;
+  margin-top: 16px;
 }
