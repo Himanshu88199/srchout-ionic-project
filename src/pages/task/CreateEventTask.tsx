@@ -47,14 +47,14 @@ const CreateEventTask: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol size='12' className='text-grey2 pb-0 ml-10'>
-                            Category:
+                            Assign Task To:
                         </IonCol>
                         <IonCol className='pd-0' size='12'>
                             <IonInput className='input-border'></IonInput>
                         </IonCol>
                     </IonRow>
                     <IonRow>
-                        <IonCol className='m-auto mt-43' size='11'>
+                        <IonCol className='m-auto mt-34' size='11'>
                             <IonButton className='sign-btn' size='default' expand="block">Save</IonButton>
                         </IonCol>
                     </IonRow>

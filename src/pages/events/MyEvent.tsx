@@ -9,29 +9,37 @@ import './MyEvent.css';
 const MyEvent: React.FC = () => {
     return (
         <>
-<IonPage>
-    <Header />
-    <IonContent>
-<EventsPage />
+            <IonPage className='pg-grey'>
+                <Header />
+                <EventsPage />
+                    {/* <IonTabBar className='custom-tabbar mt-58' slot='top'>
+                        <IonTabButton className='button-1' tab="tab1" href="/myevents">
+                            <IonLabel className=''>My Events</IonLabel>
+                        </IonTabButton>
+                        <IonTabButton className='button-1' tab="tab2" href="/invitedevent">
+                            <IonLabel className=''>Invited Events</IonLabel>
+                        </IonTabButton>
+                    </IonTabBar> */}
+                <IonContent>
 
-            <IonCol className='pd-0 ' size='12' >
-                <IonLabel className='dark-text'> Event:</IonLabel>
-                <IonText>World cup soccer finals</IonText>
-            </IonCol>
-            <IonCol className='pd-0 ' size='12' >
-                <IonLabel className='dark-text'>Location:</IonLabel>
-                <IonText>Babu's House</IonText>
-            </IonCol>
-            <IonCol className='pd-0 ' size='12' >
-                <IonLabel className='dark-text'> Date: </IonLabel>
-                <IonText>Aug 20, 2022</IonText>
-            </IonCol>
-            <IonCol className='pd-0 ' size='12' >
-                <IonLabel className='dark-text'> Time:</IonLabel>
-                <IonText>3:00PM</IonText>
-            </IonCol>
-    </IonContent>
-</IonPage>
+                    {/* <IonCol className='pd-0 ' size='12' >
+                        <IonLabel className='dark-text'> Event:</IonLabel>
+                        <IonText>World cup soccer finals</IonText>
+                    </IonCol>
+                    <IonCol className='pd-0 ' size='12' >
+                        <IonLabel className='dark-text'>Location:</IonLabel>
+                        <IonText>Babu's House</IonText>
+                    </IonCol>
+                    <IonCol className='pd-0 ' size='12' >
+                        <IonLabel className='dark-text'> Date: </IonLabel>
+                        <IonText>Aug 20, 2022</IonText>
+                    </IonCol>
+                    <IonCol className='pd-0 ' size='12' >
+                        <IonLabel className='dark-text'> Time:</IonLabel>
+                        <IonText>3:00PM</IonText>
+                    </IonCol> */}
+                </IonContent>
+            </IonPage>
 
         </>
     );

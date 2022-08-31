@@ -15,9 +15,20 @@
     /* margin-left: 34px; */
 }
 
+.icon-size-2{
+    width: 15px;
+    height: 18px;
+    /* margin-left: 34px; */
+}
+
+.p-0{
+    padding-right: 0px;
+}
+
 .btn-right{
+    padding-right: 0px;
     margin-left: auto;
-    margin-right: 0px;
+    margin-right:0px;
 }
 
 .dark-text {

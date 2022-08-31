@@ -32,16 +32,16 @@ const Login: React.FC = () => {
           <a href="">Forgot Password</a>
         </div>
       </IonRow>
-      <IonCol className='m-auto mt-67' size='11'>
+      <IonCol className='m-auto mt-51' size='11'>
         <IonButton className='sign-btn' size='default' expand="block">Sign In</IonButton>
       </IonCol>
         <IonCol size='12' className='sign-with'>
           Or sign in with
         </IonCol>
-      <IonRow>
+      <IonRow className='center'>
         <LoginIcons />
       </IonRow>
-        <IonCol className='center'>
+        <IonCol size='12' className='center'>
           <span className='light-text'>Don't have an account?</span><a href='/createuser'><span className='dark-text'>Sign Up</span></a>
         </IonCol>
 

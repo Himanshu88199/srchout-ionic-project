@@ -1,5 +1,5 @@
 .round-logo-buttons{
-    padding: 0%;
+    --padding: 0 !important;
     border-radius: 50%;
     height: 50px;
     margin: 23px 20px;
@@ -14,4 +14,9 @@
 .logo-size{
     height: 35px !important;
     width: 35px !important;
+}
+
+.round-logo-buttons .button-native{
+    padding-inline-start: 0 !important;
+    padding-inline-end: 0 !important;
 }

@@ -65,11 +65,11 @@ const Createuser: React.FC = () => {
                             or Register with
                         </IonCol>
                     </IonRow>
-                    <IonRow>
+                    <IonRow className='center'>
                         <LoginIcons />
                     </IonRow>
                     <IonRow>
-                        <IonCol className='center'>
+                        <IonCol size='12' className='center'>
                             <span className='light-text'>Already have an account?</span><a href='/'><span className='dark-text'>Sign In</span></a>
                         </IonCol>
                     </IonRow>

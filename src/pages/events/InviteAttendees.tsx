@@ -30,7 +30,7 @@ const InviteAttendees: React.FC = () => {
                         </IonCol>
                     </IonRow>
                     <IonRow>
-                        <IonCol className='m-auto mt-34' size='11'>
+                        <IonCol className='m-auto mt-41' size='11'>
                             <IonButton className='sign-btn' size='default' expand="block">Save</IonButton>
                         </IonCol>
                     </IonRow>

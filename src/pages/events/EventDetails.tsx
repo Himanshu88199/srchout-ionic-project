@@ -77,15 +77,15 @@ const EventDetails: React.FC = () => {
                             </IonRow>
                         </IonRow>
                         <IonRow className='btn-right'>
-                            <IonCol>
+                            <IonCol className='p-0'>
                                 <IonButton fill='clear' >
                                     <IonIcon className='icon-size' src='../assets/users.svg' />
                                 </IonButton>
                                 <IonButton fill='clear'>
-                                    <IonIcon className='icon-size' src='../assets/tick.svg' />
+                                    <IonIcon className='icon-size-2' src='../assets/tick.svg' />
                                 </IonButton>
                                 <IonButton fill='clear'>
-                                    <IonIcon className='icon-size' src='../assets/edit.svg' />
+                                    <IonIcon className='icon-size-2' src='../assets/edit.svg' />
                                 </IonButton>
                             </IonCol>
                         </IonRow>
