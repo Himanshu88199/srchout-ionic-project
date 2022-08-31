@@ -30,11 +30,10 @@ import "./MyEvent.css";
 const MyEvent: React.FC = () => {
   return (
     <>
-      <IonPage>
+      <IonPage className="pg-grey">
         <Header />
         <IonContent>
           <EventsPage />
-
           <IonRow>
             <IonCol>
               <p className="event-heading">EVENTS</p>

@@ -29,11 +29,10 @@ import "./Assignedtasks.css";
 const Assignedtasks: React.FC = () => {
   return (
     <>
-      <IonPage>
+      <IonPage className="pg-grey">
         <Header />
         <IonContent>
           <EventsPage />
-
           <IonRow>
             <IonCol>
               <p className="event-heading">EVENTS</p>
@@ -155,9 +154,8 @@ const Assignedtasks: React.FC = () => {
               </div>
             </IonCol>
           </IonRow>
-
-          <Footer />
         </IonContent>
+        <Footer />
       </IonPage>
     </>
   );
