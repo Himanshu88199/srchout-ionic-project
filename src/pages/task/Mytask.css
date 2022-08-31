@@ -1,31 +1,29 @@
-.pg-grey {
-  background: #324755;
+.pd-0 {
+  padding-top: 0px !important;
 }
 
-.text-left {
-  text-align: left;
+.pb-0 {
+  padding-bottom: 0px !important;
 }
 
-.event-heading {
-  text-align: center;
-  color: #707070;
-  font-size: 16px;
-  font-weight: 700;
+.save-btn-row {
+  padding-bottom: 100px;
 }
 
-.events {
+.tasks {
   margin: 15px 20px;
   padding: 10px;
   background: #eeeeee;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
   border-radius: 10px;
+  border: 1px solid #555;
 }
 
-.events-btns {
+.tasks-btns {
   margin: 0 20px;
 }
 
-.event-btn {
+.task-btn {
   padding: 10px;
   border-radius: 10px;
   width: 50%;
@@ -37,29 +35,30 @@
   outline: none;
 }
 
-.event-btn:focus {
+.light-tex {
+  color: #324755;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.light-text span {
+  font-weight: 600;
+}
+
+.task-btn:focus {
   background: #4ca1d8;
   border-radius: 10px;
   border: none;
   color: #fff;
 }
 
-.events:nth-child(odd) {
+.tasks:nth-child(even) {
   background: #fff;
 }
 
-.event {
+.task {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 2px;
-}
-
-.events-icons {
-  text-align: end;
-  padding-right: 4px;
-}
-
-.user-img {
-  margin-left: 25px;
 }
