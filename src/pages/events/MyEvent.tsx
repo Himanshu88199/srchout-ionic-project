@@ -128,7 +128,7 @@ const MyEvent: React.FC = () => {
               <img className="user-img" src="../../../assets/edit.svg" alt="" />
             </IonCol>
           </IonRow>
-          <Footer />
+          {/* <Footer /> */}
         </IonContent>
       </IonPage>
     </>

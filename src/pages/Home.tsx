@@ -9,9 +9,9 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import Footer from "../components/Footer";
 import "./Home.css";
 import Login from "./user/Login";
-import LoginIcons from "./user/loginIcons";
 
 const Home: React.FC = () => {
   return (
@@ -32,10 +32,8 @@ const Home: React.FC = () => {
           <IonRow className="login-box">
             <Login />
           </IonRow>
-          <IonRow>
-            <IonCol className="bg-dark"></IonCol>
-          </IonRow>
         </IonGrid>
+        <Footer />
       </IonContent>
     </IonPage>
   );
