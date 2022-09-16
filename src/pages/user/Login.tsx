@@ -32,7 +32,6 @@ import LoginIcons from "./loginIcons";
 // }
 
 const Login: React.FC = () => {
-
   const {
     register,
     handleSubmit,
@@ -163,7 +162,12 @@ const Login: React.FC = () => {
         </IonRow>
         <IonRow>
           <IonCol className="m-auto mt-67" size="11">
-            <IonButton type="submit" className="sign-btn" size="default" expand="block">
+            <IonButton
+              type="submit"
+              className="sign-btn"
+              size="default"
+              expand="block"
+            >
               Sign In
             </IonButton>
           </IonCol>
