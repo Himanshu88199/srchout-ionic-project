@@ -1,0 +1,28 @@
+.ml-10{
+    margin-left: 5vw;
+}
+
+.mt-43{
+    margin-top: 43px;
+}
+
+.mt-32{
+    margin-top: 32px;
+}
+
+.text-grey2{
+    font-size: 14px !important;
+    line-height: 17.07px;
+    font-weight: 400 !important;
+    color: rgba(128, 128, 128, 1) !important;
+}
+
+.input-border-2 {
+    border: 1px solid rgb(131, 131, 131);
+    border-radius: 9px;
+    width: 87vw;
+    font-size: 14px;
+    margin:auto;
+    margin-top: 3px;
+    box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.13)
+}

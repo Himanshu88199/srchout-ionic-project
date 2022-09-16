@@ -1,0 +1,78 @@
+.sign-in {
+  font-size: 16px;
+  color: #707070;
+  text-align: center;
+  font-weight: 700;
+  height: 36px;
+  padding-top: 0%;
+}
+
+.text-center {
+  margin: 0 auto;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.input-border {
+  border: 1px solid #707070;
+  border-radius: 9px;
+  width: 87vw;
+  height: 48px;
+  font-size: 14px;
+  margin: auto;
+  margin-top: 3px;
+  box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.13);
+}
+
+.input-text {
+  font-size: 15px;
+}
+
+.item-native {
+  padding-left: 0;
+}
+
+.sign-with {
+  text-align: center;
+  margin-top: 35px;
+  font-size: 14px;
+  color: #808080;
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  color: #808080;
+  width: 88vw;
+  margin: auto;
+  font-size: 14px;
+}
+
+.mt-51 {
+  margin-top: 51px;
+}
+
+.sign-btn {
+  --background-color: rgba(76, 161, 216, 1);
+}
+
+.remember-forgot a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #808080;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.mt-67 {
+  margin-top: 67px;
+}
+
+.sign-btn {
+  background: #4ca1d8;
+}

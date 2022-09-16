@@ -1,0 +1,38 @@
+.custom-tabbar{
+    overflow: visible;
+    height: 25px;
+    width: 303px !important;
+    margin: auto;
+    z-index: 5;
+    opacity: 1;
+    background: #fff;
+    text-align: center;
+}
+
+.button-1{
+    border-radius: 9px;
+    --background-selected:rgba(76, 161, 216, 1);
+    border: 1px solid black !important;
+}
+
+.button-1.tab-selected{
+    color: #fff;
+    border-radius: 9px;
+    background: rgba(76, 161, 216, 1);
+    border: 1px solid rgba(76, 161, 216, 1);
+}
+
+.mt-58{
+    margin-top: 58px;
+}
+
+.mt-59{
+    margin-top: 59px;
+}
+/* .button-1:focus{
+    color: #fff;
+    --color-selected:#FFF;
+    border-radius: 9px;
+    background: rgba(76, 161, 216, 1);
+    border: 1px solid rgba(76, 161, 216, 1);
+} */
