@@ -1,20 +1,16 @@
 import {
   IonButton,
-  IonCheckbox,
+
   IonCol,
   IonContent,
-  IonGrid,
-  IonHeader,
+
   IonIcon,
-  IonInput,
-  IonItem,
+
   IonLabel,
   IonPage,
   IonRow,
   IonText,
-  IonTextarea,
-  IonTitle,
-  IonToolbar,
+
 } from "@ionic/react";
 import Header from "../Header";
 import "./EventDetails.css";

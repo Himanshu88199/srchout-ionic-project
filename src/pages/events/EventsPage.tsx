@@ -1,28 +1,26 @@
 import {
-  IonButton,
-  IonCheckbox,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonIcon,
-  IonInput,
-  IonItem,
+  // IonButton,
+  // IonCheckbox,
+  // IonCol,
+  // IonContent,
+  // IonGrid,
+  // IonHeader,
+  // IonIcon,
+  // IonInput,
+  // IonItem,
   IonLabel,
-  IonPage,
+  // IonPage,
   IonRouterOutlet,
-  IonRow,
+
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonText,
-  IonTitle,
-  IonToolbar,
+
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { Route, Redirect } from "react-router";
-import Header from "../Header";
-import Setting from "../settings/Setting";
+import { Route } from "react-router";
+// import Header from "../Header";
+// import Setting from "../settings/Setting";
 import "./EventsPage.css";
 import InvitedEvents from "./InvitedEvents";
 import MyEvent from "./MyEvent";
@@ -33,7 +31,7 @@ const EventsPage: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/myevent">
+            <Route exact path="/myevents">
               <MyEvent />
             </Route>
             <Route path="/invitedevents">

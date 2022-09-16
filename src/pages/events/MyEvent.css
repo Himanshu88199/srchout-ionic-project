@@ -62,4 +62,16 @@
 
 .user-img {
   margin-left: 25px;
+  margin-top: -2rem;
+  padding: 0.5rem;
+}
+
+.user-img:hover {
+  cursor: pointer;
+  background-color: #d0c1c1;
+  border-radius: 10px;
+}
+
+.add-btn {
+  margin-right: 2rem;
 }

@@ -1,4 +1,4 @@
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
@@ -22,9 +22,9 @@ import "@ionic/react/css/display.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import Login from "./pages/user/Login";
+// import Login from "./pages/user/Login";
 import Tabs from "./pages/Tabs";
-import Setting from "./pages/settings/Setting";
+// import Setting from "./pages/settings/Setting";
 import ChangePassword from "./pages/settings/ChangePassword";
 import MyEvent from "./pages/events/MyEvent";
 import ContactUs from "./pages/settings/ContactUs";
@@ -37,6 +37,9 @@ import InviteAttendees from "./pages/events/InviteAttendees";
 import EventDetails from "./pages/events/EventDetails";
 import Assignedtasks from "./pages/task/Assignedtasks";
 import Mytask from "./pages/task/Mytask";
+import InvitedEvents from "./pages/events/InvitedEvents";
+import Login from "./pages/user/Login";
+import Events from "./pages/events/Events";
 
 setupIonicReact();
 
@@ -57,6 +60,7 @@ const App: React.FC = () => (
           path="/createpersonaltask"
           component={CreatePersonalTask}
         />
+        <Route exact path="/invitedevents" component={InvitedEvents} />
         <Route exact path="/createeventtask" component={CreateEventTask} />
         <Route exact path="/createevent" component={CreateEvent} />
         <Route exact path="/contactus" component={ContactUs} />
@@ -65,6 +69,7 @@ const App: React.FC = () => (
         <Route exact path="/inviteattendees" component={InviteAttendees} />
         <Route exact path="/changepassword" component={ChangePassword} />
         <Route exact path="/mytask" component={Mytask} />
+        <Route exact path="/myevents" component={Events} />
         <Route exact path="/assignedtasks" component={Assignedtasks} />
         {/* <Route exact path="/setting" component={Setting} /> */}
         <Route exact path="/app" component={Tabs} />
