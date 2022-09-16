@@ -19,21 +19,14 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import Footer from "../../components/Footer";
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./Createuser.css";
 import LoginIcons from "./loginIcons";
 import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import Service from "../../services/http";
 
-
-
-
-
-
 const Createuser: React.FC = () => {
-
-
   const {
     register,
     handleSubmit,
@@ -49,9 +42,11 @@ const Createuser: React.FC = () => {
   const [message, setMessage] = useState("");
 
   const [phoneCode, codes] = useState<any>(null);
+  const [agree, setAgree] = useState(false);
+
   const handleCreate = (userData: any) => {
     delete userData["confirm_password"];
-
+    
     fetch("https://taskerr-api.herokuapp.com/api/v1/users/", {
       method: "POST",
       headers: {
@@ -83,30 +78,18 @@ const Createuser: React.FC = () => {
       });
   };
 
+  const checkboxHandler = () => {
+    // if agree === true, it will be set to false
+    // if agree === false, it will be set to true
+    setAgree(!agree);
+    // Don't miss the exclamation mark
+  };
   React.useEffect(() => {
     service.get("countrycodes").then((res) => {
       codes(res);
     });
   }, []);
 
-
-
-  // const [fname, setfName] = useState("");
-  // const [lname, setlName] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [phone, setPhone] = useState("");
-  // // const [cpassword, setcPassword] = useState("");
-
-  // async function Register() {
-  //   //validation
-  //   // if(password!==cpassword){}
-  //   if (fname.trim() === '' || lname.trim() === '' || password.trim() === '' || email.trim() === '' || phone.trim() === '') {
-  //     return Toast('All Fields are required')
-  //   }
-
-  //   const res = await RegisterUser(fname,lname,password,email,phone)
-  // }
   return (
     <>
       <IonPage>
@@ -144,29 +127,39 @@ const Createuser: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonItem className="input-border">
-                  <IonInput value={""} {...register("fname", { required: true })} placeholder="First Name"></IonInput>
+                  <IonInput
+                    value={""}
+                    {...register("fname", { required: true })}
+                    placeholder="First Name"
+                  ></IonInput>
                 </IonItem>
                 {errors.fname && (
                   <span className="validation-errors">
-                    first name is required
+                    First name is required
                   </span>
                 )}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
-                  <IonInput value={""} {...register("lname", { required: true })} placeholder="Last Name"></IonInput>
+                  <IonInput
+                    value={""}
+                    {...register("lname", { required: true })}
+                    placeholder="Last Name"
+                  ></IonInput>
                 </IonItem>
                 {errors.lname && (
                   <span className="validation-errors">
-                    last name is required
+                    Last name is required
                   </span>
                 )}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
-                  <IonSelect {...register("countrycode", {
-                    required: true,
-                  })}>
+                  <IonSelect
+                    {...register("countrycode", {
+                      required: true,
+                    })}
+                  >
                     {phoneCode &&
                       phoneCode.map((i: any, index: number) => (
                         <IonSelectOption value={i.dial_code}>
@@ -175,11 +168,15 @@ const Createuser: React.FC = () => {
                       ))}
                   </IonSelect>
                   {/* <IonIcon slot='start' src='../assets/email.svg'></IonIcon> */}
-                  <IonInput value={""} type="tel"
+                  <IonInput
+                    value={""}
+                    type="tel"
                     {...register("phone", {
                       required: true,
                       pattern: /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
-                    })} placeholder="Phone Number"></IonInput>
+                    })}
+                    placeholder="Phone Number"
+                  ></IonInput>
                 </IonItem>
                 {errors.countrycode?.type === "required" && (
                   <span className="validation-errors">
@@ -188,50 +185,65 @@ const Createuser: React.FC = () => {
                 )}
                 {errors.phone?.type === "required" && (
                   <span className="validation-errors">
-                    phone number is required
+                    Phone number is required
                   </span>
                 )}
                 {errors.phone?.type === "pattern" && (
                   <span className="validation-errors">
-                    provide valid phone number
+                    Provide valid phone number
                   </span>
                 )}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
-                  <IonInput value={""} type="email"
+                  <IonInput
+                    value={""}
+                    type="email"
                     {...register("email", {
                       required: true,
                       pattern: /\S+@\S+\.\S+/,
-                    })} placeholder="Email Address"></IonInput>
+                    })}
+                    placeholder="Email Address"
+                  ></IonInput>
                 </IonItem>
                 {errors.email?.type === "required" && (
-                  <span className="validation-errors">email is required</span>
+                  <span className="validation-errors">Email is required</span>
                 )}
                 {errors.email?.type === "pattern" && (
-                  <span className="validation-errors">provide valid email</span>
+                  <span className="validation-errors">Provide valid email</span>
                 )}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
-                  <IonInput value={""} type="password"
-                    {...register("password", { required: true })} placeholder="Password"></IonInput>
+                  <IonInput
+                    value={""}
+                    type="password"
+                    {...register("password", { required: true })}
+                    placeholder="Password"
+                  ></IonInput>
                   <IonIcon slot="end" src="../assets/eye.svg"></IonIcon>
                 </IonItem>
                 {errors.password && (
                   <span className="validation-errors">
-                    password is required
+                    Password is required
                   </span>
                 )}
               </IonCol>
               <IonCol className="m-auto mt-56" size="11">
-                <IonButton type="submit" className="sign-btn" size="default" expand="block">
+                <IonButton
+                  type="submit"
+                  className="sign-btn"
+                  size="default"
+                  expand="block"
+                  disabled={!agree}
+                >
                   Sign Up
                 </IonButton>
+                
               </IonCol>
               <IonCol size="11" className="remember-forgot">
                 <div>
-                  <input type="checkbox" name="remember" />
+                  <input type="checkbox" onChange={checkboxHandler} />
                   <label htmlFor="remember">
                     &nbsp;&nbsp;I agree with Terms and Conditions
                   </label>
