@@ -19,6 +19,7 @@ import "./CreatePersonalTask.css";
 import "./Mytask.css";
 import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
+import { Advertisements } from "../Advertisements";
 
 const Mytask: React.FC = () => {
   const history = useHistory()
@@ -233,6 +234,8 @@ const Mytask: React.FC = () => {
           >
             +Task
           </IonButton>
+          <Advertisements />
+
         </IonContent>
       </IonPage>
     </>
