@@ -25,6 +25,7 @@ import LoginIcons from "./loginIcons";
 import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import Service from "../../services/http";
+import PhoneInput from "react-phone-input-2";
 
 
 
@@ -148,7 +149,7 @@ const Createuser: React.FC = () => {
                 </IonItem>
                 {errors.fname && (
                   <span className="validation-errors">
-                    first name is required
+                    First name is required
                   </span>
                 )}
               </IonCol>
@@ -158,7 +159,7 @@ const Createuser: React.FC = () => {
                 </IonItem>
                 {errors.lname && (
                   <span className="validation-errors">
-                    last name is required
+                    Last name is required
                   </span>
                 )}
               </IonCol>
@@ -174,12 +175,13 @@ const Createuser: React.FC = () => {
                         </IonSelectOption>
                       ))}
                   </IonSelect>
+
                   {/* <IonIcon slot='start' src='../assets/email.svg'></IonIcon> */}
                   <IonInput value={""} type="tel"
                     {...register("phone", {
                       required: true,
                       pattern: /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
-                    })} placeholder="Phone Number"></IonInput>
+                    })} ></IonInput>
                 </IonItem>
                 {errors.countrycode?.type === "required" && (
                   <span className="validation-errors">
@@ -188,12 +190,12 @@ const Createuser: React.FC = () => {
                 )}
                 {errors.phone?.type === "required" && (
                   <span className="validation-errors">
-                    phone number is required
+                    Phone number is required
                   </span>
                 )}
                 {errors.phone?.type === "pattern" && (
                   <span className="validation-errors">
-                    provide valid phone number
+                    Provide valid phone number
                   </span>
                 )}
               </IonCol>
@@ -206,10 +208,10 @@ const Createuser: React.FC = () => {
                     })} placeholder="Email Address"></IonInput>
                 </IonItem>
                 {errors.email?.type === "required" && (
-                  <span className="validation-errors">email is required</span>
+                  <span className="validation-errors">Email is required</span>
                 )}
                 {errors.email?.type === "pattern" && (
-                  <span className="validation-errors">provide valid email</span>
+                  <span className="validation-errors">Provide valid email</span>
                 )}
               </IonCol>
               <IonCol>
@@ -220,7 +222,7 @@ const Createuser: React.FC = () => {
                 </IonItem>
                 {errors.password && (
                   <span className="validation-errors">
-                    password is required
+                    Password is required
                   </span>
                 )}
               </IonCol>
@@ -230,10 +232,10 @@ const Createuser: React.FC = () => {
                 </IonButton>
               </IonCol>
               <IonCol size="11" className="remember-forgot">
-                <div>
+                <div className="remember">
                   <input type="checkbox" name="remember" />
                   <label htmlFor="remember">
-                    &nbsp;&nbsp;I agree with Terms and Conditions
+                    I agree with Terms and Conditions
                   </label>
                 </div>
               </IonCol>

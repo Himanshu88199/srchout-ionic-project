@@ -1,20 +1,12 @@
 import {
   IonAlert,
   IonButton,
-  IonCheckbox,
   IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
   IonIcon,
   IonInput,
   IonItem,
-  IonLabel,
   IonLoading,
-  IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -148,14 +140,14 @@ const Login: React.FC = () => {
               <IonIcon slot="end" src="../assets/eye.svg"></IonIcon>
             </IonItem>
             {errors.password && (
-              <span className="validation-errors">password is required</span>
+              <span className="validation-errors">Password is required</span>
             )}
           </IonCol>
         </IonRow>
         <IonRow className="remember-forgot">
-          <div>
+          <div className="remember">
             <input type="checkbox" name="remember" />
-            <label htmlFor="remember">&nbsp;&nbsp;Remember me</label>
+            <label htmlFor="remember">Remember me</label>
           </div>
           <div>
             <a href="">Forgot Password</a>
@@ -163,7 +155,7 @@ const Login: React.FC = () => {
         </IonRow>
         <IonRow>
           <IonCol className="m-auto mt-67" size="11">
-            <IonButton type="submit" className="sign-btn" size="default" expand="block">
+            <IonButton type="submit" className="signin-btn" size="default" expand="block">
               Sign In
             </IonButton>
           </IonCol>

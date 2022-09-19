@@ -107,20 +107,24 @@ const MyEvent: React.FC = () => {
           {data?.map((i: any, index: number) => (
             <IonRow key={index}>
               <IonCol>
-                <IonCard>
-                  < IonCardContent >
-                    <IonGrid>
-                      <IonRow>
-                        <IonCol>Event : {i.name}</IonCol>
+                <IonCard className="card">
+                  <IonCardContent>
+                    <IonGrid className="events">
+                      <IonRow className="start">
+                        <p>Event:</p>
+                        <IonCol>{i.name}</IonCol>
                       </IonRow>
-                      <IonRow>
-                        <IonCol>Where : {i.location}</IonCol>
+                      <IonRow className="start">
+                        <p>Where:</p>
+                        <IonCol>{i.location}</IonCol>
                       </IonRow>
-                      <IonRow>
-                        <IonCol>Date : {getFormattedDate(i.event_at)}</IonCol>
+                      <IonRow className="start">
+                        <p>Date:</p>
+                        <IonCol>{getFormattedDate(i.event_at)}</IonCol>
                       </IonRow>
-                      <IonRow>
-                        <IonCol>Time : {getFormattedTime(i.event_at)}</IonCol>
+                      <IonRow className="start">
+                        <p>Time:</p>
+                        <IonCol>{getFormattedTime(i.event_at)}</IonCol>
                       </IonRow>
                       <IonCol className="pd-0 events-icons" size="12" style={{ float: "right" }}>
                         <img
@@ -128,7 +132,7 @@ const MyEvent: React.FC = () => {
                           src="../../../assets/users.svg"
                           alt=""
                         />
-                        {/* <img className="user-img" src="../../../assets/tick.svg" alt="" /> */}
+                        <img className="user-img" src="../../../assets/tick.svg" alt="" />
                         <img className="user-img" src="../../../assets/edit.svg" alt="" />
                       </IonCol>
                     </IonGrid>

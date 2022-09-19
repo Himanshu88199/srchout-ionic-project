@@ -1,27 +1,38 @@
 .text-right {
-    text-align: right;
+  text-align: right;
 }
 
 .pr-2 {
-    padding-right: 27px;
+  padding-right: 27px;
 }
 
 .pl-2 {
-    padding-left: 27px;
+  padding-left: 27px;
 }
 
 .setting-text {
-    font-Weight: 400;
-    font-size: 14px;
-    line-height: 17.07px;
-    color: rgba(128, 128, 128, 1);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 27.07px;
+  color: rgba(128, 128, 128, 1);
 }
 
-.text-dec{
-    color: rgba(128, 128, 128, 1);
-    text-decoration: none;
+.text-dec {
+  color: rgba(128, 128, 128, 1);
+  text-decoration: none;
 }
 
-.mt-50{
-    margin-top: 50px;
+.mt-50 {
+  margin-top: 15px;
+}
+
+.ad {
+  width: 100%;
+  margin-top: 2rem;
+  border: 1px solid #707070;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
 }

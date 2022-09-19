@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonContent, IonDatetime, IonIcon, IonInput, IonLabel, IonModal, IonPage, IonRow, IonTextarea } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonDatetime, IonIcon, IonInput, IonLabel, IonModal, IonPage, IonRow, IonTextarea, IonToast } from '@ionic/react';
 import { useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import Header from '../Header';
@@ -16,6 +16,8 @@ const CreateEvent: React.FC = () => {
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState("");
+    const [action, setAction] = useState(false);
+
     const [dateForDisplay, setDateForDisplay] = useState("");
 
     const history = useHistory()
@@ -97,7 +99,7 @@ const CreateEvent: React.FC = () => {
                                 Event Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
+                                <IonInput className='input-border pd' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -108,10 +110,10 @@ const CreateEvent: React.FC = () => {
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        <IonRow className='content'>
+                        {/* <IonRow className='content'>
                             <IonCol size="8" className="ion-align-self-start text-grey2 pb-0 ml-10 ">
                                 <IonLabel > Event Date:</IonLabel>
-                                <IonInput value={dateForDisplay} className="border mt-10 mb-10" />
+                                <IonInput value={dateForDisplay} className="border mt-10 mb-10 pd" />
                             </IonCol>
                             <IonCol size="2" className="ion-align-self-end ">
                                 <IonButton id="open-modal" fill="clear">
@@ -123,8 +125,19 @@ const CreateEvent: React.FC = () => {
                                             presentation="date-time"
                                             onIonChange={updateEventDate}
                                         ></IonDatetime>
+                                        <IonButton onClick={() => history.push("/createevent")}>Done</IonButton>
                                     </IonContent>
                                 </IonModal>
+                            </IonCol>
+                        </IonRow> */}
+                        <IonRow className='date-time'>
+                            <IonCol>
+                                <IonLabel className='ml-12'>Event Date:</IonLabel>
+                                <IonInput className='input-border col-50'></IonInput>
+                            </IonCol>
+                            <IonCol>
+                                <IonLabel className='ml-12'>Event Time:</IonLabel>
+                                <IonInput className='input-border col-50'></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -132,15 +145,30 @@ const CreateEvent: React.FC = () => {
                                 Event Location:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
+                                <IonInput className='input-border pd' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
                             <IonCol className='m-auto mt-34' size='10.6'>
-                                <IonButton className='save-btn' size='default' expand="block" onClick={() => history.push("/events")}>Save</IonButton>
+                                <IonButton className='save-btn' size='default' expand="block" >Save</IonButton>
                             </IonCol>
                         </IonRow>
                     </form>
+                    <IonToast
+                        isOpen={success}
+                        onDidDismiss={() => {
+                            if (action) {
+                                setSuccess(false);
+                                history.push("/createeventtask" + eventId + "/" + eventName);
+                            } else {
+                                setSuccess(false);
+                                history.push("/myevents");
+                            }
+                        }}
+                        message="Task has been created"
+                        duration={200}
+                        color="dark"
+                    />
                 </IonContent>
             </IonPage>
         </>

@@ -21,14 +21,7 @@ const Setting: React.FC = () => {
                             On/Off
                         </IonCol>
                     </IonRow>
-                    <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
-                            Notification
-                        </IonCol>
-                        <IonCol class='text-right pr-2 setting-text' size='6'>
-                            On/Off
-                        </IonCol>
-                    </IonRow>
+
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
                             Sound
@@ -39,12 +32,12 @@ const Setting: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           <a href="/ChangePassword" className='text-dec' >Change Password</a> 
+                            <a href="/ChangePassword" className='text-dec' >Change Password</a>
                         </IonCol>
                     </IonRow>
                     <IonRow className='mt-50'>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           Subscription 
+                            Subscription
                         </IonCol>
                         <IonCol class='text-right pr-2 setting-text' size='6'>
                             Free
@@ -52,32 +45,37 @@ const Setting: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           <a href="" className='text-dec' >Help</a> 
+                            <a href="" className='text-dec' >Help</a>
                         </IonCol>
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           <a href="" className='text-dec' >Tell your friends</a> 
+                            <a href="" className='text-dec' >Tell your friends</a>
                         </IonCol>
                     </IonRow>
                     <IonRow className='mt-50'>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           <a href="" className='text-dec' >Privacy Policy</a> 
+                            <a href="" className='text-dec' >Privacy Policy</a>
                         </IonCol>
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           <a href="" className='text-dec' >Terms and Conditions</a> 
+                            <a href="" className='text-dec' >Terms and Conditions</a>
                         </IonCol>
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           <a href="" className='text-dec' >Delete my account</a> 
+                            <a href="" className='text-dec' >Delete my account</a>
                         </IonCol>
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                           <a href="" className='text-dec' >Contact Us</a> 
+                            <a href="" className='text-dec' >Contact Us</a>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol className='ad'>
+                            Advertisements
                         </IonCol>
                     </IonRow>
                 </IonContent>
