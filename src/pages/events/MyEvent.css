@@ -69,6 +69,7 @@
   margin-left: 10px;
   margin-top: -2rem;
   padding: 0.5rem;
+  width: 35px;
 }
 
 .user-img:hover {
@@ -78,8 +79,9 @@
 }
 
 .add-btn {
-  margin-right: 2rem;
+  margin-right: 1.4rem;
 }
+
 .start {
   display: flex;
   align-items: center;

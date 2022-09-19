@@ -13,7 +13,11 @@ import Footer from "../components/Footer";
 import "./Home.css";
 import Login from "./user/Login";
 
-const Home: React.FC = () => {
+interface ScanNewProps {
+  isFromHome: any;
+}
+
+const Home: React.FC<ScanNewProps> = ({ isFromHome }) => {
   return (
     <IonPage>
       <IonContent>
