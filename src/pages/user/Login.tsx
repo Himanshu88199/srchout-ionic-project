@@ -61,7 +61,7 @@ const Login: React.FC = () => {
           sessionStorage.setItem("token", res.jwt_token);
           sessionStorage.setItem("logged_in", "Y");
           reset();
-          history.push("/app");
+          history.push("/my/home");
         } else if (res.error) {
           setShowLoading(false);
           setMessage(res.error);

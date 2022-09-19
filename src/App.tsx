@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
@@ -41,18 +41,25 @@ import InvitedEvents from "./pages/events/InvitedEvents";
 // import Login from "./pages/user/Login";
 import Events from "./pages/events/Events";
 import './pages/Tabs.css';
+import { useEffect, useState } from "react";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
+const App: React.FC = () => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const setIsLoggedIn = () => {
+    console.log("loggedin")
+    setLoggedIn(true);
+  }
+  console.log(isLoggedIn);
+  return (
+    <IonApp>
+      <IonReactRouter>
         <IonRouterOutlet>
           {/* <Route exact path="/Home">
           <Home />
         </Route> */}
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={() => <Home isFromHome={true} />} />
           <Route exact path="/home" component={Home} />
 
           <Route exact path="/createuser" component={Createuser} />
@@ -71,28 +78,17 @@ const App: React.FC = () => (
           <Route exact path="/myevents" component={Events} />
           <Route exact path="/assignedtasks" component={Assignedtasks} />
           <Route exact path="/setting" component={Setting} />
+          <Route path="/my" render={() => (
+            sessionStorage.getItem("logged_in") !== "Y" ? (
+              <Redirect to="/" />
+            ) : (
+              <Tabs />
+            )
+          )} />
         </IonRouterOutlet>
-        <IonTabBar className='dark-tabbar' slot="bottom">
-          <IonTabButton tab="tab1" href="/home">
-            <IonIcon src='../assets/home.svg' />
-            <IonLabel className='c-fff'>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/events">
-            <IonIcon src='../assets/events.svg' />
-            <IonLabel className='c-fff'>Events</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/mytask">
-            <IonIcon src='../assets/task.svg' />
-            <IonLabel className='c-fff'>Task</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab4" href="/setting">
-            <IonIcon src='../assets/setting.svg' />
-            <IonLabel className='c-fff'>Settings</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp >
-);
+      </IonReactRouter>
+    </IonApp >
+  );
+}
 
 export default App;
