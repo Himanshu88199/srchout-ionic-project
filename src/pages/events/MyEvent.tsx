@@ -26,7 +26,7 @@ const MyEvent: React.FC = () => {
   const [data, setData] = useState<any>(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
-
+  console.log(data);
   const url = "https://taskerr-api.herokuapp.com/api/v1/events?type=personal";
   const fetchData = () => {
     const abortCnt = new AbortController();
@@ -104,8 +104,13 @@ const MyEvent: React.FC = () => {
               <button className="event-btn " onClick={() => history.push("/invitedevents")}>Invited Events</button>
             </IonCol>
           </IonRow>
-
-          {data?.map((i: any, index: number) => (
+          <IonButton routerLink="/createevent"
+            className="add-btn"
+            style={{ float: "right" }}
+          >
+            +Event
+          </IonButton>
+          {data && data?.map((i: any, index: number) => (
             <IonRow key={index}>
               <IonCol>
                 <IonCard className="card">
@@ -226,14 +231,6 @@ const MyEvent: React.FC = () => {
             </IonCol>
           </IonRow> */}
           {/* <Footer /> */}
-          <IonButton
-            className="add-btn"
-            style={{ float: "right" }}
-            onClick={() => history.push("/createevent")}
-          >
-            +Event
-          </IonButton>
-          <Advertisements />
         </IonContent>
       </IonPage>
     </>

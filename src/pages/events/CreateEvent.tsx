@@ -12,7 +12,7 @@ const CreateEvent: React.FC = () => {
     const [eventId, setEventId] = useState("");
     const [eventName, setEventName] = useState("")
     const [eventDesc, setEventDesc] = useState("")
-    const [eventDate, setEventDate] = useState("");
+    const [eventDate, setEventDate] = useState(Date.now());
     const [eventLoc, setEventLoc] = useState("");
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -27,7 +27,7 @@ const CreateEvent: React.FC = () => {
         e.preventDefault();
         const url = "https://taskerr-api.herokuapp.com/api/v1/events";
         const token = sessionStorage.getItem("token");
-        console.log(eventDate, "eventDateeventDate");
+        //console.log(eventDate, "eventDateeventDate");
 
         const eventData = {
             name: eventName,
@@ -39,7 +39,7 @@ const CreateEvent: React.FC = () => {
         // console.log(formatDateForDB(eventDate));
 
         // console.log(eventData,"eventData");
-
+        //console.log(eventData);
         fetch(url, {
             method: "POST",
             headers: {
@@ -77,11 +77,11 @@ const CreateEvent: React.FC = () => {
     };
 
     const updateEventDate = (e: any) => {
-        console.log(eventDate, "change");
+        //console.log(eventDate, "change");
         setEventDate(e.detail.value);
         setDateForDisplay(formatDate(e.detail.value));
-        console.log(eventDate, "changedd");
-        console.log(dateForDisplay, "dateForDisplay");
+        //console.log(eventDate, "changedd");
+        //console.log(dateForDisplay, "dateForDisplay");
     };
 
     return (
@@ -111,7 +111,7 @@ const CreateEvent: React.FC = () => {
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        {/* <IonRow className='content'>
+                        <IonRow className='content'>
                             <IonCol size="8" className="ion-align-self-start text-grey2 pb-0 ml-10 ">
                                 <IonLabel > Event Date:</IonLabel>
                                 <IonInput value={dateForDisplay} className="border mt-10 mb-10 pd" />
@@ -130,8 +130,8 @@ const CreateEvent: React.FC = () => {
                                     </IonContent>
                                 </IonModal>
                             </IonCol>
-                        </IonRow> */}
-                        <IonRow className='date-time'>
+                        </IonRow>
+                        {/* <IonRow className='date-time'>
                             <IonCol>
                                 <IonLabel className='ml-12'>Event Date:</IonLabel>
                                 <IonInput className='input-border col-50'></IonInput>
@@ -140,18 +140,18 @@ const CreateEvent: React.FC = () => {
                                 <IonLabel className='ml-12'>Event Time:</IonLabel>
                                 <IonInput className='input-border col-50'></IonInput>
                             </IonCol>
-                        </IonRow>
+                        </IonRow> */}
                         <IonRow>
                             <IonCol size='12' className='text-grey2 pb-0 ml-12'>
                                 Event Location:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
                                 <IonInput className='input-border pd' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
-                            </IonCol>
+                            </IonCol> 
                         </IonRow>
                         <IonRow>
                             <IonCol className='m-auto mt-34' size='10.6'>
-                                <IonButton className='save-btn' size='default' expand="block" >Save</IonButton>
+                                <IonButton className='save-btn' size='default' expand="block" type="submit">Save</IonButton>
                             </IonCol>
                         </IonRow>
                     </form>
@@ -163,7 +163,7 @@ const CreateEvent: React.FC = () => {
                                 history.push("/createeventtask" + eventId + "/" + eventName);
                             } else {
                                 setSuccess(false);
-                                history.push("/myevents");
+                                history.push("/events");
                             }
                         }}
                         message="Task has been created"
