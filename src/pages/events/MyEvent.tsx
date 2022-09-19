@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 // import { IonReactRouter } from "@ionic/react-router";
 import { useHistory } from "react-router";
+import { Advertisements } from "../Advertisements";
 // import Footer from "../../components/Footer";
 import Header from "../Header";
 // import EventDetails from "./EventDetails";
@@ -232,6 +233,7 @@ const MyEvent: React.FC = () => {
           >
             +Event
           </IonButton>
+          <Advertisements />
         </IonContent>
       </IonPage>
     </>

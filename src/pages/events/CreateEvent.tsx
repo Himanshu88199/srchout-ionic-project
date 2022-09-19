@@ -5,6 +5,7 @@ import Header from '../Header';
 import './CreateEvent.css';
 import { calendar } from "ionicons/icons"
 import { useHistory } from 'react-router';
+import { Advertisements } from '../Advertisements';
 
 const CreateEvent: React.FC = () => {
 
@@ -169,6 +170,8 @@ const CreateEvent: React.FC = () => {
                         duration={200}
                         color="dark"
                     />
+                    <Advertisements />
+
                 </IonContent>
             </IonPage>
         </>

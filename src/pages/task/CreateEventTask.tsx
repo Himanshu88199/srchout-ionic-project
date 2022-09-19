@@ -1,6 +1,7 @@
 import { IonButton, IonCol, IonContent, IonInput, IonPage, IonRow, IonTextarea, IonToast } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { Advertisements } from '../Advertisements';
 import Header from '../Header';
 import './CreateEventTask.css';
 
@@ -211,6 +212,8 @@ const CreateEventTask: React.FC = () => {
                         duration={200}
                         color="dark"
                     />
+                    <Advertisements />
+
                 </IonContent>
             </IonPage>
         </>

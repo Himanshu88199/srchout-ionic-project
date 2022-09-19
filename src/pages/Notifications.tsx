@@ -1,4 +1,5 @@
 import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { Advertisements } from './Advertisements';
 import Header from './Header';
 import './Notifications.css';
 
@@ -16,65 +17,67 @@ const Notifications: React.FC = () => {
                     <IonList>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                         <IonItem className='notification-text'>
                             <IonCol size='12'>
-                            <IonLabel>Babu assigned a task to you</IonLabel>
-                            <span className='line-height'>July 18,2022</span>
+                                <IonLabel>Babu assigned a task to you</IonLabel>
+                                <span className='line-height'>July 18,2022</span>
                             </IonCol>
                         </IonItem>
                     </IonList>
+                    <Advertisements />
+
                 </IonContent>
             </IonPage>
         </>
