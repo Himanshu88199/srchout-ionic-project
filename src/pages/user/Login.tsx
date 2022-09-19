@@ -24,7 +24,6 @@ import LoginIcons from "./loginIcons";
 // }
 
 const Login: React.FC = () => {
-
   const {
     register,
     handleSubmit,
