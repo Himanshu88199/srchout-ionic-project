@@ -147,7 +147,7 @@ const CreateEvent: React.FC = () => {
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
                                 <IonInput className='input-border pd' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
-                            </IonCol>
+                            </IonCol> 
                         </IonRow>
                         <IonRow>
                             <IonCol className='m-auto mt-34' size='10.6'>
