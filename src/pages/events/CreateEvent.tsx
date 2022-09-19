@@ -24,7 +24,7 @@ const CreateEvent: React.FC = () => {
         e.preventDefault();
         const url = "https://taskerr-api.herokuapp.com/api/v1/events";
         const token = sessionStorage.getItem("token");
-        console.log(eventDate, "eventDateeventDate");
+        //console.log(eventDate, "eventDateeventDate");
 
         const eventData = {
             name: eventName,
@@ -36,7 +36,7 @@ const CreateEvent: React.FC = () => {
         // console.log(formatDateForDB(eventDate));
 
         // console.log(eventData,"eventData");
-
+        //console.log(eventData);
         fetch(url, {
             method: "POST",
             headers: {
@@ -74,11 +74,11 @@ const CreateEvent: React.FC = () => {
     };
 
     const updateEventDate = (e: any) => {
-        console.log(eventDate, "change");
+        //console.log(eventDate, "change");
         setEventDate(e.detail.value);
         setDateForDisplay(formatDate(e.detail.value));
-        console.log(eventDate, "changedd");
-        console.log(dateForDisplay, "dateForDisplay");
+        //console.log(eventDate, "changedd");
+        //console.log(dateForDisplay, "dateForDisplay");
     };
 
     return (
@@ -137,7 +137,7 @@ const CreateEvent: React.FC = () => {
                         </IonRow>
                         <IonRow>
                             <IonCol className='m-auto mt-34' size='10.6'>
-                                <IonButton className='save-btn' size='default' expand="block" onClick={() => history.push("/events")}>Save</IonButton>
+                                <IonButton className='save-btn' size='default' expand="block" type="submit">Save</IonButton>
                             </IonCol>
                         </IonRow>
                     </form>

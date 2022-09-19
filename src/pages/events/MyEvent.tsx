@@ -25,7 +25,7 @@ const MyEvent: React.FC = () => {
   const [data, setData] = useState<any>(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
-
+  console.log(data);
   const url = "https://taskerr-api.herokuapp.com/api/v1/events?type=personal";
   const fetchData = () => {
     const abortCnt = new AbortController();
@@ -65,7 +65,7 @@ const MyEvent: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [history]);
 
   const getFormattedDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -103,7 +103,12 @@ const MyEvent: React.FC = () => {
               <button className="event-btn " onClick={() => history.push("/invitedevents")}>Invited Events</button>
             </IonCol>
           </IonRow>
-
+          <IonButton routerLink="/createevent"
+            className="add-btn"
+            style={{ float: "right" }}
+          >
+            +Event
+          </IonButton>
           {data?.map((i: any, index: number) => (
             <IonRow key={index}>
               <IonCol>
@@ -221,13 +226,6 @@ const MyEvent: React.FC = () => {
             </IonCol>
           </IonRow> */}
           {/* <Footer /> */}
-          <IonButton
-            className="add-btn"
-            style={{ float: "right" }}
-            onClick={() => history.push("/createevent")}
-          >
-            +Event
-          </IonButton>
         </IonContent>
       </IonPage>
     </>
