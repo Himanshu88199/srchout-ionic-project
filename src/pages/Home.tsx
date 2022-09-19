@@ -37,7 +37,7 @@ const Home: React.FC<ScanNewProps> = ({ isFromHome }) => {
             <Login />
           </IonRow>
         </IonGrid>
-        {/* <Footer /> */}
+        <Footer />
       </IonContent>
     </IonPage>
   );

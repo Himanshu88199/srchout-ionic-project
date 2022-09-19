@@ -63,7 +63,7 @@ const App: React.FC = () => {
           <Route exact path="/home" component={Home} />
 
           <Route exact path="/createuser" component={Createuser} />
-          <Route exact path="/events" component={MyEvent} />
+          {/* <Route exact path="/events" component={MyEvent} /> */}
           <Route exact path="/eventdetails" component={EventDetails} />
           <Route exact path="/createpersonaltask" component={CreatePersonalTask} />
           <Route exact path="/invitedevents" component={InvitedEvents} />
