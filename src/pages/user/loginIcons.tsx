@@ -1,18 +1,8 @@
 import {
   IonButton,
-  IonCheckbox,
   IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
   IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
 import "./loginIcons.css";
 

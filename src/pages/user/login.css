@@ -43,6 +43,7 @@
 
 .remember-forgot {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-left: 10px;
   color: #808080;
@@ -51,12 +52,14 @@
   font-size: 14px;
 }
 
-.mt-51 {
-  margin-top: 51px;
+.remember {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
 }
 
-.sign-btn {
-  --background-color: rgba(76, 161, 216, 1);
+.mt-51 {
+  margin-top: 51px;
 }
 
 .remember-forgot a {
@@ -73,6 +76,8 @@
   margin-top: 67px;
 }
 
-.sign-btn {
-  background: #4ca1d8;
+span {
+  color: red;
+  margin-left: 1.3rem;
+  font-weight: 100;
 }

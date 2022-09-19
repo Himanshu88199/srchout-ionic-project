@@ -1,16 +1,22 @@
 import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import Header from '../Header';
 import './MyProfile.css';
+import PhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css";
 
 const MyProfile: React.FC = () => {
+
     return (
         <>
             <IonPage className='pg-grey'>
                 <Header />
                 <IonContent>
-                    <IonRow>
-                        <IonCol className='center text-grey'>
+                    <IonRow className='con'>
+                        <IonCol className='center text-grey myprofile'>
                             MY PROFILE
+                        </IonCol>
+                        <IonCol className='edit'>
+                            <img src="../assets/edit.svg" alt="" />
                         </IonCol>
                     </IonRow>
                     <IonRow>
@@ -30,10 +36,17 @@ const MyProfile: React.FC = () => {
                             </IonItem>
                         </IonCol>
                         <IonCol>
-                            <IonItem className='input-border'>
-                                <IonIcon slot='start' src='../assets/email.svg'></IonIcon>
-                                <IonInput value={''} placeholder="Phone Number"></IonInput>
-                            </IonItem>
+                            {/* <IonIcon slot='start' src='../assets/email.svg'></IonIcon>
+                                <IonInput value={''} placeholder="Phone Number"></IonInput> */}
+
+                            <PhoneInput country={"us"}
+                                onChange={phone => console.log({ phone })}
+                                containerStyle={{ margin: '5px', marginLeft: '1.2rem', border: '1px solid #707070', borderRadius: '9px', width: '87vw', height: '45px' }}
+                                inputStyle={{ width: '86vw', height: '42px', border: 'none', borderRadius: '9px' }}
+                                dropdownStyle={{ height: '200px' }}
+                                buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
+                            />
+
                         </IonCol>
                         <IonCol>
                             <IonItem className='input-border'>

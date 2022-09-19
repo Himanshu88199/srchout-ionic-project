@@ -25,6 +25,7 @@ import LoginIcons from "./loginIcons";
 import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import Service from "../../services/http";
+import PhoneInput from "react-phone-input-2";
 
 const Createuser: React.FC = () => {
   const {
@@ -46,7 +47,7 @@ const Createuser: React.FC = () => {
 
   const handleCreate = (userData: any) => {
     delete userData["confirm_password"];
-    
+
     fetch("https://taskerr-api.herokuapp.com/api/v1/users/", {
       method: "POST",
       headers: {
@@ -167,6 +168,7 @@ const Createuser: React.FC = () => {
                         </IonSelectOption>
                       ))}
                   </IonSelect>
+
                   {/* <IonIcon slot='start' src='../assets/email.svg'></IonIcon> */}
                   <IonInput
                     value={""}
@@ -174,9 +176,7 @@ const Createuser: React.FC = () => {
                     {...register("phone", {
                       required: true,
                       pattern: /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
-                    })}
-                    placeholder="Phone Number"
-                  ></IonInput>
+                    })} ></IonInput>
                 </IonItem>
                 {errors.countrycode?.type === "required" && (
                   <span className="validation-errors">
@@ -239,13 +239,13 @@ const Createuser: React.FC = () => {
                 >
                   Sign Up
                 </IonButton>
-                
+
               </IonCol>
               <IonCol size="11" className="remember-forgot">
-                <div>
-                  <input type="checkbox" onChange={checkboxHandler} />
+                <div className="remember">
+                  <input type="checkbox" name="remember" />
                   <label htmlFor="remember">
-                    &nbsp;&nbsp;I agree with Terms and Conditions
+                    I agree with Terms and Conditions
                   </label>
                 </div>
               </IonCol>
