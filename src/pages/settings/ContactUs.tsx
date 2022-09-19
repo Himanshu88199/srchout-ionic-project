@@ -18,7 +18,7 @@ const ContactUs: React.FC = () => {
                             Name
                         </IonCol>
                         <IonCol className='pd-0' size='12'>
-                            <IonInput className='input-border'></IonInput>
+                            <IonInput className='input-border pd'></IonInput>
                         </IonCol>
                     </IonRow>
                     <IonRow>
@@ -26,7 +26,7 @@ const ContactUs: React.FC = () => {
                             Email Address
                         </IonCol>
                         <IonCol className='pd-0' size='12'>
-                            <IonInput className='input-border'></IonInput>
+                            <IonInput className='input-border pd'></IonInput>
                         </IonCol>
                     </IonRow>
                     <IonRow>
@@ -39,7 +39,7 @@ const ContactUs: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol className='m-auto mt-32' size='11'>
-                            <IonButton className='sign-btn' size='default' expand="block">Save</IonButton>
+                            <IonButton className='sign-btn' size='default' expand="block">Send</IonButton>
                         </IonCol>
                     </IonRow>
                 </IonContent>

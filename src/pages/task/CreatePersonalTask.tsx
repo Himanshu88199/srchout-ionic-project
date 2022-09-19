@@ -19,6 +19,7 @@ import {
 import Header from "../Header";
 import "./CreatePersonalTask.css";
 import Footer from "../../components/Footer";
+import { Advertisements } from "../Advertisements";
 
 const CreatePersonalTask: React.FC = () => {
   return (
@@ -69,6 +70,8 @@ const CreatePersonalTask: React.FC = () => {
             </IonCol>
           </IonRow>
           <Footer />
+          <Advertisements />
+
         </IonContent>
       </IonPage>
     </>

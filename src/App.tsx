@@ -38,7 +38,7 @@ import EventDetails from "./pages/events/EventDetails";
 import Assignedtasks from "./pages/task/Assignedtasks";
 import Mytask from "./pages/task/Mytask";
 import InvitedEvents from "./pages/events/InvitedEvents";
-import Login from "./pages/user/Login";
+// import Login from "./pages/user/Login";
 import Events from "./pages/events/Events";
 import './pages/Tabs.css';
 

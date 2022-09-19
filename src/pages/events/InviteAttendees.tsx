@@ -1,6 +1,7 @@
 import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTextarea, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { Advertisements } from '../Advertisements';
 import Header from '../Header';
 import './InviteAttendees.css';
 
@@ -194,6 +195,7 @@ const InviteAttendees: React.FC = () => {
                             </IonCol>
                         </IonRow>
                     </form>
+                    <Advertisements />
                 </IonContent>
             </IonPage>
         </>

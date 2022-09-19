@@ -21,7 +21,7 @@ const ChangePassword: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol >
-                            <IonItem className='input-border'>
+                            <IonItem className='input-border '>
                                 <IonInput value={''} placeholder="Security Code"></IonInput>
                             </IonItem>
                         </IonCol>

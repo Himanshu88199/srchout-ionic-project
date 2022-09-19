@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 // import { IonReactRouter } from "@ionic/react-router";
 import { useHistory } from "react-router";
+import { Advertisements } from "../Advertisements";
 // import Footer from "../../components/Footer";
 import Header from "../Header";
 // import EventDetails from "./EventDetails";
@@ -65,7 +66,7 @@ const MyEvent: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, [history]);
+  }, []);
 
   const getFormattedDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -109,23 +110,27 @@ const MyEvent: React.FC = () => {
           >
             +Event
           </IonButton>
-          {data?.map((i: any, index: number) => (
+          {data && data?.map((i: any, index: number) => (
             <IonRow key={index}>
               <IonCol>
-                <IonCard>
-                  < IonCardContent >
-                    <IonGrid>
-                      <IonRow>
-                        <IonCol>Event : {i.name}</IonCol>
+                <IonCard className="card">
+                  <IonCardContent>
+                    <IonGrid className="events">
+                      <IonRow className="start">
+                        <p>Event:</p>
+                        <IonCol>{i.name}</IonCol>
                       </IonRow>
-                      <IonRow>
-                        <IonCol>Where : {i.location}</IonCol>
+                      <IonRow className="start">
+                        <p>Where:</p>
+                        <IonCol>{i.location}</IonCol>
                       </IonRow>
-                      <IonRow>
-                        <IonCol>Date : {getFormattedDate(i.event_at)}</IonCol>
+                      <IonRow className="start">
+                        <p>Date:</p>
+                        <IonCol>{getFormattedDate(i.event_at)}</IonCol>
                       </IonRow>
-                      <IonRow>
-                        <IonCol>Time : {getFormattedTime(i.event_at)}</IonCol>
+                      <IonRow className="start">
+                        <p>Time:</p>
+                        <IonCol>{getFormattedTime(i.event_at)}</IonCol>
                       </IonRow>
                       <IonCol className="pd-0 events-icons" size="12" style={{ float: "right" }}>
                         <img
@@ -133,7 +138,7 @@ const MyEvent: React.FC = () => {
                           src="../../../assets/users.svg"
                           alt=""
                         />
-                        {/* <img className="user-img" src="../../../assets/tick.svg" alt="" /> */}
+                        <img className="user-img" src="../../../assets/tick.svg" alt="" />
                         <img className="user-img" src="../../../assets/edit.svg" alt="" />
                       </IonCol>
                     </IonGrid>

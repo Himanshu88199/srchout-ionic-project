@@ -1,10 +1,13 @@
-import { IonButton, IonCol, IonContent, IonInput, IonPage, IonRow, IonTextarea } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonInput, IonPage, IonRow, IonTextarea, IonToast } from '@ionic/react';
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import { Advertisements } from '../Advertisements';
 import Header from '../Header';
 import './CreateEventTask.css';
 
 const CreateEventTask: React.FC = () => {
+    const history = useHistory();
+
     const { event_id, event_name } = useParams<{
         event_id: string;
         event_name: string;
@@ -149,7 +152,7 @@ const CreateEventTask: React.FC = () => {
                                         Event Name:
                                     </IonCol>
                                     <IonCol className='pd-0' size='12'>
-                                        <IonInput className='input-border' value={event_name_modified} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
+                                        <IonInput className='input-border pd' value={event_name_modified} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
                                     </IonCol>
                                 </IonRow>
                             )
@@ -159,7 +162,7 @@ const CreateEventTask: React.FC = () => {
                                 Task Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border' value={taskName} onIonChange={(e) => setTaskName(e.detail.value!)}></IonInput>
+                                <IonInput className='input-border pd' value={taskName} onIonChange={(e) => setTaskName(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -175,7 +178,7 @@ const CreateEventTask: React.FC = () => {
                                 Task Due Date:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border' value={dateForDisplay}></IonInput>
+                                <IonInput className='input-border pd' value={dateForDisplay}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -183,12 +186,12 @@ const CreateEventTask: React.FC = () => {
                                 Assign Task To:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border'>{taskAssignTo}</IonInput>
+                                <IonInput className='input-border pd'>{taskAssignTo}</IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
                             <IonCol className='m-auto mt-34' size='10.7'>
-                                <IonButton className='save-btn' size='default' expand="block">Save</IonButton>
+                                <IonButton className='save-btn' size='default' expand="block" >Save</IonButton>
                             </IonCol>
                         </IonRow>
                         <IonButton
@@ -199,6 +202,18 @@ const CreateEventTask: React.FC = () => {
                             Assign Attendees
                         </IonButton>
                     </form>
+                    <IonToast
+                        isOpen={success}
+                        onDidDismiss={() => {
+                            setSuccess(false);
+                            history.push("/mytask");
+                        }}
+                        message="Task has been created"
+                        duration={200}
+                        color="dark"
+                    />
+                    <Advertisements />
+
                 </IonContent>
             </IonPage>
         </>

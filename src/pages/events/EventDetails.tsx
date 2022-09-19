@@ -12,6 +12,7 @@ import {
   IonText,
 
 } from "@ionic/react";
+import { Advertisements } from "../Advertisements";
 import Header from "../Header";
 import "./EventDetails.css";
 
@@ -125,6 +126,7 @@ const EventDetails: React.FC = () => {
               </IonCol>
             </IonRow>
           </IonRow>
+          <Advertisements />
         </IonContent>
       </IonPage>
     </>
