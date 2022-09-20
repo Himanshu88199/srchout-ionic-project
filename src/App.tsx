@@ -26,7 +26,6 @@ import "./theme/variables.css";
 import Tabs from "./pages/Tabs";
 import Setting from "./pages/settings/Setting";
 import ChangePassword from "./pages/settings/ChangePassword";
-import MyEvent from "./pages/events/MyEvent";
 import ContactUs from "./pages/settings/ContactUs";
 import MyProfile from "./pages/settings/MyProfile";
 import Notifications from "./pages/Notifications";
@@ -64,8 +63,7 @@ const App: React.FC = () => {
           <Route exact path="/home" component={Home} />
 
           <Route exact path="/createuser" component={Createuser} />
-          {/* <Route exact path="/events" component={MyEvent} /> */}
-          <Route exact path="/eventdetails" component={EventDetails} />
+          {/* <Route exact path="/eventdetails" component={EventDetails} /> */}
           <Route exact path="/createpersonaltask" component={CreatePersonalTask} />
           <Route exact path="/invitedevents" component={InvitedEvents} />
           <Route exact path="/createeventtask" component={CreateEventTask} />

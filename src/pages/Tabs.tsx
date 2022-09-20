@@ -3,6 +3,7 @@ import { IonReactRouter } from '@ionic/react-router';
 // import { calendar, ellipse, informationCircle, logoGoogle, map, personCircle, square, triangle } from "ionicons/icons";
 import { Redirect, Route } from 'react-router-dom';
 import CreateEvent from './events/CreateEvent';
+import EventDetails from './events/EventDetails';
 import MyEvent from './events/MyEvent';
 import Home from './Home';
 import { HomeTab } from './HomeTab';
@@ -33,6 +34,9 @@ const Tabs: React.FC = () => {
                 </Route>
                 <Route path="/my/createevent">
                     <CreateEvent />
+                </Route>
+                <Route exact path="/my/eventdetails">
+                    <EventDetails />
                 </Route>
                 {/* <Route exact path="/app">
                     <Redirect to="/tab1" />
