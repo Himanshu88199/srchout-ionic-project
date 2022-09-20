@@ -146,7 +146,6 @@ const CreateEventTask: React.FC = () => {
                     <form onSubmit={handleCreateTask}>
                         {
                             event_id_modified && (
-
                                 <IonRow>
                                     <IonCol size='12' className='text-grey2 pb-0 ml-10'>
                                         Event Name:
@@ -157,6 +156,14 @@ const CreateEventTask: React.FC = () => {
                                 </IonRow>
                             )
                         }
+                        <IonRow>
+                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
+                                Event Name:
+                            </IonCol>
+                            <IonCol className='pd-0' size='12'>
+                                <IonInput className='input-border pd' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
+                            </IonCol>
+                        </IonRow>
                         <IonRow>
                             <IonCol size='12' className='text-grey2 pb-0 ml-10'>
                                 Task Name:

@@ -235,7 +235,7 @@ const Createuser: React.FC = () => {
                   className="sign-btn"
                   size="default"
                   expand="block"
-                  disabled={!agree}
+                // disabled={!agree}
                 >
                   Sign Up
                 </IonButton>
