@@ -49,7 +49,7 @@ const CreateEventTask: React.FC = () => {
             taskData = {
                 name: taskName,
                 description: taskDesc,
-                due_date: eventDate,
+                due_date: new Date("09/22/2022 19:00:00").toISOString(),
                 task_type: "personal",
             };
         }
@@ -198,7 +198,7 @@ const CreateEventTask: React.FC = () => {
                         </IonRow>
                         <IonRow>
                             <IonCol className='m-auto mt-34' size='10.7'>
-                                <IonButton className='save-btn' size='default' expand="block" >Save</IonButton>
+                                <IonButton className='save-btn' size='default' expand="block" type="submit">Save</IonButton>
                             </IonCol>
                         </IonRow>
                         <IonButton
@@ -213,7 +213,7 @@ const CreateEventTask: React.FC = () => {
                         isOpen={success}
                         onDidDismiss={() => {
                             setSuccess(false);
-                            history.push("/mytask");
+                            history.push("/my/mytask");
                         }}
                         message="Task has been created"
                         duration={200}

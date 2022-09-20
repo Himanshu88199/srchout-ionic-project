@@ -11,6 +11,7 @@ import Setting from './settings/Setting';
 // import Createuser from './user/Createuser';
 
 import './Tabs.css';
+import CreateEventTask from './task/CreateEventTask';
 // import Header from './Header';
 // import EventsPage from './events/EventsPage';
 import Mytask from './task/Mytask';
@@ -38,6 +39,10 @@ const Tabs: React.FC = () => {
                 <Route exact path="/my/eventdetails">
                     <EventDetails />
                 </Route>
+                <Route exact path="/my/createeventtask">
+                    <CreateEventTask />
+                </Route>
+
                 {/* <Route exact path="/app">
                     <Redirect to="/tab1" />
                 </Route> */}
