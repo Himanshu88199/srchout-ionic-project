@@ -33,6 +33,7 @@ import "./MyEvent.css";
 const MyEvent: React.FC = () => {
   const history = useHistory()
 
+  const [eventType, setEventType] = useState("personal");
   const [data, setData] = useState<any>(null);
   const [open, setOpen] = useState<any>(false);
   const [eventId, setEventId] = useState("");
@@ -52,12 +53,12 @@ const MyEvent: React.FC = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
   //console.log(data);
-  const url = "https://taskerr-api.herokuapp.com/api/v1/events?type=personal";
+  const url = "https://taskerr-api.herokuapp.com/api/v1/events?type=";
   const fetchData = () => {
     const abortCnt = new AbortController();
     const token = sessionStorage.getItem("token");
 
-    fetch(url, {
+    fetch(url + eventType, {
       signal: abortCnt.signal,
       method: "GET",
       headers: {
@@ -91,7 +92,7 @@ const MyEvent: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [eventType]);
   useIonViewWillEnter(() => {
     fetchData();
   });
@@ -116,8 +117,7 @@ const MyEvent: React.FC = () => {
   const handleClick = (e: any) => {
     e.preventDefault();
     var id = e.target.getAttribute("data-event-id");
-    //history.push("/update_personal_event/" + id);
-    console.log(id);
+    history.push("/my/createevent?id=" + id);
   };
   const closeModal = () => {
     setOpen(false);
@@ -139,19 +139,6 @@ const MyEvent: React.FC = () => {
     setContactFirstName("");
     setContactSecondName("");
 
-
-    // service.post("guests", newContact).then((res) => {
-    //   // codes(res);
-
-    //   if (res.status >= 200 && res.status <= 299) {
-    //     setShowModal(false);
-    //     return res.json();
-    //   } else if (res.status === 400) {
-    //     return res.json();
-    //   } else {
-    //     throw Error(res.statusText);
-    //   }
-    // });
     const abortCnt = new AbortController();
     const token = sessionStorage.getItem("token");
 
@@ -204,13 +191,13 @@ const MyEvent: React.FC = () => {
 
           <IonRow>
             <IonCol class="events-btns">
-              <button className="event-btn" onClick={() => history.push("/myevents")}>My Events</button>
-              <button className="event-btn " onClick={() => history.push("/invitedevents")}>Invited Events</button>
+              <button className={eventType === "personal" ? "event-btn event-btn-clicked" : "event-btn"} onClick={() => setEventType("personal")}>My Events</button>
+              <button className={eventType === "invited" ? "event-btn event-btn-clicked" : "event-btn"} onClick={() => setEventType("invited")}>Invited Events</button>
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
-              <IonButton routerLink="/createevent"
+              <IonButton routerLink="/my/createevent"
                 className="add-btn"
                 style={{ float: "right" }}
               >

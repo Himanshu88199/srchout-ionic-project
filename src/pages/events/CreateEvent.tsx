@@ -1,39 +1,45 @@
 import { IonButton, IonCol, IonContent, IonDatetime, IonIcon, IonInput, IonLabel, IonModal, IonPage, IonRow, IonTextarea, IonToast } from '@ionic/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import Header from '../Header';
 import './CreateEvent.css';
 import { calendar } from "ionicons/icons"
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { Advertisements } from '../Advertisements';
 
 const CreateEvent: React.FC = () => {
 
+    const { search } = useLocation();
+    const id = search.split('?id=')[1];
+    //console.log(id);
+
     const [eventId, setEventId] = useState("");
     const [eventName, setEventName] = useState("")
     const [eventDesc, setEventDesc] = useState("")
-    const [eventDate, setEventDate] = useState(Date.now());
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
     const [eventLoc, setEventLoc] = useState("");
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState("");
     const [action, setAction] = useState(false);
 
-    const [dateForDisplay, setDateForDisplay] = useState("");
-
     const history = useHistory()
 
-    const handleSaveEvent = (e: any) => {
-        e.preventDefault();
+    const formatDateForDB = (date: string, time: string) => {
+        const dtArr = date.split('/');
+        const newDate = `${dtArr[1]}/${dtArr[0]}/${dtArr[2]}`;
+        return new Date(`${newDate} ${time}`).toISOString();
+    };
+    const createNewEvent = () => {
         const url = "https://taskerr-api.herokuapp.com/api/v1/events";
         const token = sessionStorage.getItem("token");
-        //console.log(eventDate, "eventDateeventDate");
 
         const eventData = {
             name: eventName,
             detail: eventDesc,
             location: eventLoc,
-            event_at: eventDate,
+            event_at: formatDateForDB(date, time),
             evnt_type: "personal",
         };
         // console.log(formatDateForDB(eventDate));
@@ -71,18 +77,122 @@ const CreateEvent: React.FC = () => {
                 setError(true);
             });
     };
+    const updateEvent = (id: any) => {
+        const url = "https://taskerr-api.herokuapp.com/api/v1/events/" + id;
+        const token = sessionStorage.getItem("token");
+        const abortCnt = new AbortController();
+        let eventData = {
+            name: eventName,
+            detail: eventDesc,
+            event_at: formatDateForDB(date, time),
+            location: eventLoc,
+        };
+        let options = {
+            signal: abortCnt.signal,
+            method: "PUT",
+            headers: {
+                "api-token": token!,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(eventData),
+        };
+
+        fetch(url, options)
+            .then((res) => {
+                if (res.status >= 200 && res.status <= 299) {
+                    return res.json();
+                } else if (res.status === 400) {
+                    return res.json();
+                } else {
+                    throw Error(res.statusText);
+                }
+            })
+            .then((res) => {
+                if (res) {
+                    setSuccess(true);
+                } else if (res.error) {
+                    setMessage(res.error);
+                    setError(true);
+                }
+            })
+            .catch((err) => {
+                setMessage(err.message);
+                setError(true);
+            });
+        return () => abortCnt.abort();
+    };
+    const handleSaveEvent = (e: any) => {
+        e.preventDefault();
+        if (id) {
+            updateEvent(id);
+        } else {
+            createNewEvent();
+        }
+    };
 
     const formatDate = (value: string) => {
         return format(parseISO(value), "MM/dd/yy hh:mm aaaa");
     };
 
-    const updateEventDate = (e: any) => {
-        //console.log(eventDate, "change");
-        setEventDate(e.detail.value);
-        setDateForDisplay(formatDate(e.detail.value));
-        //console.log(eventDate, "changedd");
-        //console.log(dateForDisplay, "dateForDisplay");
+    const fetchEventById = (id: any) => {
+        const url = "https://taskerr-api.herokuapp.com/api/v1/events/" + id;
+        const token = sessionStorage.getItem("token");
+        const abortCnt = new AbortController();
+        let options = {
+            signal: abortCnt.signal,
+            method: "GET",
+            headers: {
+                "api-token": token!,
+                "Content-Type": "application/json",
+            },
+        };
+
+        fetch(url, options)
+            .then((res) => {
+                if (res.status >= 200 && res.status <= 299) {
+                    return res.json();
+                } else if (res.status === 400) {
+                    return res.json();
+                } else {
+                    throw Error(res.statusText);
+                }
+            })
+            .then((res) => {
+                if (res) {
+                    setEventName(res.name);
+                    setEventDesc(res.detail);
+                    if (res.event_at !== null) {
+                        const date = new Date(res.event_at).toLocaleDateString();
+                        const time = new Date(res.event_at).toLocaleTimeString();
+                        setDate(date);
+                        setTime(time);
+                    }
+                    setEventLoc(res.location);
+                } else if (res.error) {
+                    setMessage(res.error);
+                    setError(true);
+                }
+            })
+            .catch((err) => {
+                setMessage(err.message);
+                setError(true);
+            });
+        return () => abortCnt.abort();
     };
+
+    const resetForm = () => {
+        setEventName('');
+        setEventDesc('');
+        setDate("");
+        setTime("");
+        setEventLoc('');
+    };
+    useEffect(() => {
+        resetForm();
+        if (id) {
+            fetchEventById(id);
+        }
+    }, [id]);
 
     return (
         <>
@@ -91,7 +201,7 @@ const CreateEvent: React.FC = () => {
                 <IonContent >
                     <IonRow>
                         <IonCol className='center text-grey'>
-                            CREATE EVENT
+                            {id ? "EDIT" : "CREATE"} EVENT
                         </IonCol>
                     </IonRow>
                     <form onSubmit={handleSaveEvent}>
@@ -111,7 +221,7 @@ const CreateEvent: React.FC = () => {
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        <IonRow className='content'>
+                        {/* <IonRow className='content'>
                             <IonCol size="8" className="ion-align-self-start text-grey2 pb-0 ml-10 ">
                                 <IonLabel > Event Date:</IonLabel>
                                 <IonInput value={dateForDisplay} className="border mt-10 mb-10 pd" />
@@ -126,21 +236,21 @@ const CreateEvent: React.FC = () => {
                                             presentation="date-time"
                                             onIonChange={updateEventDate}
                                         ></IonDatetime>
-                                        <IonButton onClick={() => history.push("/createevent")}>Done</IonButton>
+                                        <IonButton onClick={() => history.push("/my/createevent")}>Done</IonButton>
                                     </IonContent>
                                 </IonModal>
                             </IonCol>
-                        </IonRow>
-                        {/* <IonRow className='date-time'>
+                        </IonRow> */}
+                        <IonRow className='date-time'>
                             <IonCol>
                                 <IonLabel className='ml-12'>Event Date:</IonLabel>
-                                <IonInput className='input-border col-50'></IonInput>
+                                <IonInput className='input-border col-50' value={date} onIonChange={(e) => setDate(e.detail.value ? e.detail.value : '')}></IonInput>
                             </IonCol>
                             <IonCol>
                                 <IonLabel className='ml-12'>Event Time:</IonLabel>
-                                <IonInput className='input-border col-50'></IonInput>
+                                <IonInput className='input-border col-50' value={time} onIonChange={(e) => setTime(e.detail.value ? e.detail.value : '')}></IonInput>
                             </IonCol>
-                        </IonRow> */}
+                        </IonRow>
                         <IonRow>
                             <IonCol size='12' className='text-grey2 pb-0 ml-12'>
                                 Event Location:
@@ -160,13 +270,13 @@ const CreateEvent: React.FC = () => {
                         onDidDismiss={() => {
                             if (action) {
                                 setSuccess(false);
-                                history.push("/createeventtask" + eventId + "/" + eventName);
+                                history.push("/my/createeventtask?id=" + eventId);
                             } else {
                                 setSuccess(false);
                                 history.push("/my/events");
                             }
                         }}
-                        message="Task has been created"
+                        message={`Task has been ${id ? "updated" : "created"}`}
                         duration={200}
                         color="dark"
                     />
