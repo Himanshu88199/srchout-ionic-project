@@ -51,11 +51,34 @@
   box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.13);
 }
 
-.date-time {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.date {
+  width: 50vw;
+}
+
+.date input {
+  margin-left: 0.5rem;
+}
+
+.time {
+  width: 30vw;
+}
+
+.time input {
+  margin-left: 0.5rem;
 }
 
 .col-50 {
   width: 38vw;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.ml-11 {
+  margin-left: 3px;
+}
+
+.text-grey2 {
 }

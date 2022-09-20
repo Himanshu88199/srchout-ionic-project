@@ -112,7 +112,7 @@ const CreateEvent: React.FC = () => {
                             </IonCol>
                         </IonRow>
                         <IonRow className='content'>
-                            <IonCol size="8" className="ion-align-self-start text-grey2 pb-0 ml-10 ">
+                            {/* <IonCol size="8" className="ion-align-self-start text-grey2 pb-0 ml-10 ">
                                 <IonLabel > Event Date:</IonLabel>
                                 <IonInput value={dateForDisplay} className="border mt-10 mb-10 pd" />
                             </IonCol>
@@ -129,6 +129,14 @@ const CreateEvent: React.FC = () => {
                                         <IonButton onClick={() => history.push("/createevent")}>Done</IonButton>
                                     </IonContent>
                                 </IonModal>
+                            </IonCol> */}
+                            <IonCol>
+                                <IonLabel className='text-grey2 ml-11'>Event Date:</IonLabel>
+                                <IonInput className='input-border date ml-11'></IonInput>
+                            </IonCol>
+                            <IonCol>
+                                <IonLabel className='text-grey2 ml-12'>Event Time:</IonLabel>
+                                <IonInput className='input-border time'></IonInput>
                             </IonCol>
                         </IonRow>
                         {/* <IonRow className='date-time'>

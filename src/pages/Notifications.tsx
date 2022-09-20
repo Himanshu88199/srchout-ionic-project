@@ -11,7 +11,7 @@ const Notifications: React.FC = () => {
                 <IonContent>
                     <IonRow>
                         <IonCol className='center text-grey'>
-                            MY PROFILE
+                            NOTIFICATIONS
                         </IonCol>
                     </IonRow>
                     <IonList>
