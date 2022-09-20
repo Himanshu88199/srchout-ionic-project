@@ -205,9 +205,11 @@ const MyEvent: React.FC = () => {
               </IonButton>
             </IonCol>
           </IonRow>
+          {/* <IonContent className="setheight"> */}
+
           {data && data?.map((i: any, index: number) => (
-            <IonRow key={index}>
-              <IonCol>
+            <IonRow key={index} >
+              <IonCol >
                 <IonCard className="card">
                   <IonCardContent>
                     <IonGrid className="events">
@@ -229,7 +231,7 @@ const MyEvent: React.FC = () => {
                       </IonRow>
                       <IonCol className="pd-0 events-icons" size="12" style={{ float: "right" }}>
                         <img
-                          className="user-img"
+                          className="user-img user"
                           src="../../../assets/users.svg"
                           alt=""
                           onClick={() => openModal(i.id)}
@@ -377,6 +379,7 @@ const MyEvent: React.FC = () => {
 
             </IonRow>
           ))}
+          {/* </IonContent> */}
 
           {/* <IonRow className="events">
             <IonCol className="pd-0 event" size="12">
@@ -461,6 +464,7 @@ const MyEvent: React.FC = () => {
           </IonRow> */}
           {/* <Footer /> */}
         </IonContent>
+        <Advertisements />
       </IonPage>
     </>
   );

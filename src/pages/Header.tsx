@@ -7,10 +7,10 @@ const Header: React.FC = () => {
             <IonRow>
                 <IonCol size='12'>
                     <IonItem className='bg-custom'>
-                        <IonButton className='pl-0' slot='start' size='default' fill='clear' href='/my/events'>
+                        <IonButton className='pl-0' slot='start' size='default' fill='clear' href='/my/events' >
                             <IonIcon className='size' src='../assets/back.svg' />
                         </IonButton>
-                        <IonButton className='pr-0' slot='end' size='default' fill='clear'>
+                        <IonButton className='pr-0' slot='end' size='default' fill='clear' href='/notifications'>
                             <IonIcon className='size' src='../assets/bell.svg' />
                         </IonButton>
                     </IonItem>

@@ -221,26 +221,6 @@ const CreateEvent: React.FC = () => {
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        {/* <IonRow className='content'>
-                            <IonCol size="8" className="ion-align-self-start text-grey2 pb-0 ml-10 ">
-                                <IonLabel > Event Date:</IonLabel>
-                                <IonInput value={dateForDisplay} className="border mt-10 mb-10 pd" />
-                            </IonCol>
-                            <IonCol size="2" className="ion-align-self-end ">
-                                <IonButton id="open-modal" fill="clear">
-                                    <IonIcon icon={calendar} />
-                                </IonButton>
-                                <IonModal trigger="open-modal" >
-                                    <IonContent force-overscroll="false" className='modal'>
-                                        <IonDatetime
-                                            presentation="date-time"
-                                            onIonChange={updateEventDate}
-                                        ></IonDatetime>
-                                        <IonButton onClick={() => history.push("/my/createevent")}>Done</IonButton>
-                                    </IonContent>
-                                </IonModal>
-                            </IonCol>
-                        </IonRow> */}
                         <IonRow className='date-time'>
                             <IonCol>
                                 <IonLabel className='ml-12'>Event Date:</IonLabel>
@@ -281,7 +261,6 @@ const CreateEvent: React.FC = () => {
                         color="dark"
                     />
                     <Advertisements />
-
                 </IonContent>
             </IonPage>
         </>

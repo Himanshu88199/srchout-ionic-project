@@ -2,6 +2,7 @@ import {
   IonButton,
   IonCol,
   IonIcon,
+  IonImg,
   IonRow,
 } from "@ionic/react";
 import "./loginIcons.css";
@@ -28,6 +29,7 @@ const LoginIcons: React.FC = () => {
             fill="outline"
           >
             <IonIcon className="logo-size" src="../assets/apple.svg" />
+
           </IonButton>
         </IonCol>
         <IonCol>

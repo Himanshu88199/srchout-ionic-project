@@ -2,9 +2,9 @@
   background: #324755;
 }
 
-.text-left {
+/* .text-left {
   text-align: left;
-}
+} */
 
 .event-heading {
   text-align: center;
@@ -15,15 +15,18 @@
 
 .events {
   /* margin: 10px 10px; */
-  background: #eeeeee;
+  background: none;
   /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
   /* border-radius: 10px; */
+  line-height: 12px;
 }
 
 .card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   background: #ffffff;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 
 .events-btns {
@@ -68,15 +71,20 @@
 }
 
 .events-icons {
-  text-align: end;
-  padding-right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }
 
 .user-img {
   margin-left: 10px;
-  margin-top: -2rem;
+  margin-top: -1rem;
   padding: 0.5rem;
   width: 35px;
+}
+
+.user {
+  width: 40px;
 }
 
 .user-img:hover {
@@ -87,6 +95,8 @@
 
 .add-btn {
   margin-right: 1.4rem;
+  margin-bottom: 0.5rem;
+  height: 35px;
 }
 
 .start {
@@ -97,4 +107,5 @@
 
 .start p {
   font-weight: 700;
+  margin-bottom: 0;
 }

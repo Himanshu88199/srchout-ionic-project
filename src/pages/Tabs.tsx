@@ -5,6 +5,7 @@ import { Redirect, Route } from 'react-router-dom';
 import CreateEvent from './events/CreateEvent';
 import MyEvent from './events/MyEvent';
 import Home from './Home';
+import { HomeTab } from './HomeTab';
 import Setting from './settings/Setting';
 // import Createuser from './user/Createuser';
 
@@ -18,7 +19,8 @@ const Tabs: React.FC = () => {
         <IonTabs>
             <IonRouterOutlet ionPage>
                 <Route exact path="/my/home">
-                    <Home isFromHome={true} />
+                    {/* <Home isFromHome={true} /> */}
+                    <HomeTab />
                 </Route>
                 <Route exact path="/my/events">
                     <MyEvent />

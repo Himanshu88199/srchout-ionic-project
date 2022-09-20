@@ -42,6 +42,7 @@ import InvitedEvents from "./pages/events/InvitedEvents";
 import Events from "./pages/events/Events";
 import './pages/Tabs.css';
 import { useEffect, useState } from "react";
+import { HomeTab } from "./pages/HomeTab";
 
 setupIonicReact();
 
