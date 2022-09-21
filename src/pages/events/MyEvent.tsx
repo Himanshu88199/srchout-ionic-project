@@ -19,6 +19,7 @@ import {
 
 } from "@ionic/react";
 import { addOutline, closeCircleOutline, createOutline, personAddOutline } from "ionicons/icons";
+import moment from "moment";
 import { useEffect, useState } from "react";
 // import { IonReactRouter } from "@ionic/react-router";
 import { useHistory } from "react-router";
@@ -208,11 +209,11 @@ const MyEvent: React.FC = () => {
           {/* <IonContent className="setheight"> */}
 
           {data && data?.map((i: any, index: number) => (
-            <IonRow key={index} onClick={() => history.push('/my/eventdetails?id=' + i.id)}>
+            <IonRow key={index}>
               <IonCol >
                 <IonCard className="card">
                   <IonCardContent>
-                    <IonGrid className="events">
+                    <IonGrid className="events" onClick={() => history.push('/my/eventdetails?id=' + i.id)}>
                       <IonRow className="start">
                         <p>Event:</p>
                         <IonCol>{i.name}</IonCol>
@@ -223,156 +224,157 @@ const MyEvent: React.FC = () => {
                       </IonRow>
                       <IonRow className="start">
                         <p>Date:</p>
-                        <IonCol>{getFormattedDate(i.event_at)}</IonCol>
+                        <IonCol>{moment(i.event_at).format("ll")}</IonCol>
                       </IonRow>
                       <IonRow className="start">
                         <p>Time:</p>
-                        <IonCol>{getFormattedTime(i.event_at)}</IonCol>
+                        <IonCol>{moment(i.event_at).format('hh:mm a')}</IonCol>
                       </IonRow>
-                      <IonCol className="pd-0 events-icons" size="12" style={{ float: "right" }}>
-                        <img
-                          className="user-img user"
-                          src="../../../assets/users.svg"
-                          alt=""
-                          onClick={() => openModal(i.id)}
-                          data-event-id={i.id}
-
-                        />
-                        <img className="user-img" src="../../../assets/tick.svg" alt="" />
-                        <img className="user-img" src="../../../assets/edit.svg" alt=""
-                          onClick={handleClick}
-                          data-event-id={i.id}
-                        />
-                      </IonCol>
-                      <IonModal
-                        isOpen={open}
-                        onDidDismiss={closeModal}
-                        breakpoints={[0, 0.2, 0.5, 1]}
-                        initialBreakpoint={0.5}
-                        backdropBreakpoint={0.2}
-                      >
-                        <IonHeader>
-                          <IonToolbar color="primary">
-                            <IonTitle>Add Attendees</IonTitle>
-                            <IonButton
-                              size="small"
-                              fill="clear"
-                              className="float-right-button"
-                              onClick={() => closeModal()}
-                            >
-                              <IonIcon
-                                slot="icon-only"
-                                icon={closeCircleOutline}
-                                color="light"
-                              />
-                            </IonButton>
-                          </IonToolbar>
-                        </IonHeader>
-                        <IonContent className="ion-padding">
-                          <IonGrid>
-                            <IonRow>
-                              <IonCol>
-                                <IonItem hidden>
-                                  <IonLabel position="floating">
-                                    {" "}
-                                    event_id:
-                                  </IonLabel>
-                                  <IonInput
-                                    placeholder="event_id"
-                                    value={event_id}
-                                  ></IonInput>
-                                </IonItem>
-
-                                <IonItem>
-                                  <IonLabel position="floating">
-                                    {" "}
-                                    First Name:
-                                  </IonLabel>
-                                  <IonInput
-                                    placeholder="First Name"
-                                    value={contactFirstName}
-                                    onIonChange={(e) =>
-                                      setContactFirstName(e.detail.value!)
-                                    }
-                                  ></IonInput>
-                                </IonItem>
-
-                                <IonItem>
-                                  <IonLabel position="floating">
-                                    {" "}
-                                    Last Name:
-                                  </IonLabel>
-                                  <IonInput
-                                    placeholder="Last Name"
-                                    value={contactSecondName}
-                                    onIonChange={(e) =>
-                                      setContactSecondName(e.detail.value!)
-                                    }
-                                  ></IonInput>
-                                </IonItem>
-                              </IonCol>
-                            </IonRow>
-                            <IonRow>
-                              <IonCol>
-                                <IonItem>
-                                  <IonLabel position="floating">
-                                    {" "}
-                                    Phone:
-                                  </IonLabel>
-                                  <IonInput
-                                    placeholder="phone"
-                                    value={contactPhone}
-                                    onIonChange={(e) =>
-                                      setContactPhone(e.detail.value!)
-                                    }
-                                  ></IonInput>
-                                </IonItem>
-                              </IonCol>
-                            </IonRow>
-                            <IonRow>
-                              <IonCol>
-                                <IonItem>
-                                  <IonLabel position="floating">
-                                    {" "}
-                                    Email:
-                                  </IonLabel>
-                                  <IonInput
-                                    placeholder="email"
-                                    value={contactEmail}
-                                    onIonChange={(e) =>
-                                      setContactEmail(e.detail.value!)
-                                    }
-                                  ></IonInput>
-                                </IonItem>
-                              </IonCol>
-                            </IonRow>
-                            <IonRow className="text-center">
-                              <IonCol>
-                                <IonButton
-                                  size="small"
-                                  onClick={addInContacts}
-                                >
-                                  <IonIcon icon={addOutline} />
-                                  Add
-                                </IonButton>
-                              </IonCol>
-                            </IonRow>
-                            <IonRow>
-                              <IonCol>
-                                <ul>
-                                  {list.length > 0 &&
-                                    list.map((item, index) => (
-                                      <li key={item.name + index}>
-                                        {item.name}({item.phone}){" "}
-                                      </li>
-                                    ))}
-                                </ul>
-                              </IonCol>
-                            </IonRow>
-                          </IonGrid>
-                        </IonContent>
-                      </IonModal>
                     </IonGrid>
+
+                    <IonCol className="pd-0 events-icons" size="12" style={{ float: "right" }}>
+                      <img
+                        className="user-img user"
+                        src="../../../assets/users.svg"
+                        alt=""
+                        onClick={() => openModal(i.id)}
+                        data-event-id={i.id}
+
+                      />
+                      <img className="user-img" src="../../../assets/tick.svg" alt="" onClick={() => history.push(`/my/createeventtask?id=${i.id}&eventName=${i.name}`)} />
+                      <img className="user-img" src="../../../assets/edit.svg" alt=""
+                        onClick={handleClick}
+                        data-event-id={i.id}
+                      />
+                    </IonCol>
+                    <IonModal
+                      isOpen={open}
+                      onDidDismiss={closeModal}
+                      breakpoints={[0, 0.2, 0.5, 1]}
+                      initialBreakpoint={0.5}
+                      backdropBreakpoint={0.2}
+                    >
+                      <IonHeader>
+                        <IonToolbar color="primary">
+                          <IonTitle>Add Attendees</IonTitle>
+                          <IonButton
+                            size="small"
+                            fill="clear"
+                            className="float-right-button"
+                            onClick={() => closeModal()}
+                          >
+                            <IonIcon
+                              slot="icon-only"
+                              icon={closeCircleOutline}
+                              color="light"
+                            />
+                          </IonButton>
+                        </IonToolbar>
+                      </IonHeader>
+                      <IonContent className="ion-padding">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem hidden>
+                                <IonLabel position="floating">
+                                  {" "}
+                                  event_id:
+                                </IonLabel>
+                                <IonInput
+                                  placeholder="event_id"
+                                  value={event_id}
+                                ></IonInput>
+                              </IonItem>
+
+                              <IonItem>
+                                <IonLabel position="floating">
+                                  {" "}
+                                  First Name:
+                                </IonLabel>
+                                <IonInput
+                                  placeholder="First Name"
+                                  value={contactFirstName}
+                                  onIonChange={(e) =>
+                                    setContactFirstName(e.detail.value!)
+                                  }
+                                ></IonInput>
+                              </IonItem>
+
+                              <IonItem>
+                                <IonLabel position="floating">
+                                  {" "}
+                                  Last Name:
+                                </IonLabel>
+                                <IonInput
+                                  placeholder="Last Name"
+                                  value={contactSecondName}
+                                  onIonChange={(e) =>
+                                    setContactSecondName(e.detail.value!)
+                                  }
+                                ></IonInput>
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem>
+                                <IonLabel position="floating">
+                                  {" "}
+                                  Phone:
+                                </IonLabel>
+                                <IonInput
+                                  placeholder="phone"
+                                  value={contactPhone}
+                                  onIonChange={(e) =>
+                                    setContactPhone(e.detail.value!)
+                                  }
+                                ></IonInput>
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem>
+                                <IonLabel position="floating">
+                                  {" "}
+                                  Email:
+                                </IonLabel>
+                                <IonInput
+                                  placeholder="email"
+                                  value={contactEmail}
+                                  onIonChange={(e) =>
+                                    setContactEmail(e.detail.value!)
+                                  }
+                                ></IonInput>
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                          <IonRow className="text-center">
+                            <IonCol>
+                              <IonButton
+                                size="small"
+                                onClick={addInContacts}
+                              >
+                                <IonIcon icon={addOutline} />
+                                Add
+                              </IonButton>
+                            </IonCol>
+                          </IonRow>
+                          <IonRow>
+                            <IonCol>
+                              <ul>
+                                {list.length > 0 &&
+                                  list.map((item, index) => (
+                                    <li key={item.name + index}>
+                                      {item.name}({item.phone}){" "}
+                                    </li>
+                                  ))}
+                              </ul>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonContent>
+                    </IonModal>
                   </IonCardContent>
                 </IonCard>
               </IonCol>

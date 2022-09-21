@@ -14,14 +14,74 @@ import {
   IonText,
   IonTextarea,
   IonTitle,
+  IonToast,
   IonToolbar,
 } from "@ionic/react";
 import Header from "../Header";
 import "./CreatePersonalTask.css";
 import Footer from "../../components/Footer";
 import { Advertisements } from "../Advertisements";
+import { useState } from "react";
+import moment from "moment";
+import { useHistory } from "react-router";
 
 const CreatePersonalTask: React.FC = () => {
+  const history = useHistory();
+  const initialTaskData = {
+    name: '',
+    description: '',
+    due_date: '',
+    task_type: "personal",
+    category: ''
+  };
+  const [taskData, setTaskData] = useState(initialTaskData);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const submitCreateTask = (e: any) => {
+    e.preventDefault();
+    const url = "https://taskerr-api.herokuapp.com/api/v1/tasks";
+    const token = sessionStorage.getItem("token");
+
+    //console.log(taskData);
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-token": token!,
+      },
+      body: JSON.stringify(taskData),
+    })
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) {
+          return res.json();
+        } else if (res.status === 400) {
+          return res.json();
+        } else {
+          throw Error(res.statusText);
+        }
+      })
+      .then((res) => {
+        if (res.error) {
+          setMessage(res.error);
+          setError(true);
+        } else {
+          setSuccess(true);
+        }
+      })
+      .catch((err) => {
+        setMessage(err.message);
+        setError(true);
+      });
+
+  };
+  const onChangeHandler = (e: any) => {
+    setTaskData({
+      ...taskData,
+      [e.target.name]: e.detail.value
+    });
+  };
   return (
     <>
       <IonPage className="pg-grey">
@@ -30,48 +90,58 @@ const CreatePersonalTask: React.FC = () => {
           <IonRow>
             <IonCol className="center text-grey">CREATE PERSONAL TASK</IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol size="12" className="text-grey2 pb-0 ml-10">
-              Task Name:
-            </IonCol>
-            <IonCol className="pd-0" size="12">
-              <IonInput className="input-border"></IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="12" className="text-grey2 pb-0 ml-10">
-              Task Description:
-            </IonCol>
-            <IonCol className="pd-0" size="12">
-              <IonTextarea rows={3} className="input-border-2"></IonTextarea>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="12" className="text-grey2 pb-0 ml-10">
-              Task Due Date:
-            </IonCol>
-            <IonCol className="pd-0" size="12">
-              <IonInput className="input-border"></IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="12" className="text-grey2 pb-0 ml-10">
-              Category:
-            </IonCol>
-            <IonCol className="pd-0" size="12">
-              <IonInput className="input-border"></IonInput>
-            </IonCol>
-          </IonRow>
-          <IonRow className="save-btn-row">
-            <IonCol className="m-auto mt-43" size="11">
-              <IonButton className="sign-btn" size="default" expand="block">
-                Save
-              </IonButton>
-            </IonCol>
-          </IonRow>
-          <Footer />
+          <form onSubmit={submitCreateTask}>
+            <IonRow>
+              <IonCol size="12" className="text-grey2 pb-0 ml-10">
+                Task Name:
+              </IonCol>
+              <IonCol className="pd-0" size="12">
+                <IonInput className="input-border" value={taskData.name} name="name" onIonChange={onChangeHandler}></IonInput>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="12" className="text-grey2 pb-0 ml-10">
+                Task Description:
+              </IonCol>
+              <IonCol className="pd-0" size="12">
+                <IonTextarea rows={3} className="input-border-2" value={taskData.description} name="description" onIonChange={onChangeHandler}></IonTextarea>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="12" className="text-grey2 pb-0 ml-10">
+                Task Due Date:
+              </IonCol>
+              <IonCol className="pd-0" size="12">
+                <IonInput type="datetime-local" className="input-border" value={taskData.due_date} name="due_date" onIonChange={onChangeHandler}></IonInput>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="12" className="text-grey2 pb-0 ml-10">
+                Category:
+              </IonCol>
+              <IonCol className="pd-0" size="12">
+                <IonInput className="input-border" value={taskData.category} name="category" onIonChange={onChangeHandler}></IonInput>
+              </IonCol>
+            </IonRow>
+            <IonRow className="save-btn-row">
+              <IonCol className="m-auto mt-43" size="11">
+                <IonButton className="sign-btn" size="default" expand="block" type="submit">
+                  Save
+                </IonButton>
+              </IonCol>
+            </IonRow>
+          </form>
+          <IonToast
+            isOpen={success}
+            onDidDismiss={() => {
+              setSuccess(false);
+              history.push("/my/mytask");
+            }}
+            message="Task has been created"
+            duration={200}
+            color="dark"
+          />
           <Advertisements />
-
         </IonContent>
       </IonPage>
     </>
