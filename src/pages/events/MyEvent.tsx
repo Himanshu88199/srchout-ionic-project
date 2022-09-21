@@ -208,7 +208,7 @@ const MyEvent: React.FC = () => {
           {/* <IonContent className="setheight"> */}
 
           {data && data?.map((i: any, index: number) => (
-            <IonRow key={index} >
+            <IonRow key={index} onClick={() => history.push('/my/eventdetails?id=' + i.id)}>
               <IonCol >
                 <IonCard className="card">
                   <IonCardContent>

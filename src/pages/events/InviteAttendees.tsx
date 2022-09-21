@@ -191,7 +191,7 @@ const InviteAttendees: React.FC = () => {
                         </IonRow>
                         <IonRow>
                             <IonCol className='m-auto mt-41' size='11'>
-                                <IonButton className='sign-btn' size='default' expand="block" onClick={() => history.push("/mytask")}>Save</IonButton>
+                                <IonButton className='sign-btn' size='default' expand="block" onClick={() => history.push("/my/mytask")}>Save</IonButton>
                             </IonCol>
                         </IonRow>
                     </form>

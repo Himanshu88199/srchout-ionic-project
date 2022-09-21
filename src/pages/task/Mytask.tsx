@@ -10,6 +10,7 @@ import {
   // IonLabel,
   IonPage,
   IonRow,
+  useIonViewWillEnter,
   // IonText,
   // IonTextarea,
 } from "@ionic/react";
@@ -72,6 +73,9 @@ const Mytask: React.FC = () => {
     fetchData();
   }, []);
 
+  useIonViewWillEnter(() => {
+    fetchData();
+  });
   const updateTaskCompleted = (id: number, name: string) => {
     const abortCnt = new AbortController();
     const token = sessionStorage.getItem("token");
@@ -129,7 +133,7 @@ const Mytask: React.FC = () => {
   const handleEdit = (e: any) => {
     if (typeof e.target.checked === "undefined") {
       let task_id = e.target.getAttribute("data-task-id");
-      history.push("/update_personal_task/" + task_id);
+      //history.push("/update_personal_task/" + task_id);
     }
   };
   const getFormattedDate = (dateStr: string) => {
@@ -230,7 +234,7 @@ const Mytask: React.FC = () => {
           <IonButton
             className="add-btn"
             style={{ float: "right" }}
-            onClick={() => history.push("/createeventtask")}
+            onClick={() => history.push("/my/createeventtask")}
           >
             +Task
           </IonButton>
