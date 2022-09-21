@@ -37,6 +37,7 @@ const EventDetails: React.FC = () => {
   const [attendees, setAttendess] = useState<any>([]);
   const [newAttendee, setNewAttendee] = useState(newContact);
   const [open, setOpen] = useState<any>(false);
+  const [tasks, setTasks] = useState<any>([]);
 
   const fetchEventById = (id: any) => {
     const url = "https://taskerr-api.herokuapp.com/api/v1/events/" + id;
@@ -111,6 +112,42 @@ const EventDetails: React.FC = () => {
 
     return () => abortCnt.abort();
   };
+  const fetchTasks = (id: any) => {
+    const url = "https://taskerr-api.herokuapp.com/api/v1/tasks?event_id=" + 120;
+    const abortCnt = new AbortController();
+    const token = sessionStorage.getItem("token");
+
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "api-token": token!,
+      },
+    })
+      .then((res) => {
+        if (res.status >= 200 && res.status <= 299) {
+          return res.json();
+        } else if (res.status === 400) {
+          return res.json();
+        } else {
+          throw Error(res.statusText);
+        }
+      })
+      .then((res) => {
+        if (res) {
+          setTasks(res);
+        } else if (res.error) {
+          setMessage(res.error);
+          setError(true);
+        }
+      })
+      .catch((err) => {
+        setMessage(err.message);
+        setError(true);
+      });
+
+    return () => abortCnt.abort();
+  }
   const closeModal = () => {
     setOpen(false);
   };
@@ -166,6 +203,7 @@ const EventDetails: React.FC = () => {
   useEffect(() => {
     fetchEventById(id);
     fetchAttendees(id);
+    fetchTasks(id);
   }, [id]);
   return (
     <>
@@ -231,24 +269,14 @@ const EventDetails: React.FC = () => {
                 <IonLabel className="dark-text"> Tasks :</IonLabel>
               </IonCol>
               <IonRow>
-                <IonCol className="pd-0 pb-0" size="12">
-                  Sankaran - Accepted Giri
-                </IonCol>
-                <IonCol className="pd-0 pb-0" size="12">
-                  Giri V. - Accepted{" "}
-                </IonCol>
-                <IonCol className="pd-0 pb-0" size="12">
-                  Dev Patel - Declined
-                </IonCol>
-                <IonCol className="pd-0 pb-0" size="12">
-                  Sarthak - Accepted
-                </IonCol>
-                <IonCol className="pd-0 pb-0" size="12">
-                  Sudhanshu - Undecided
-                </IonCol>
-                <IonCol className="pd-0 pb-0" size="12">
-                  more...
-                </IonCol>
+                {tasks.map((item: any, index: number) => {
+                  const assignee = attendees.filter((attend: any) => attend.id === item.assigned_to)[0];
+                  return (
+                    <IonCol key={index} className="pd-0 pb-0" size="12">
+                      {item.name} {assignee && `- ${assignee.fname} ${assignee.lname}`}
+                    </IonCol>
+                  )
+                })}
               </IonRow>
             </IonRow>
             <IonRow className="btn-right">
@@ -256,7 +284,7 @@ const EventDetails: React.FC = () => {
                 <IonButton fill="clear" onClick={() => openModal()}>
                   <IonIcon className="icon-size" src="../assets/users.svg" />
                 </IonButton>
-                <IonButton fill="clear">
+                <IonButton fill="clear" onClick={() => history.push(`/my/createeventtask?id=${id}&eventName=${eventData.name}`)}>
                   <IonIcon className="icon-size-2" src="../assets/tick.svg" />
                 </IonButton>
                 <IonButton fill="clear" onClick={() => history.push("/my/createevent?id=" + id)}>

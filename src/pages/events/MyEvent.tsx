@@ -19,6 +19,7 @@ import {
 
 } from "@ionic/react";
 import { addOutline, closeCircleOutline, createOutline, personAddOutline } from "ionicons/icons";
+import moment from "moment";
 import { useEffect, useState } from "react";
 // import { IonReactRouter } from "@ionic/react-router";
 import { useHistory } from "react-router";
@@ -223,11 +224,11 @@ const MyEvent: React.FC = () => {
                       </IonRow>
                       <IonRow className="start">
                         <p>Date:</p>
-                        <IonCol>{getFormattedDate(i.event_at)}</IonCol>
+                        <IonCol>{moment(i.event_at).format("ll")}</IonCol>
                       </IonRow>
                       <IonRow className="start">
                         <p>Time:</p>
-                        <IonCol>{getFormattedTime(i.event_at)}</IonCol>
+                        <IonCol>{moment(i.event_at).format('hh:mm a')}</IonCol>
                       </IonRow>
                     </IonGrid>
 
@@ -240,7 +241,7 @@ const MyEvent: React.FC = () => {
                         data-event-id={i.id}
 
                       />
-                      <img className="user-img" src="../../../assets/tick.svg" alt="" />
+                      <img className="user-img" src="../../../assets/tick.svg" alt="" onClick={() => history.push(`/my/createeventtask?id=${i.id}&eventName=${i.name}`)} />
                       <img className="user-img" src="../../../assets/edit.svg" alt=""
                         onClick={handleClick}
                         data-event-id={i.id}

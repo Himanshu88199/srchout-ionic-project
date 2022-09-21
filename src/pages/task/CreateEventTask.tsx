@@ -1,31 +1,25 @@
-import { IonButton, IonCol, IonContent, IonInput, IonPage, IonRow, IonTextarea, IonToast } from '@ionic/react';
-import { useState } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { IonButton, IonCol, IonContent, IonInput, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToast } from '@ionic/react';
+import { useEffect, useState } from 'react';
+import { useHistory, useParams, useLocation } from 'react-router';
 import { Advertisements } from '../Advertisements';
 import Header from '../Header';
 import './CreateEventTask.css';
 
 const CreateEventTask: React.FC = () => {
     const history = useHistory();
-
-    const { event_id, event_name } = useParams<{
-        event_id: string;
-        event_name: string;
-    }>();
-
-    const event_id_modified = event_id ? event_id : null;
-    const event_name_modified = event_name ? event_name : null;
-    const [eventName, setEventName] = useState("");
+    const { search } = useLocation();
+    const params = search.split('&eventName=');
+    const eventName = decodeURIComponent(params[1]);
+    const id = params[0].split('?id=')[1];
+    //console.log(id, eventName);
     const [taskName, setTaskName] = useState("");
     const [taskDesc, setTaskDesc] = useState("");
-    const [dateForDisplay, setDateForDisplay] = useState("");
     const [error, setError] = useState(false);
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const [attend, getAttendend] = useState([]);
     const [eventDate, setEventDate] = useState("");
     const [taskAssignTo, setTaskAssignTo] = useState("");
-    const [open, setOpen] = useState<any>(false);
 
 
 
@@ -35,24 +29,14 @@ const CreateEventTask: React.FC = () => {
         const url = "https://taskerr-api.herokuapp.com/api/v1/tasks";
         const token = sessionStorage.getItem("token");
 
-        var taskData;
-        if (typeof event_id != "undefined") {
-            taskData = {
-                name: taskName,
-                description: taskDesc,
-                due_date: eventDate,
-                task_type: "event",
-                event_id: event_id,
-                assigned_to: taskAssignTo,
-            };
-        } else {
-            taskData = {
-                name: taskName,
-                description: taskDesc,
-                due_date: new Date("09/22/2022 19:00:00").toISOString(),
-                task_type: "personal",
-            };
-        }
+        var taskData = {
+            name: taskName,
+            description: taskDesc,
+            due_date: eventDate,
+            task_type: "event",
+            event_id: id,
+            assigned_to: taskAssignTo,
+        };
 
         fetch(url, {
             method: "POST",
@@ -76,6 +60,10 @@ const CreateEventTask: React.FC = () => {
                     setMessage(res.error);
                     setError(true);
                 } else {
+                    setTaskName("");
+                    setTaskDesc("");
+                    setEventDate("");
+                    setTaskAssignTo("");
                     setSuccess(true);
                 }
             })
@@ -87,7 +75,7 @@ const CreateEventTask: React.FC = () => {
 
     const fetchAttendies = () => {
         const guesturl =
-            "https://taskerr-api.herokuapp.com/api/v1/guests/" + event_id_modified;
+            "https://taskerr-api.herokuapp.com/api/v1/guests/" + id;
 
         const abortCnt = new AbortController();
         const token = sessionStorage.getItem("token");
@@ -124,15 +112,13 @@ const CreateEventTask: React.FC = () => {
         return () => abortCnt.abort();
     };
 
-    const openModal = () => {
-        setOpen(true);
+    const assignHandler = (e: any) => {
+        //console.log(e.detail);
+        setTaskAssignTo(e.detail.value);
+    };
+    useEffect(() => {
         fetchAttendies();
-    };
-
-    const assignAttendees = () => {
-        openModal();
-    };
-
+    }, [id]);
     return (
         <>
             <IonPage className='pg-grey'>
@@ -144,24 +130,12 @@ const CreateEventTask: React.FC = () => {
                         </IonCol>
                     </IonRow>
                     <form onSubmit={handleCreateTask}>
-                        {
-                            event_id_modified && (
-                                <IonRow>
-                                    <IonCol size='12' className='text-grey2 pb-0 ml-10'>
-                                        Event Name:
-                                    </IonCol>
-                                    <IonCol className='pd-0' size='12'>
-                                        <IonInput className='input-border pd' value={event_name_modified} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
-                                    </IonCol>
-                                </IonRow>
-                            )
-                        }
                         <IonRow>
                             <IonCol size='12' className='text-grey2 pb-0 ml-10'>
                                 Event Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border pd' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
+                                <IonInput className='input-border pd' value={eventName}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -185,7 +159,7 @@ const CreateEventTask: React.FC = () => {
                                 Task Due Date:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border pd' value={dateForDisplay}></IonInput>
+                                <IonInput type="datetime-local" className='input-border pd' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -193,7 +167,13 @@ const CreateEventTask: React.FC = () => {
                                 Assign Task To:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border pd'>{taskAssignTo}</IonInput>
+                                <IonSelect className='input-border pd' placeholder="Select Assignees" value={taskAssignTo} onIonChange={(e: any) => assignHandler(e)}>
+                                    {attend.map((item: any, index: number) => {
+                                        return (
+                                            <IonSelectOption key={index} value={item.id}>{item.fname} {item.lname}</IonSelectOption>
+                                        )
+                                    })}
+                                </IonSelect>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -201,24 +181,27 @@ const CreateEventTask: React.FC = () => {
                                 <IonButton className='save-btn' size='default' expand="block" type="submit">Save</IonButton>
                             </IonCol>
                         </IonRow>
-                        <IonButton
-                            size="small"
-                            fill="clear"
-                            onClick={() => assignAttendees()}
-                        >
-                            Assign Attendees
-                        </IonButton>
                     </form>
                     <IonToast
                         isOpen={success}
                         onDidDismiss={() => {
                             setSuccess(false);
-                            history.push("/my/mytask");
+                            history.goBack();
                         }}
                         message="Task has been created"
                         duration={200}
                         color="dark"
                     />
+                    <IonToast
+                        isOpen={error}
+                        onDidDismiss={() => {
+                            setError(false);
+                        }}
+                        message={message}
+                        duration={200}
+                        color="dark"
+                    />
+
                     <Advertisements />
 
                 </IonContent>

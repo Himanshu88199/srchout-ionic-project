@@ -21,6 +21,7 @@ import "./Mytask.css";
 import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 import { Advertisements } from "../Advertisements";
+import moment from "moment";
 
 const Mytask: React.FC = () => {
   const history = useHistory()
@@ -29,14 +30,15 @@ const Mytask: React.FC = () => {
   const [message, setMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
 
+  const [taskType, setTaskType] = useState("personal");
 
-  const url = "https://taskerr-api.herokuapp.com/api/v1/tasks?type=personal";
+  const url = "https://taskerr-api.herokuapp.com/api/v1/tasks?type=";
 
   const fetchData = () => {
     const abortCnt = new AbortController();
     const token = sessionStorage.getItem("token");
 
-    fetch(url, {
+    fetch(url + taskType, {
       signal: abortCnt.signal,
       method: "GET",
       headers: {
@@ -55,6 +57,7 @@ const Mytask: React.FC = () => {
       })
       .then((res) => {
         if (res) {
+          //console.log(res);
           setData(res);
         } else if (res.error) {
           setMessage(res.error);
@@ -71,7 +74,7 @@ const Mytask: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [taskType]);
 
   useIonViewWillEnter(() => {
     fetchData();
@@ -154,8 +157,19 @@ const Mytask: React.FC = () => {
           </IonRow>
           <IonRow>
             <IonCol class="tasks-btns">
-              <button className="event-btn">My tasks</button>
-              <button className="event-btn ">Assigned tasks</button>
+              <button className={taskType === "personal" ? "event-btn event-btn-clicked" : "event-btn"} onClick={() => setTaskType("personal")}>My Tasks</button>
+              <button className={taskType === "assigned" ? "event-btn event-btn-clicked" : "event-btn"} onClick={() => setTaskType("assigned")}>Assigned tasks</button>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonButton
+                className="add-btn"
+                style={{ float: "right" }}
+                onClick={() => history.push("/my/createpersonaltask")}
+              >
+                +Task
+              </IonButton>
             </IonCol>
           </IonRow>
           {data && (
@@ -183,7 +197,7 @@ const Mytask: React.FC = () => {
                       data-task-id={i.id}
                     >
                       {i.description}
-                      <br /> Due: {getFormattedDate(i.due_date)}
+                      <br /> Due: {moment(i.due_date).format('ll')}
                     </IonLabel>
                   </IonItem> : null
               ))}
@@ -231,13 +245,6 @@ const Mytask: React.FC = () => {
           </IonRow> */}
 
           {/* <Footer /> */}
-          <IonButton
-            className="add-btn"
-            style={{ float: "right" }}
-            onClick={() => history.push("/my/createeventtask")}
-          >
-            +Task
-          </IonButton>
           <Advertisements />
 
         </IonContent>

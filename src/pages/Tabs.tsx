@@ -7,11 +7,13 @@ import EventDetails from './events/EventDetails';
 import MyEvent from './events/MyEvent';
 import Home from './Home';
 import { HomeTab } from './HomeTab';
+import Notifications from './Notifications';
 import Setting from './settings/Setting';
 // import Createuser from './user/Createuser';
 
 import './Tabs.css';
 import CreateEventTask from './task/CreateEventTask';
+import CreatePersonalTask from './task/CreatePersonalTask';
 // import Header from './Header';
 // import EventsPage from './events/EventsPage';
 import Mytask from './task/Mytask';
@@ -41,6 +43,12 @@ const Tabs: React.FC = () => {
                 </Route>
                 <Route exact path="/my/createeventtask">
                     <CreateEventTask />
+                </Route>
+                <Route exact path="/my/createpersonaltask">
+                    <CreatePersonalTask />
+                </Route>
+                <Route exact path="/my/notifications">
+                    <Notifications />
                 </Route>
 
                 {/* <Route exact path="/app">
