@@ -60,21 +60,15 @@ const App: React.FC = () => {
           <Home />
         </Route> */}
           <Route exact path="/" component={() => <Home isFromHome={true} />} />
-          <Route exact path="/home" component={Home} />
+          {/* <Route exact path="/home" component={Home} /> */}
 
           <Route exact path="/createuser" component={Createuser} />
-          {/* <Route exact path="/eventdetails" component={EventDetails} /> */}
           <Route exact path="/createpersonaltask" component={CreatePersonalTask} />
-          {/* <Route exact path="/invitedevents" component={InvitedEvents} /> */}
-          {/* <Route exact path="/createeventtask" component={CreateEventTask} /> */}
-          {/* <Route exact path="/createevent" component={CreateEvent} /> */}
           <Route exact path="/contactus" component={ContactUs} />
           <Route exact path="/notifications" component={Notifications} />
           <Route exact path="/myprofile" component={MyProfile} />
           {/* <Route exact path="/inviteattendees" component={InviteAttendees} /> */}
           <Route exact path="/changepassword" component={ChangePassword} />
-          <Route exact path="/mytask" component={Mytask} />
-          {/* <Route exact path="/myevents" component={Events} /> */}
           <Route exact path="/assignedtasks" component={Assignedtasks} />
           <Route exact path="/setting" component={Setting} />
           <Route path="/my" render={() => (
