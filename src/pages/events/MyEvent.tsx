@@ -14,6 +14,7 @@ import {
   IonPage,
   IonRow,
   IonTitle,
+  IonToast,
   IonToolbar,
   useIonViewWillEnter,
 
@@ -466,6 +467,15 @@ const MyEvent: React.FC = () => {
           </IonRow> */}
           {/* <Footer /> */}
         </IonContent>
+        {/* <IonToast
+          isOpen={error}
+          onDidDismiss={() => {
+            setError(false);
+          }}
+          message={message}
+          duration={200}
+          color="danger"
+        /> */}
         <Advertisements />
       </IonPage>
     </>

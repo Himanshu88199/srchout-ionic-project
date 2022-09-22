@@ -1,8 +1,15 @@
 import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { useHistory } from 'react-router';
 import Header from '../Header';
 import './Setting.css';
 
 const Setting: React.FC = () => {
+    const history = useHistory();
+    const handleLogout = () => {
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('logged_in');
+        history.push("/");
+    }
     return (
         <>
             <IonPage className='pg-grey'>
@@ -76,6 +83,13 @@ const Setting: React.FC = () => {
                     <IonRow>
                         <IonCol className='ad'>
                             Advertisements
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                            <IonButton size="small" fill="outline" type="button" onClick={() => handleLogout()}>
+                                Log Out
+                            </IonButton>
                         </IonCol>
                     </IonRow>
                 </IonContent>

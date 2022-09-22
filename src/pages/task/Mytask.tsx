@@ -136,15 +136,8 @@ const Mytask: React.FC = () => {
   const handleEdit = (e: any) => {
     if (typeof e.target.checked === "undefined") {
       let task_id = e.target.getAttribute("data-task-id");
-      //history.push("/update_personal_task/" + task_id);
+      history.push("/my/createpersonaltask?id=" + task_id);
     }
-  };
-  const getFormattedDate = (dateStr: string) => {
-    if (dateStr !== null) {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString();
-    }
-    return;
   };
 
   return (
@@ -180,7 +173,6 @@ const Mytask: React.FC = () => {
                     lines="none"
                     key={index}
                     button
-                    onClick={handleEdit}
                     className={
                       index % 2
                         ? `personal-tasks-card-even`
@@ -195,9 +187,11 @@ const Mytask: React.FC = () => {
                     <IonLabel
                       className="ion-text-wrap ion-text-capitalize"
                       data-task-id={i.id}
+                      onClick={handleEdit}
                     >
-                      {i.description}
-                      <br /> Due: {moment(i.due_date).format('ll')}
+                      <p>{i.name}</p>
+                      {i.description} <br />
+                      <small>Due: {moment(i.due_date).format('lll')}</small>
                     </IonLabel>
                   </IonItem> : null
               ))}
