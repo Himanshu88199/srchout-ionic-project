@@ -1,12 +1,9 @@
-import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRouterOutlet, IonRow, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-// import { calendar, ellipse, informationCircle, logoGoogle, map, personCircle, square, triangle } from "ionicons/icons";
-import { Redirect, Route } from 'react-router-dom';
+import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
+import { Route } from 'react-router-dom';
+import Dashboard from './dashboard/Dashboard';
 import CreateEvent from './events/CreateEvent';
 import EventDetails from './events/EventDetails';
 import MyEvent from './events/MyEvent';
-import Home from './Home';
-import { HomeTab } from './HomeTab';
 import Notifications from './Notifications';
 import Setting from './settings/Setting';
 // import Createuser from './user/Createuser';
@@ -23,8 +20,7 @@ const Tabs: React.FC = () => {
         <IonTabs>
             <IonRouterOutlet ionPage>
                 <Route exact path="/my/home">
-                    {/* <Home isFromHome={true} /> */}
-                    <HomeTab />
+                    <Dashboard />
                 </Route>
                 <Route exact path="/my/events">
                     <MyEvent />

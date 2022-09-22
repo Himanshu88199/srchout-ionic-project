@@ -136,7 +136,7 @@ const Mytask: React.FC = () => {
   const handleEdit = (e: any) => {
     if (typeof e.target.checked === "undefined") {
       let task_id = e.target.getAttribute("data-task-id");
-      history.push("/createpersonaltask?id=" + task_id);
+      history.push("/my/createpersonaltask?id=" + task_id);
     }
   };
 
