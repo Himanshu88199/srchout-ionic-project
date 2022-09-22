@@ -1,5 +1,5 @@
 import {
-  IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonModal, IonPage, IonRow, IonText, IonTitle, IonToolbar
+  IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonModal, IonPage, IonRow, IonText, IonTitle, IonToast, IonToolbar
 } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
@@ -418,6 +418,15 @@ const EventDetails: React.FC = () => {
             </IonContent>
           </IonModal>
         </IonContent>
+        {/* <IonToast
+          isOpen={error}
+          onDidDismiss={() => {
+            setError(false);
+          }}
+          message={message}
+          duration={200}
+          color="danger"
+        /> */}
         <Advertisements />
       </IonPage>
     </>
