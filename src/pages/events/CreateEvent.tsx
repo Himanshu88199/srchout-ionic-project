@@ -6,6 +6,7 @@ import './CreateEvent.css';
 import { calendar } from "ionicons/icons"
 import { useHistory, useLocation } from 'react-router';
 import { Advertisements } from '../Advertisements';
+import Service from '../../services/http';
 
 const CreateEvent: React.FC = () => {
 
@@ -13,7 +14,6 @@ const CreateEvent: React.FC = () => {
     const id = search.split('?id=')[1];
     //console.log(id);
 
-    const [eventId, setEventId] = useState("");
     const [eventName, setEventName] = useState("")
     const [eventDesc, setEventDesc] = useState("")
     const [date, setDate] = useState("");
@@ -32,9 +32,6 @@ const CreateEvent: React.FC = () => {
         return new Date(`${newDate} ${time}`).toISOString();
     };
     const createNewEvent = () => {
-        const url = "https://taskerr-api.herokuapp.com/api/v1/events";
-        const token = sessionStorage.getItem("token");
-
         const eventData = {
             name: eventName,
             detail: eventDesc,
@@ -42,84 +39,36 @@ const CreateEvent: React.FC = () => {
             event_at: formatDateForDB(date, time),
             evnt_type: "personal",
         };
-        // console.log(formatDateForDB(eventDate));
+        const request = new Service();
 
-        // console.log(eventData,"eventData");
-        //console.log(eventData);
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "api-token": token!,
-            },
-            body: JSON.stringify(eventData),
-        })
-            .then((res) => {
-                if (res.status >= 200 && res.status <= 299) {
-                    return res.json();
-                } else if (res.status === 400) {
-                    return res.json();
-                } else {
-                    throw Error(res.statusText);
-                }
-            })
-            .then((res) => {
-                if (res.error) {
-                    setMessage(res.error);
+        request.post('events', eventData)
+            .then((result: any) => {
+                if (result.err) {
+                    setMessage(result.err.message);
                     setError(true);
                 } else {
                     setSuccess(true);
-                    setEventId(res.id);
                 }
-            })
-            .catch((err) => {
-                setMessage(err.message);
-                setError(true);
             });
     };
     const updateEvent = (id: any) => {
-        const url = "https://taskerr-api.herokuapp.com/api/v1/events/" + id;
-        const token = sessionStorage.getItem("token");
-        const abortCnt = new AbortController();
         let eventData = {
             name: eventName,
             detail: eventDesc,
             event_at: formatDateForDB(date, time),
             location: eventLoc,
         };
-        let options = {
-            signal: abortCnt.signal,
-            method: "PUT",
-            headers: {
-                "api-token": token!,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(eventData),
-        };
+        const request = new Service();
 
-        fetch(url, options)
-            .then((res) => {
-                if (res.status >= 200 && res.status <= 299) {
-                    return res.json();
-                } else if (res.status === 400) {
-                    return res.json();
-                } else {
-                    throw Error(res.statusText);
-                }
-            })
-            .then((res) => {
-                if (res) {
-                    setSuccess(true);
-                } else if (res.error) {
-                    setMessage(res.error);
+        request.put(`events/${id}`, eventData)
+            .then((result: any) => {
+                if (result.err) {
+                    setMessage(result.err.message);
                     setError(true);
+                } else {
+                    setSuccess(true);
                 }
-            })
-            .catch((err) => {
-                setMessage(err.message);
-                setError(true);
             });
-        return () => abortCnt.abort();
     };
     const handleSaveEvent = (e: any) => {
         e.preventDefault();
@@ -130,54 +79,27 @@ const CreateEvent: React.FC = () => {
         }
     };
 
-    const formatDate = (value: string) => {
-        return format(parseISO(value), "MM/dd/yy hh:mm aaaa");
-    };
-
     const fetchEventById = (id: any) => {
-        const url = "https://taskerr-api.herokuapp.com/api/v1/events/" + id;
-        const token = sessionStorage.getItem("token");
-        const abortCnt = new AbortController();
-        let options = {
-            signal: abortCnt.signal,
-            method: "GET",
-            headers: {
-                "api-token": token!,
-                "Content-Type": "application/json",
-            },
-        };
 
-        fetch(url, options)
-            .then((res) => {
-                if (res.status >= 200 && res.status <= 299) {
-                    return res.json();
-                } else if (res.status === 400) {
-                    return res.json();
+        const request = new Service();
+
+        request.get(`events/${id}`)
+            .then((result: any) => {
+                if (result.err) {
+                    setMessage(result.err.message);
+                    setError(true);
                 } else {
-                    throw Error(res.statusText);
-                }
-            })
-            .then((res) => {
-                if (res) {
-                    setEventName(res.name);
-                    setEventDesc(res.detail);
-                    if (res.event_at !== null) {
-                        const date = new Date(res.event_at).toLocaleDateString();
-                        const time = new Date(res.event_at).toLocaleTimeString();
+                    setEventName(result.data.name);
+                    setEventDesc(result.data.detail);
+                    if (result.data.event_at !== null) {
+                        const date = new Date(result.data.event_at).toLocaleDateString();
+                        const time = new Date(result.data.event_at).toLocaleTimeString();
                         setDate(date);
                         setTime(time);
                     }
-                    setEventLoc(res.location);
-                } else if (res.error) {
-                    setMessage(res.error);
-                    setError(true);
+                    setEventLoc(result.data.location);
                 }
-            })
-            .catch((err) => {
-                setMessage(err.message);
-                setError(true);
             });
-        return () => abortCnt.abort();
     };
 
     const resetForm = () => {
@@ -250,7 +172,6 @@ const CreateEvent: React.FC = () => {
                         onDidDismiss={() => {
                             if (action) {
                                 setSuccess(false);
-                                history.push("/my/createeventtask?id=" + eventId);
                             } else {
                                 setSuccess(false);
                                 history.push("/my/events");

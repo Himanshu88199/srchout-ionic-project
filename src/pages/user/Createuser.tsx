@@ -48,34 +48,16 @@ const Createuser: React.FC = () => {
   const handleCreate = (userData: any) => {
     delete userData["confirm_password"];
 
-    fetch("https://taskerr-api.herokuapp.com/api/v1/users/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          history.push("/");
-        } else if (res.status === 400) {
-          return res.json();
+    const request = new Service();
+    request.post(`users`, userData)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
+          setError(true);
         } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res.jwt_token) {
           reset();
           setSuccess(true);
-        } else if (res.error) {
-          setMessage(res.error);
-          setError(true);
         }
-      })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
       });
   };
 

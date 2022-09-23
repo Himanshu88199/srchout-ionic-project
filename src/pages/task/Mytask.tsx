@@ -22,6 +22,7 @@ import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 import { Advertisements } from "../Advertisements";
 import moment from "moment";
+import Service from "../../services/http";
 
 const Mytask: React.FC = () => {
   const history = useHistory()
@@ -32,44 +33,17 @@ const Mytask: React.FC = () => {
 
   const [taskType, setTaskType] = useState("personal");
 
-  const url = "https://taskerr-api.herokuapp.com/api/v1/tasks?type=";
-
   const fetchData = () => {
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
-
-    fetch(url + taskType, {
-      signal: abortCnt.signal,
-      method: "GET",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          //console.log(res);
-          setData(res);
-        } else if (res.error) {
-          setMessage(res.error);
+    const request = new Service();
+    request.get(`tasks?type=${taskType}`)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setData(result.data);
         }
-      })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
       });
-
-    return () => abortCnt.abort();
   };
 
   useEffect(() => {
@@ -80,47 +54,21 @@ const Mytask: React.FC = () => {
     fetchData();
   });
   const updateTaskCompleted = (id: number, name: string) => {
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
 
-    let url = "https://taskerr-api.herokuapp.com/api/v1/tasks/" + id;
-
-    fetch(url, {
-      signal: abortCnt.signal,
-      method: "PUT",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        status: "C",
-      }),
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          fetchData();
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          return true;
-        } else if (res.error) {
-          setMessage(res.error);
+    const data = {
+      name: name,
+      status: "C",
+    };
+    const request = new Service();
+    request.put(`tasks/${id}`, data)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          return true;
         }
-      })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
       });
-
-    return () => abortCnt.abort();
   };
 
   const onCheckboxChange = (e: any) => {

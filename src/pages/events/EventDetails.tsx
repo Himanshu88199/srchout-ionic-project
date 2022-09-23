@@ -8,6 +8,7 @@ import Header from "../Header";
 import "./EventDetails.css";
 import moment from 'moment';
 import { addOutline, closeCircleOutline } from "ionicons/icons";
+import Service from "../../services/http";
 
 const EventDetails: React.FC = () => {
   const history = useHistory();
@@ -40,113 +41,43 @@ const EventDetails: React.FC = () => {
   const [tasks, setTasks] = useState<any>([]);
 
   const fetchEventById = (id: any) => {
-    const url = "https://taskerr-api.herokuapp.com/api/v1/events/" + id;
-    const token = sessionStorage.getItem("token");
-    const abortCnt = new AbortController();
-    let options = {
-      signal: abortCnt.signal,
-      method: "GET",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-    };
+    const request = new Service();
 
-    fetch(url, options)
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          setEventData(res);
-        } else if (res.error) {
-          setMessage(res.error);
+    request.get(`events/${id}`)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setEventData(result.data);
         }
       })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
-      });
-    return () => abortCnt.abort();
   };
   const fetchAttendees = (id: any) => {
-    const url = "https://taskerr-api.herokuapp.com/api/v1/guests/" + id;
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
+    const request = new Service();
 
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "api-token": token!,
-      },
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          setAttendess(res);
-        } else if (res.error) {
-          setMessage(res.error);
+    request.get(`guests/${id}`)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setAttendess(result.data);
         }
-      })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
       });
-
-    return () => abortCnt.abort();
   };
   const fetchTasks = (id: any) => {
-    const url = "https://taskerr-api.herokuapp.com/api/v1/tasks?event_id=" + 120;
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
+    const request = new Service();
 
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "api-token": token!,
-      },
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          setTasks(res);
-        } else if (res.error) {
-          setMessage(res.error);
+    request.get(`tasks?eventid=${id}`)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setTasks(result.data);
         }
-      })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
       });
-
-    return () => abortCnt.abort();
   }
   const closeModal = () => {
     setOpen(false);
@@ -156,42 +87,20 @@ const EventDetails: React.FC = () => {
   };
 
   const addInContacts = () => {
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
+
+    const request = new Service();
     newAttendee.event_id = id;
-    fetch(`https://taskerr-api.herokuapp.com/api/v1/guests`, {
-      signal: abortCnt.signal,
-      method: "POST",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newAttendee)
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
+    request.post(`guests`, newAttendee)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
+          setError(true);
         } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          //console.log(res);
           setNewAttendee(newContact);
           fetchAttendees(id);
           closeModal();
-        } else if (res.error) {
-          setMessage(res.error);
-          setError(true);
         }
       })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
-      });
   };
 
   const changeContacthandler = (e: any) => {

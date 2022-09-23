@@ -24,6 +24,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 // import { IonReactRouter } from "@ionic/react-router";
 import { useHistory } from "react-router";
+import Service from "../../services/http";
 import { Advertisements } from "../Advertisements";
 // import Footer from "../../components/Footer";
 import Header from "../Header";
@@ -54,41 +55,19 @@ const MyEvent: React.FC = () => {
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
-  //console.log(data);
-  const url = "https://taskerr-api.herokuapp.com/api/v1/events?type=";
-  const fetchData = () => {
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
 
-    fetch(url + eventType, {
-      signal: abortCnt.signal,
-      method: "GET",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          setData(res);
-        } else if (res.error) {
-          setMessage(res.error);
+  const fetchData = () => {
+    const request = new Service();
+
+    request.get(`events?type=${eventType}`)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setData(result.data);
         }
       })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
-      });
   };
   // const service = new Service();
 
@@ -98,24 +77,7 @@ const MyEvent: React.FC = () => {
   useIonViewWillEnter(() => {
     fetchData();
   });
-  const getFormattedDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString();
-  };
 
-  const getFormattedTime = (dateStr: string) => {
-    const date = new Date(dateStr);
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var min: string;
-    var ampm = hours >= 12 ? "pm" : "am";
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    if (minutes < 10) min = "0" + minutes.toString();
-    else min = minutes.toString();
-    var strTime = hours + ":" + min + " " + ampm;
-    return strTime;
-  };
   const handleClick = (e: any) => {
     e.preventDefault();
     var id = e.target.getAttribute("data-event-id");
@@ -136,47 +98,21 @@ const MyEvent: React.FC = () => {
       fname: contactFirstName,
       lname: contactSecondName,
     };
-    setContactPhone("");
-    setContactEmail("");
-    setContactFirstName("");
-    setContactSecondName("");
 
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
-
-    fetch(`https://taskerr-api.herokuapp.com/api/v1/guests`, {
-      signal: abortCnt.signal,
-      method: "POST",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newContact)
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          //console.log(res);
-          setList([...list, res]);
-          closeModal();
-        } else if (res.error) {
-          setMessage(res.error);
+    const request = new Service();
+    request.post(`guests`, newContact)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setContactPhone("");
+          setContactEmail("");
+          setContactFirstName("");
+          setContactSecondName("");
+          closeModal();
         }
       })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
-      });
-
   };
 
   return (

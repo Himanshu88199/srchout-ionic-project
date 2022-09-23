@@ -2,6 +2,7 @@ import { IonCard, IonCardContent, IonCol, IonContent, IonGrid, IonItem, IonItemD
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import Service from "../../services/http";
 import { Advertisements } from "../Advertisements";
 import Header from "../Header";
 import './Dashboard.css';
@@ -19,81 +20,32 @@ const Dashboard: React.FC = () => {
   const [error, setError] = useState(false);
 
   const fetchEvents = () => {
-    const url = "https://taskerr-api.herokuapp.com/api/v1/events?type=personal";
+    const request = new Service();
 
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
-
-    fetch(url, {
-      signal: abortCnt.signal,
-      method: "GET",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          setEventsList(res);
-        } else if (res.error) {
-          setMessage(res.error);
+    request.get('events?type=personal')
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setEventsList(result.data);
         }
-      })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
       });
   };
 
 
   const fetchTasks = () => {
-    const url = "https://taskerr-api.herokuapp.com/api/v1/tasks?type=personal";
+    const request = new Service();
 
-    const abortCnt = new AbortController();
-    const token = sessionStorage.getItem("token");
-
-    fetch(url, {
-      signal: abortCnt.signal,
-      method: "GET",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res) {
-          //console.log(res);
-          setTasksList(res);
-        } else if (res.error) {
-          setMessage(res.error);
+    request.get('tasks?type=personal')
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setTasksList(result.data);
         }
       })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
-      });
-
-    return () => abortCnt.abort();
   };
 
   useEffect(() => {
