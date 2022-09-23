@@ -120,27 +120,13 @@ const MyEvent: React.FC = () => {
       <IonPage className="pg-grey">
         <Header />
         <IonContent>
-          <EventsPage />
           <IonRow>
-            <IonCol>
-              <p className="event-heading">EVENTS</p>
-            </IonCol>
+            <IonCol className="center text-grey">EVENTS</IonCol>
           </IonRow>
-
           <IonRow>
             <IonCol class="events-btns">
               <button className={eventType === "personal" ? "event-btn event-btn-clicked" : "event-btn"} onClick={() => setEventType("personal")}>My Events</button>
               <button className={eventType === "invited" ? "event-btn event-btn-clicked" : "event-btn"} onClick={() => setEventType("invited")}>Invited Events</button>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonButton routerLink="/my/createevent"
-                className="add-btn"
-                style={{ float: "right" }}
-              >
-                +Event
-              </IonButton>
             </IonCol>
           </IonRow>
           {/* <IonContent className="setheight"> */}
@@ -402,6 +388,10 @@ const MyEvent: React.FC = () => {
             </IonCol>
           </IonRow> */}
           {/* <Footer /> */}
+          <IonButton className="add-btn" fill='clear' routerLink='/my/createevent' size="small">
+            <IonIcon color="light" src="../../../assets/plus_icon.svg" />
+          </IonButton>
+
         </IonContent>
         {/* <IonToast
           isOpen={error}

@@ -95,9 +95,12 @@
 }
 
 .add-btn {
-  margin-right: 1.4rem;
-  margin-bottom: 0.5rem;
-  height: 35px;
+  position: fixed;
+  bottom: 50px;
+  right: 8px;
+  border-radius: 50% !important;
+  background-color: #4ca1d8;
+  height: 40px;
 }
 
 .start {

@@ -3,6 +3,7 @@ import {
   IonCheckbox,
   IonCol,
   IonContent,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
@@ -102,17 +103,6 @@ const Mytask: React.FC = () => {
               <button className={taskType === "assigned" ? "event-btn event-btn-clicked" : "event-btn"} onClick={() => setTaskType("assigned")}>Assigned tasks</button>
             </IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonButton
-                className="add-btn"
-                style={{ float: "right" }}
-                onClick={() => history.push("/my/createpersonaltask")}
-              >
-                +Task
-              </IonButton>
-            </IonCol>
-          </IonRow>
           {data && (
             <IonList className="personal-task-list">
               {data.map((i: any, index: number) => (
@@ -187,6 +177,10 @@ const Mytask: React.FC = () => {
           </IonRow> */}
 
           {/* <Footer /> */}
+          <IonButton className="add-btn" fill='clear' routerLink='/my/createpersonaltask' size="small">
+            <IonIcon color="light" src="../../../assets/plus_icon.svg" />
+          </IonButton>
+
           <Advertisements />
 
         </IonContent>

@@ -23,7 +23,7 @@ const Header: React.FC = () => {
         <>
             <IonRow>
                 <IonCol size='12'>
-                    <IonItem className='bg-custom'>
+                    <IonItem className='bg-custom' lines='none'>
                         <IonButton className='pl-0' slot='start' size='default' fill='clear' onClick={() => goBack()} >
                             <IonIcon className='size' src='../assets/back.svg' />
                         </IonButton>

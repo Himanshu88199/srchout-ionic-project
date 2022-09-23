@@ -42,7 +42,7 @@ const Createuser: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [phoneCode, codes] = useState<any>(null);
+  const [phoneCode, codes] = useState<any>([]);
   const [agree, setAgree] = useState(false);
 
   const handleCreate = (userData: any) => {
@@ -68,8 +68,8 @@ const Createuser: React.FC = () => {
     // Don't miss the exclamation mark
   };
   React.useEffect(() => {
-    service.get("countrycodes").then((res) => {
-      codes(res);
+    service.get("countrycodes").then((res: any) => {
+      codes(res.data);
     });
   }, []);
 
@@ -145,7 +145,7 @@ const Createuser: React.FC = () => {
                   >
                     {phoneCode &&
                       phoneCode.map((i: any, index: number) => (
-                        <IonSelectOption value={i.dial_code}>
+                        <IonSelectOption key={index} value={i.dial_code}>
                           {i.name}
                         </IonSelectOption>
                       ))}
