@@ -99,4 +99,5 @@
 .signin-btn {
   text-transform: capitalize;
   height: 45px;
+  --border-radius: 10px;
 }

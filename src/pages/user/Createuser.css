@@ -36,4 +36,9 @@
   /* background-color: #4ca1d8 !important; */
   height: 42px;
   font-family: "Montserrat", sans-serif;
+  --border-radius: 10px;
+}
+
+.login-box .dark-text {
+  margin-left: 0.5rem;
 }

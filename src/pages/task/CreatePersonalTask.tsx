@@ -166,7 +166,7 @@ const CreatePersonalTask: React.FC = () => {
             }}
             message="Task has been created"
             duration={200}
-            color="dark"
+            color="success"
           />
           <Advertisements />
         </IonContent>

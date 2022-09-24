@@ -119,9 +119,9 @@ const MyEvent: React.FC = () => {
     <>
       <IonPage className="pg-grey">
         <Header />
-        <IonContent>
-          <IonRow>
-            <IonCol className="center text-grey">EVENTS</IonCol>
+        <IonContent className="white-head page-content">
+          <IonRow >
+            <IonCol className="center text-grey event-heading">EVENTS</IonCol>
           </IonRow>
           <IonRow>
             <IonCol class="events-btns">
@@ -132,11 +132,11 @@ const MyEvent: React.FC = () => {
           {/* <IonContent className="setheight"> */}
 
           {data && data?.map((i: any, index: number) => (
-            <IonRow key={index}>
+            <IonRow key={index} >
               <IonCol >
-                <IonCard className="card">
-                  <IonCardContent>
-                    <IonGrid className="events" onClick={() => history.push('/my/eventdetails?id=' + i.id)}>
+                <IonCard className="card events">
+                  <IonCardContent className="event-content">
+                    <IonGrid className={index % 2 ? 'even-event events' : 'odd-event events'} onClick={() => history.push('/my/eventdetails?id=' + i.id)}>
                       <IonRow className="start">
                         <p>Event:</p>
                         <IonCol>{i.name}</IonCol>

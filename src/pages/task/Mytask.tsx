@@ -1,5 +1,7 @@
 import {
   IonButton,
+  IonCard,
+  IonCardContent,
   IonCheckbox,
   IonCol,
   IonContent,
@@ -93,9 +95,9 @@ const Mytask: React.FC = () => {
     <>
       <IonPage className="pg-grey">
         <Header />
-        <IonContent>
+        <IonContent className="white-head">
           <IonRow>
-            <IonCol className="center text-grey">TASKS</IonCol>
+            <IonCol className="center text-grey event-heading">TASKS</IonCol>
           </IonRow>
           <IonRow>
             <IonCol class="tasks-btns">
@@ -107,31 +109,35 @@ const Mytask: React.FC = () => {
             <IonList className="personal-task-list">
               {data.map((i: any, index: number) => (
                 i.status == null ?
-                  <IonItem
-                    lines="none"
-                    key={index}
-                    button
-                    className={
-                      index % 2
-                        ? `personal-tasks-card-even`
-                        : `personal-tasks-card-odd`
-                    }
-                  >
-                    <IonCheckbox
-                      data-task-name={i.name}
-                      value={i.id}
-                      onIonChange={(e) => onCheckboxChange(e)}
-                    ></IonCheckbox>
-                    <IonLabel
-                      className="ion-text-wrap ion-text-capitalize"
-                      data-task-id={i.id}
-                      onClick={handleEdit}
-                    >
-                      <p>{i.name}</p>
-                      {i.description} <br />
-                      <small>Due: {moment(i.due_date).format('lll')}</small>
-                    </IonLabel>
-                  </IonItem> : null
+                  <IonCard className="tasks">
+                    <IonCardContent className="card-content">
+                      <IonItem
+                        lines="none"
+                        key={index}
+                        button
+                        className={
+                          index % 2
+                            ? `personal-tasks-card-even`
+                            : `personal-tasks-card-odd`
+                        }
+                      >
+                        <IonCheckbox
+                          data-task-name={i.name}
+                          value={i.id}
+                          onIonChange={(e) => onCheckboxChange(e)}
+                        ></IonCheckbox>
+                        <IonLabel
+                          className="ion-text-wrap ion-text-capitalize card-label"
+                          data-task-id={i.id}
+                          onClick={handleEdit}
+                        >
+                          {/* <p>{i.name}</p> */}
+                          {i.description} <br />
+                          <small><span>Due:</span> {moment(i.due_date).format('lll')}</small>
+                        </IonLabel>
+                      </IonItem>
+                    </IonCardContent>
+                  </IonCard> : null
               ))}
             </IonList>
           )}

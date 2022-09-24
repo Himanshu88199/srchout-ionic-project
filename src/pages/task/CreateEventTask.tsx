@@ -142,7 +142,7 @@ const CreateEventTask: React.FC = () => {
                         }}
                         message="Task has been created"
                         duration={200}
-                        color="dark"
+                        color="success"
                     />
                     <IonToast
                         isOpen={error}
@@ -151,7 +151,7 @@ const CreateEventTask: React.FC = () => {
                         }}
                         message={message}
                         duration={200}
-                        color="dark"
+                        color="danger"
                     />
 
                     <Advertisements />
