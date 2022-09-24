@@ -4,7 +4,7 @@ http://ionicframework.com/docs/theming/ */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 * {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 /** Ionic CSS Variables **/

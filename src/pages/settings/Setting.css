@@ -40,3 +40,13 @@
   background-color: white;
   color: #707070;
 }
+
+.logout {
+  margin-left: 2.5rem;
+  margin-top: 2rem;
+  --border-radius: 10px;
+  --background: #4ca1db;
+  color: #fff;
+  width: 80%;
+  height: 40px;
+}

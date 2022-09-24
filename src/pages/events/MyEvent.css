@@ -12,22 +12,15 @@
   color: #707070;
   font-size: 16px;
   font-weight: 700;
+  margin: 0.8rem 0rem;
+  margin-bottom: 0.3rem;
 }
 
 .events {
-  /* margin: 10px 10px; */
-  background: none;
+  /* margin: 10px 0px; */
   /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
   /* border-radius: 10px; */
   line-height: 12px;
-}
-
-.card {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  background: #ffffff;
-  margin-bottom: 0.5rem;
-  margin-top: 0;
 }
 
 .events-btns {
@@ -38,12 +31,14 @@
   padding: 10px;
   border-radius: 10px;
   width: 50%;
+  height: 30px;
   background: #ffffff;
   border: 1px solid #707070;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
   outline: none;
+  padding-top: -2rem;
 }
 
 .event-btn-clicked {
@@ -59,9 +54,16 @@
   border: none;
   color: #fff;
 }
+.card {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  --background: #fff;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
 
 .card:nth-child(odd) {
-  background: #eeeeee;
+  background: #eee;
 }
 
 .event {
@@ -112,4 +114,27 @@
 .start p {
   font-weight: 700;
   margin-bottom: 0;
+}
+
+/* .white-head {
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  --background: none;
+}
+.page-content {
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+} */
+
+.event-content {
+  padding: 10px;
+  --background: none;
+}
+
+.even-event {
+  --background: none;
+}
+
+.odd-event {
+  --background: none;
 }

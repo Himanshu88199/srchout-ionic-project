@@ -177,9 +177,9 @@ const CreateEvent: React.FC = () => {
                                 history.push("/my/events");
                             }
                         }}
-                        message={`Task has been ${id ? "updated" : "created"}`}
+                        message={`Event has been ${id ? "updated" : "created"}`}
                         duration={200}
-                        color="dark"
+                        color="success"
                     />
                     <Advertisements />
                 </IonContent>

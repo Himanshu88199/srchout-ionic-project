@@ -1,10 +1,13 @@
-import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToast, IonToolbar } from '@ionic/react';
+import { useState } from 'react';
 import { useHistory } from 'react-router';
 import Header from '../Header';
 import './Setting.css';
 
 const Setting: React.FC = () => {
     const history = useHistory();
+    const [success, setSuccess] = useState(false);
+
     const handleLogout = () => {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('logged_in');
@@ -87,11 +90,21 @@ const Setting: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol>
-                            <IonButton size="small" fill="outline" type="button" onClick={() => handleLogout()}>
+                            <IonButton size="small" fill="outline" type="button" className='logout' onClick={() => handleLogout()}>
                                 Log Out
                             </IonButton>
                         </IonCol>
                     </IonRow>
+                    <IonToast
+                        isOpen={success}
+                        onDidDismiss={() => {
+                            setSuccess(false);
+                            history.goBack();
+                        }}
+                        message="Successfully Logged out"
+                        duration={200}
+                        color="dark"
+                    />
                 </IonContent>
             </IonPage>
         </>

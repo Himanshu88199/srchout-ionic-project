@@ -11,16 +11,15 @@
 }
 
 .tasks {
-  margin: 15px 20px;
-  padding: 10px;
-  background: #eeeeee;
-  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25); */
+  margin: 10px 20px;
+  --background: #eeeeee;
   border-radius: 10px;
   border: 1px solid #555;
 }
 
 .tasks-btns {
   margin: 0 20px;
+  margin-top: -0.5rem;
 }
 
 .task-btn {
@@ -53,7 +52,7 @@
 }
 
 .tasks:nth-child(even) {
-  background: #fff;
+  --background: #fff;
 }
 
 .task {
@@ -61,4 +60,23 @@
   align-items: center;
   justify-content: flex-start;
   gap: 2px;
+}
+.card-content {
+  padding: 0;
+  --font-family: "Montserrat";
+}
+.personal-tasks-card-even {
+  --background: none;
+}
+.personal-tasks-card-odd {
+  --background: none;
+}
+
+.card-label {
+  margin-left: 1rem;
+  --font-family: "Montserrat", sans-serif;
+}
+
+.card-label span {
+  font-weight: 700;
 }
