@@ -24,6 +24,7 @@ import { Advertisements } from "../Advertisements";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { useHistory, useLocation } from "react-router";
+import Service from "../../services/http";
 
 const CreatePersonalTask: React.FC = () => {
   const history = useHistory();
@@ -43,85 +44,37 @@ const CreatePersonalTask: React.FC = () => {
   const [success, setSuccess] = useState(false);
 
   const submitCreateTask = () => {
-    const url = "https://taskerr-api.herokuapp.com/api/v1/tasks";
-    const token = sessionStorage.getItem("token");
-
-    //console.log(taskData);
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "api-token": token!,
-      },
-      body: JSON.stringify(taskData),
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res.error) {
-          setMessage(res.error);
+    const request = new Service();
+    request.post(`tasks`, taskData)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
         } else {
           setSuccess(true);
           setTaskData(initialTaskData);
         }
       })
-      .catch((err) => {
-        setMessage(err.message);
-        setError(true);
-      });
-
   };
   const submitEditTask = () => {
-    const abortCnt = new AbortController();
     const data = {
       "name": taskData.name,
       "description": taskData.description,
       "due_date": taskData.due_date,
       "category": taskData.category
     };
-    const token = sessionStorage.getItem("token");
 
-    var options = {
-      signal: abortCnt.signal,
-      method: "PUT",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    }
-
-    fetch("https://taskerr-api.herokuapp.com/api/v1/tasks/" + id, options)
-      .then(res => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
+    const request = new Service();
+    request.put(`tasks/${id}`, data)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
+          setError(true);
         } else {
-          throw Error(res.statusText);
-        }
-      }).then((res) => {
-        if (res) {
           setSuccess(true);
           setTaskData(initialTaskData);
-        } else if (res.error) {
-          setMessage(res.error);
-          setError(true);
         }
-      }).catch(err => {
-        setMessage(err.message);
-        setError(true);
       });
-
-    return () => abortCnt.abort();
   }
   const submitForm = (e: any) => {
     e.preventDefault();
@@ -138,42 +91,17 @@ const CreatePersonalTask: React.FC = () => {
     });
   };
   const fetchTaskDetail = (id: any) => {
-    const token = sessionStorage.getItem("token");
-    const url = "https://taskerr-api.herokuapp.com/api/v1/tasks/" + id;
-
-    const abortCnt = new AbortController();
-    var options = {
-      signal: abortCnt.signal,
-      method: "GET",
-      headers: {
-        "api-token": token!,
-        "Content-Type": "application/json"
-      }
-    }
-
-    fetch(url, options)
-      .then(res => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      }).then((res) => {
-        if (res) {
-          setTaskData(res);
-        } else if (res.error) {
-          setMessage(res.error);
+    const request = new Service();
+    request.get(`tasks/${id}`)
+      .then((result: any) => {
+        if (result.err) {
+          setMessage(result.err.message);
           setError(true);
+        } else {
+          setTaskData(result.data);
         }
-      }).catch(err => {
-        setMessage(err.message);
-        setError(true);
-      });
-
-    return () => abortCnt.abort();
-  }
+      })
+  };
 
   useEffect(() => {
     setTaskData(initialTaskData);

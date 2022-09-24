@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import Service from "../../services/http";
 import "./login.css";
 import LoginIcons from "./loginIcons";
 
@@ -39,39 +40,20 @@ const Login: React.FC = () => {
 
   const handleLogin = (loginData: any) => {
     setShowLoading(true);
-    fetch("https://taskerr-api.herokuapp.com/api/v1/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    })
-      .then((res) => {
-        if (res.status >= 200 && res.status <= 299) {
-          return res.json();
-        } else if (res.status === 400) {
-          return res.json();
-        } else {
-          throw Error(res.statusText);
-        }
-      })
-      .then((res) => {
-        if (res.jwt_token) {
+    const request = new Service();
+    request.post(`users/login`, loginData)
+      .then((result: any) => {
+        if (result.err) {
           setShowLoading(false);
-          sessionStorage.setItem("token", res.jwt_token);
+          setMessage(result.err.message);
+          setError(true);
+        } else {
+          setShowLoading(false);
+          sessionStorage.setItem("token", result.data.jwt_token);
           sessionStorage.setItem("logged_in", "Y");
           reset();
           history.replace("/my/home");
-        } else if (res.error) {
-          setShowLoading(false);
-          setMessage(res.error);
-          setError(true);
         }
-      })
-      .catch((err) => {
-        setShowLoading(false);
-        setMessage(err.message);
-        setError(true);
       });
   };
 

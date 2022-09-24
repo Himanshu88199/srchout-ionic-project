@@ -1,6 +1,7 @@
 import { IonButton, IonCol, IonContent, IonInput, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToast } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams, useLocation } from 'react-router';
+import Service from '../../services/http';
 import { Advertisements } from '../Advertisements';
 import Header from '../Header';
 import './CreateEventTask.css';
@@ -25,10 +26,6 @@ const CreateEventTask: React.FC = () => {
 
     const handleCreateTask = (e: any) => {
         e.preventDefault();
-
-        const url = "https://taskerr-api.herokuapp.com/api/v1/tasks";
-        const token = sessionStorage.getItem("token");
-
         var taskData = {
             name: taskName,
             description: taskDesc,
@@ -38,26 +35,11 @@ const CreateEventTask: React.FC = () => {
             assigned_to: taskAssignTo,
         };
 
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "api-token": token!,
-            },
-            body: JSON.stringify(taskData),
-        })
-            .then((res) => {
-                if (res.status >= 200 && res.status <= 299) {
-                    return res.json();
-                } else if (res.status === 400) {
-                    return res.json();
-                } else {
-                    throw Error(res.statusText);
-                }
-            })
-            .then((res) => {
-                if (res.error) {
-                    setMessage(res.error);
+        const request = new Service();
+        request.post(`tasks`, taskData)
+            .then((result: any) => {
+                if (result.err) {
+                    setMessage(result.err.message);
                     setError(true);
                 } else {
                     setTaskName("");
@@ -67,53 +49,23 @@ const CreateEventTask: React.FC = () => {
                     setSuccess(true);
                 }
             })
-            .catch((err) => {
-                setMessage(err.message);
-                setError(true);
-            });
     };
 
     const fetchAttendies = () => {
-        const guesturl =
-            "https://taskerr-api.herokuapp.com/api/v1/guests/" + id;
 
-        const abortCnt = new AbortController();
-        const token = sessionStorage.getItem("token");
-
-        fetch(guesturl, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "api-token": token!,
-            },
-        })
-            .then((res) => {
-                if (res.status >= 200 && res.status <= 299) {
-                    return res.json();
-                } else if (res.status === 400) {
-                    return res.json();
-                } else {
-                    throw Error(res.statusText);
-                }
-            })
-            .then((res) => {
-                if (res) {
-                    getAttendend(res);
-                } else if (res.error) {
-                    setMessage(res.error);
+        const request = new Service();
+        request.get(`guests/${id}`)
+            .then((result: any) => {
+                if (result.err) {
+                    setMessage(result.err.message);
                     setError(true);
+                } else {
+                    getAttendend(result.data);
                 }
             })
-            .catch((err) => {
-                setMessage(err.message);
-                setError(true);
-            });
-
-        return () => abortCnt.abort();
     };
 
     const assignHandler = (e: any) => {
-        //console.log(e.detail);
         setTaskAssignTo(e.detail.value);
     };
     useEffect(() => {
