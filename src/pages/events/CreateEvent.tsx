@@ -16,8 +16,7 @@ const CreateEvent: React.FC = () => {
 
     const [eventName, setEventName] = useState("")
     const [eventDesc, setEventDesc] = useState("")
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
+    const [eventDate, setEventDate] = useState("");
     const [eventLoc, setEventLoc] = useState("");
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -26,17 +25,17 @@ const CreateEvent: React.FC = () => {
 
     const history = useHistory()
 
-    const formatDateForDB = (date: string, time: string) => {
-        const dtArr = date.split('/');
-        const newDate = `${dtArr[1]}/${dtArr[0]}/${dtArr[2]}`;
-        return new Date(`${newDate} ${time}`).toISOString();
-    };
+    // const formatDateForDB = (date: string, time: string) => {
+    //     const dtArr = date.split('/');
+    //     const newDate = `${dtArr[1]}/${dtArr[0]}/${dtArr[2]}`;
+    //     return new Date(`${newDate} ${time}`).toISOString();
+    // };
     const createNewEvent = () => {
         const eventData = {
             name: eventName,
             detail: eventDesc,
             location: eventLoc,
-            event_at: formatDateForDB(date, time),
+            event_at: eventDate,
             evnt_type: "personal",
         };
         const request = new Service();
@@ -55,7 +54,7 @@ const CreateEvent: React.FC = () => {
         let eventData = {
             name: eventName,
             detail: eventDesc,
-            event_at: formatDateForDB(date, time),
+            event_at: eventDate,
             location: eventLoc,
         };
         const request = new Service();
@@ -92,10 +91,7 @@ const CreateEvent: React.FC = () => {
                     setEventName(result.data.name);
                     setEventDesc(result.data.detail);
                     if (result.data.event_at !== null) {
-                        const date = new Date(result.data.event_at).toLocaleDateString();
-                        const time = new Date(result.data.event_at).toLocaleTimeString();
-                        setDate(date);
-                        setTime(time);
+                        setEventDate(result.data.event_at)
                     }
                     setEventLoc(result.data.location);
                 }
@@ -105,8 +101,7 @@ const CreateEvent: React.FC = () => {
     const resetForm = () => {
         setEventName('');
         setEventDesc('');
-        setDate("");
-        setTime("");
+        setEventDate("");
         setEventLoc('');
     };
     useEffect(() => {
@@ -143,14 +138,12 @@ const CreateEvent: React.FC = () => {
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        <IonRow className='date-time'>
-                            <IonCol>
-                                <IonLabel className='ml-12'>Event Date:</IonLabel>
-                                <IonInput className='input-border col-50' value={date} onIonChange={(e) => setDate(e.detail.value ? e.detail.value : '')}></IonInput>
+                        <IonRow>
+                            <IonCol size='12' className='text-grey2 pb-0 ml-12'>
+                                Event Date:
                             </IonCol>
-                            <IonCol>
-                                <IonLabel className='ml-12'>Event Time:</IonLabel>
-                                <IonInput className='input-border col-50' value={time} onIonChange={(e) => setTime(e.detail.value ? e.detail.value : '')}></IonInput>
+                            <IonCol className='pd-0' size='12'>
+                                <IonInput type="datetime-local" className='input-border-2' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
