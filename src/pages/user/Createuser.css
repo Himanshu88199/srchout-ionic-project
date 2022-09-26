@@ -37,6 +37,7 @@
   height: 42px;
   font-family: "Montserrat", sans-serif;
   --border-radius: 10px;
+  text-transform: capitalize;
 }
 
 .login-box .dark-text {

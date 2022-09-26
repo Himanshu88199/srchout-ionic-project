@@ -45,6 +45,7 @@ const Createuser: React.FC = () => {
   const [phoneCode, codes] = useState<any>([]);
   const [agree, setAgree] = useState(false);
 
+
   const handleCreate = (userData: any) => {
     delete userData["confirm_password"];
 
@@ -136,7 +137,7 @@ const Createuser: React.FC = () => {
                   </span>
                 )}
               </IonCol>
-              <IonCol>
+              {/* <IonCol>
                 <IonItem className="input-border">
                   <IonSelect
                     {...register("countrycode", {
@@ -151,10 +152,11 @@ const Createuser: React.FC = () => {
                       ))}
                   </IonSelect>
 
-                  {/* <IonIcon slot='start' src='../assets/email.svg'></IonIcon> */}
+                  <IonIcon slot='start' src='../assets/email.svg'></IonIcon>
                   <IonInput
                     value={""}
                     type="tel"
+                    placeholder="Phone Number"
                     {...register("phone", {
                       required: true,
                       pattern: /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
@@ -175,6 +177,25 @@ const Createuser: React.FC = () => {
                     Provide valid phone number
                   </span>
                 )}
+              </IonCol> */}
+              <IonCol>
+                <PhoneInput
+                  country={"us"}
+                  onChange={phone => console.log({ phone })}
+                  containerStyle={{ margin: '5px', marginLeft: '1.2rem', border: '1px solid #707070', borderRadius: '9px', width: '87vw', height: '45px' }}
+                  inputStyle={{ width: '86vw', height: '42px', border: 'none', borderRadius: '9px' }}
+                  dropdownStyle={{ height: '200px' }}
+                  buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
+                  placeholder="Phone Number"
+                  inputProps={{ name: 'phone', required: true }}
+                // {...register("phonenumber", { required: true })}
+                />
+                {/* {errors.phone?.type === "required" && (
+                  <span className="validation-errors">
+                    Phone number is required
+                  </span>
+                )} */}
+
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">

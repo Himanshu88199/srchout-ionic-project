@@ -8,11 +8,11 @@
 .dashboard-item-bottom {
   border-bottom: 1px solid #70707050;
   padding-bottom: 8px;
-  padding-top: 8px;
+  /* padding-top: 8px; */
 }
 
 .dashboard-item-top {
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .dashboard-item-value {
@@ -37,4 +37,8 @@
   background: #ffffff;
   margin-bottom: 0.5rem;
   margin-top: 0;
+}
+.events {
+  padding: 0;
+  margin-top: -0.5rem;
 }

@@ -104,6 +104,26 @@ const Login: React.FC = () => {
               <span className="validation-errors">Email is required</span>
             )}
           </IonCol>
+          {/* <IonCol>
+            <IonItem className="input-border">
+              <IonIcon
+                className="mr-5"
+                slot="start"
+                src="../assets/lock.svg"
+              ></IonIcon>
+              <IonInput
+                className="input-text"
+                value={""}
+                placeholder="Password"
+                type="password"
+                {...register("password", { required: true })}
+              ></IonInput>
+              <IonIcon slot="end" src="../assets/eye.svg"></IonIcon>
+            </IonItem>
+            {errors.password && (
+              <span className="validation-errors">Password is required</span>
+            )}
+          </IonCol> */}
           <IonCol>
             <IonItem className="input-border">
               <IonIcon

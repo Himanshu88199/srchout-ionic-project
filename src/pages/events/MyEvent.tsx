@@ -389,7 +389,7 @@ const MyEvent: React.FC = () => {
           </IonRow> */}
           {/* <Footer /> */}
           <IonButton className="add-btn" fill='clear' routerLink='/my/createevent' size="small">
-            <IonIcon color="light" src="../../../assets/plus_icon.svg" />
+            <IonIcon color="#4ca1d8" src="../../../assets/plus_icon.svg" />
           </IonButton>
 
         </IonContent>

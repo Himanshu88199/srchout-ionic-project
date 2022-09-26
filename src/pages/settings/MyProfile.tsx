@@ -25,6 +25,11 @@ const MyProfile: React.FC = () => {
                         </IonCol>
                     </IonRow>
                     <IonRow>
+                        <IonCol className='camera'>
+                            <img src="../assets/camera.png" alt="" width={25} />
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
                         <IonCol>
                             <IonItem className='input-border'>
                                 <IonInput value={''} placeholder="First Name"></IonInput>
