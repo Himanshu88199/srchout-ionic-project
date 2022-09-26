@@ -27,11 +27,24 @@ import ChangePassword from "./pages/settings/ChangePassword";
 import ContactUs from "./pages/settings/ContactUs";
 import MyProfile from "./pages/settings/MyProfile";
 import './pages/Tabs.css';
-import { useState } from "react";
+import { StatusBar } from "@capacitor/status-bar";
+import { NavigationBar } from '@ionic-native/navigation-bar';
+import { useEffect } from "react";
 
 setupIonicReact();
 
 const App: React.FC = () => {
+  function hide() {
+    StatusBar.hide().then(r => {
+      console.log('status');
+    });
+    NavigationBar.hideNavigationBar().then(r => {
+      console.log('navigation')
+    });
+  };
+  useEffect(() => {
+    hide();
+  }, [])
   return (
     <IonApp>
       <IonReactRouter>
