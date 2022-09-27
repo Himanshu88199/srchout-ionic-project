@@ -74,9 +74,9 @@ const Dashboard: React.FC = () => {
               <IonCard className="card">
                 <IonCardContent>
                   <IonGrid className="events">
-                    {eventsList.slice(0, 5).map((item: any, index: number) => {
+                    {eventsList.slice(0, 3).map((item: any, index: number) => {
                       return (
-                        <React.Fragment key={index}>
+                        <span key={index} onClick={() => history.push(`/my/eventdetails?id=${item.id}`)}>
                           <IonRow className="start dashboard-item-top">
                             <p>Event:</p>
                             <p className="dashboard-item-value">{item.name}</p>
@@ -85,7 +85,7 @@ const Dashboard: React.FC = () => {
                             <p>Date:</p>
                             <p className="dashboard-item-value">{moment(item.event_at).format('lll')}</p>
                           </IonRow>
-                        </React.Fragment>
+                        </span>
                       )
                     })}
                     <IonLabel className="dashboard-more-btn" onClick={() => history.push("/my/events")}><p>more...</p></IonLabel>
@@ -106,9 +106,9 @@ const Dashboard: React.FC = () => {
               <IonCard className="dashboard-light-card">
                 <IonCardContent>
                   <IonGrid className="events">
-                    {tasksList.slice(0, 5).map((item: any, index: number) => {
+                    {tasksList.slice(0, 3).map((item: any, index: number) => {
                       return (
-                        <React.Fragment key={index}>
+                        <span key={index} onClick={() => history.push(`/my/mytask`)}>
                           <IonRow className="start dashboard-item-top">
                             <p>Task:</p>
                             <p className="dashboard-item-value">{item.name}</p>
@@ -117,7 +117,7 @@ const Dashboard: React.FC = () => {
                             <p>Due Date:</p>
                             <p className="dashboard-item-value">{moment(item.due_date).format('lll')}</p>
                           </IonRow>
-                        </React.Fragment>
+                        </span>
                       )
                     })}
                     <IonLabel className="dashboard-more-btn" onClick={() => history.push("/my/mytask")}><p>more...</p></IonLabel>

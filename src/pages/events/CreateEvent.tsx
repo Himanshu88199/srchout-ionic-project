@@ -17,6 +17,7 @@ const CreateEvent: React.FC = () => {
     const [eventName, setEventName] = useState("")
     const [eventDesc, setEventDesc] = useState("")
     const [eventDate, setEventDate] = useState("");
+    const [eventTime, setEventTime] = useState("");
     const [eventLoc, setEventLoc] = useState("");
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -35,7 +36,7 @@ const CreateEvent: React.FC = () => {
             name: eventName,
             detail: eventDesc,
             location: eventLoc,
-            event_at: eventDate,
+            event_at: `${eventDate}T${eventTime}`,
             evnt_type: "personal",
         };
         const request = new Service();
@@ -54,7 +55,7 @@ const CreateEvent: React.FC = () => {
         let eventData = {
             name: eventName,
             detail: eventDesc,
-            event_at: eventDate,
+            event_at: `${eventDate}T${eventTime}`,
             location: eventLoc,
         };
         const request = new Service();
@@ -91,7 +92,9 @@ const CreateEvent: React.FC = () => {
                     setEventName(result.data.name);
                     setEventDesc(result.data.detail);
                     if (result.data.event_at !== null) {
-                        setEventDate(result.data.event_at)
+                        const evdate = result.data.event_at.split('T');
+                        setEventTime(evdate[1]);
+                        setEventDate(evdate[0]);
                     }
                     setEventLoc(result.data.location);
                 }
@@ -101,7 +104,8 @@ const CreateEvent: React.FC = () => {
     const resetForm = () => {
         setEventName('');
         setEventDesc('');
-        setEventDate("");
+        setEventDate('');
+        setEventTime('');
         setEventLoc('');
     };
     useEffect(() => {
@@ -127,7 +131,7 @@ const CreateEvent: React.FC = () => {
                                 Event Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border pd' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
+                                <IonInput required className='input-border pd' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -138,12 +142,36 @@ const CreateEvent: React.FC = () => {
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-12'>
-                                Event Date:
+                        {/* <IonRow>
+                            <IonCol size="7">
+                                <IonRow>
+                                    <IonCol size='12' className='text-grey2 pb-0 ml-12'>
+                                        Event Date:
+                                    </IonCol>
+                                    <IonCol className='pd-0' size='7'>
+                                        <IonInput required type="datetime-local" className='input-border-2' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
+                                    </IonCol>
+                                </IonRow>
                             </IonCol>
-                            <IonCol className='pd-0' size='12'>
-                                <IonInput type="datetime-local" className='input-border-2' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
+                            <IonCol size="5">
+                                <IonRow>
+                                    <IonCol size='12' className='text-grey2 pb-0 ml-12'>
+                                        Event Date:
+                                    </IonCol>
+                                    <IonCol className='pd-0' size='12'>
+                                        <IonInput required type="datetime-local" className='input-border-2' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
+                                    </IonCol>
+                                </IonRow>
+                            </IonCol>
+                        </IonRow> */}
+                        <IonRow className='date-time'>
+                            <IonCol>
+                                <IonLabel className='ml-12'>Event Date:</IonLabel>
+                                <IonInput required className='input-border col-50' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)} type="date"></IonInput>
+                            </IonCol>
+                            <IonCol>
+                                <IonLabel className='ml-12'>Event Time:</IonLabel>
+                                <IonInput required className='input-border col-50' value={eventTime} onIonChange={(e: any) => setEventTime(e.detail.value)} type="time"></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -151,7 +179,7 @@ const CreateEvent: React.FC = () => {
                                 Event Location:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border pd' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
+                                <IonInput required className='input-border pd' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>

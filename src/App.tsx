@@ -28,20 +28,16 @@ import ContactUs from "./pages/settings/ContactUs";
 import MyProfile from "./pages/settings/MyProfile";
 import './pages/Tabs.css';
 import { StatusBar } from "@capacitor/status-bar";
-import { NavigationBar } from '@ionic-native/navigation-bar';
 import { useEffect } from "react";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   function hide() {
-    StatusBar.hide().then(r => {
-      console.log('status');
+    StatusBar.setOverlaysWebView({ overlay: true }).then(() => {
+      console.log('overlay');
     });
-    NavigationBar.hideNavigationBar().then(r => {
-      console.log('navigation')
-    });
-  };
+  }
   useEffect(() => {
     hide();
   }, [])

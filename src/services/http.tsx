@@ -54,7 +54,7 @@ class Service {
                     return res.json();
                 } else if (res.status === 400) {
                     return res.json().then((data: any) => {
-                        throw Error(data.message);
+                        throw Error(data.error);
                     });
                 } else {
                     throw Error(res.statusText);
