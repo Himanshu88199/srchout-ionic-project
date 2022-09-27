@@ -153,7 +153,7 @@ const Login: React.FC = () => {
           </div>
         </IonRow>
         <IonRow>
-          <IonCol className="m-auto mt-67" size="11">
+          <IonCol className="m-auto mt-40" size="11">
             <IonButton type="submit" className="signin-btn" size="default" expand="block" disabled={!remember}>
               Sign In
             </IonButton>
