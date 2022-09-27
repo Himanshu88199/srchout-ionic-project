@@ -80,7 +80,7 @@ const Setting: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                            <a href="" className='text-dec' >Contact Us</a>
+                            <a href="/contactus" className='text-dec' >Contact Us</a>
                         </IonCol>
                     </IonRow>
                     <IonRow>

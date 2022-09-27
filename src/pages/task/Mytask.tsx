@@ -184,7 +184,7 @@ const Mytask: React.FC = () => {
 
           {/* <Footer /> */}
           <IonButton className="add-btn" fill='clear' routerLink='/my/createpersonaltask' size="small">
-            <IonIcon color="light" src="../../../assets/plus_icon.svg" />
+            <IonIcon color="#4ca1d8" src="../../../assets/plus_icon.svg" />
           </IonButton>
 
           <Advertisements />
