@@ -10,6 +10,7 @@ import {
   IonInput,
   IonItem,
   IonLabel,
+  IonLoading,
   IonPage,
   IonRow,
   IonSelect,
@@ -28,44 +29,73 @@ import Service from "../../services/http";
 import PhoneInput from "react-phone-input-2";
 
 const Createuser: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm();
-
   const service = new Service();
   const history = useHistory();
+
+  const initialErrors = {
+    phone: false,
+    fname: false,
+    lname: false,
+    countrycode: false,
+    email: false,
+    password: false
+  };
+
+  const [errors, setErrors] = useState(initialErrors);
+
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
 
   const [phoneCode, codes] = useState<any>([]);
   const [agree, setAgree] = useState(false);
+  const [passwordType, setPasswordType] = useState<any>("password");
+  const [showLoading, setShowLoading] = useState(false);
 
-  const handleCreate = (userData: any) => {
-    delete userData["confirm_password"];
-
-    const request = new Service();
-    request.post(`users`, userData)
-      .then((result: any) => {
-        if (result.err) {
-          setMessage(result.err.message);
-          setError(true);
-        } else {
-          reset();
-          setSuccess(true);
-        }
-      });
+  const initialState = {
+    phone: '+91',
+    fname: '',
+    lname: '',
+    countrycode: '',
+    email: '',
+    password: ''
+  };
+  const [formData, setFormdata] = useState<any>(initialState);
+  const onChangeHandler = (e: any) => {
+    setFormdata({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+    if (e.target.name === "fname" || e.target.name === "lname") {
+      setErrors({
+        ...errors,
+        [e.target.name]: !(/^[A-Za-z ]+$/.test(e.target.value))
+      })
+    }
+  };
+  const handleCreate = (e: any) => {
+    e.preventDefault();
+    if (!errors.fname && !errors.lname) {
+      setShowLoading(true);
+      const request = new Service();
+      request.post(`users`, formData)
+        .then((result: any) => {
+          if (result.err) {
+            //console.log(result.err.data);
+            setMessage("User already exists. Please sign in.");
+            setError(true);
+          } else {
+            setFormdata(initialState);
+            setSuccess(true);
+          }
+        }).finally(() => {
+          setShowLoading(false);
+        });
+    }
   };
 
   const checkboxHandler = () => {
-    // if agree === true, it will be set to false
-    // if agree === false, it will be set to true
     setAgree(!agree);
-    // Don't miss the exclamation mark
   };
   React.useEffect(() => {
     service.get("countrycodes").then((res: any) => {
@@ -101,47 +131,60 @@ const Createuser: React.FC = () => {
                 duration={200}
                 color="dark"
               />
+              <IonLoading
+                cssClass="my-custom-class"
+                isOpen={showLoading}
+                onDidDismiss={() => setShowLoading(false)}
+                message={"Please wait..."}
+              />
+
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol className="center text-grey">CREATE YOUR ACCOUNT</IonCol>
           </IonRow>
-          <form onSubmit={handleSubmit(handleCreate)}>
+          <form onSubmit={handleCreate}>
             <IonRow>
               <IonCol>
                 <IonItem className="input-border">
                   <IonInput
-                    value={""}
-                    {...register("fname", { required: true })}
+                    value={formData.fname}
+                    onIonChange={onChangeHandler}
+                    name="fname"
+                    type="text"
                     placeholder="First Name"
+                    required
                   ></IonInput>
                 </IonItem>
                 {errors.fname && (
                   <span className="validation-errors">
-                    First name is required
+                    First Name Invalid
                   </span>
                 )}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
                   <IonInput
-                    value={""}
-                    {...register("lname", { required: true })}
+                    value={formData.lname}
+                    onIonChange={onChangeHandler}
+                    name="lname"
+                    type="text"
                     placeholder="Last Name"
+                    required
                   ></IonInput>
                 </IonItem>
                 {errors.lname && (
                   <span className="validation-errors">
-                    Last name is required
+                    Last Name Invalid
                   </span>
                 )}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
                   <IonSelect
-                    {...register("countrycode", {
-                      required: true,
-                    })}
+                    name="countrycode"
+                    value={formData.countrycode}
+                    onIonChange={onChangeHandler}
                   >
                     {phoneCode &&
                       phoneCode.map((i: any, index: number) => (
@@ -150,64 +193,63 @@ const Createuser: React.FC = () => {
                         </IonSelectOption>
                       ))}
                   </IonSelect>
-
                   {/* <IonIcon slot='start' src='../assets/email.svg'></IonIcon> */}
                   <IonInput
-                    value={""}
-                    type="tel"
-                    {...register("phone", {
-                      required: true,
-                      pattern: /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
-                    })} ></IonInput>
-                </IonItem>
-                {errors.countrycode?.type === "required" && (
-                  <span className="validation-errors">
-                    Country Code number is required
-                  </span>
-                )}
-                {errors.phone?.type === "required" && (
-                  <span className="validation-errors">
-                    Phone number is required
-                  </span>
-                )}
-                {errors.phone?.type === "pattern" && (
-                  <span className="validation-errors">
-                    Provide valid phone number
-                  </span>
-                )}
-              </IonCol>
-              <IonCol>
-                <IonItem className="input-border">
-                  <IonInput
-                    value={""}
-                    type="email"
-                    {...register("email", {
-                      required: true,
-                      pattern: /\S+@\S+\.\S+/,
-                    })}
-                    placeholder="Email Address"
+                    value={formData.phone}
+                    onIonChange={onChangeHandler}
+                    name="phone"
+                    required
+                    placeholder="Phone"
+                    type="number"
                   ></IonInput>
                 </IonItem>
-                {errors.email?.type === "required" && (
-                  <span className="validation-errors">Email is required</span>
+                {errors.countrycode && (
+                  <span className="validation-errors">
+                    Invalid Country Code
+                  </span>
                 )}
-                {errors.email?.type === "pattern" && (
-                  <span className="validation-errors">Provide valid email</span>
+                {errors.phone && (
+                  <span className="validation-errors">
+                    Phone Invalid
+                  </span>
                 )}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
                   <IonInput
-                    value={""}
-                    type="password"
-                    {...register("password", { required: true })}
+                    value={formData.email}
+                    onIonChange={onChangeHandler}
+                    name="email"
+                    required
+                    placeholder="Email Address"
+                    type="email"
+                  ></IonInput>
+                </IonItem>
+                {errors.email && (
+                  <span className="validation-errors">Email Invalid</span>
+                )}
+              </IonCol>
+              <IonCol>
+                <IonItem className="input-border">
+                  <IonInput
+                    value={formData.password}
+                    onIonChange={onChangeHandler}
+                    type={passwordType}
+                    required
+                    name="password"
                     placeholder="Password"
                   ></IonInput>
-                  <IonIcon slot="end" src="../assets/eye.svg"></IonIcon>
+                  <IonIcon onClick={() => {
+                    if (passwordType === "password") {
+                      setPasswordType("text");
+                    } else {
+                      setPasswordType("password");
+                    }
+                  }} slot="end" src="../assets/eye.svg"></IonIcon>
                 </IonItem>
                 {errors.password && (
                   <span className="validation-errors">
-                    Password is required
+                    Password Invalid
                   </span>
                 )}
               </IonCol>
@@ -217,15 +259,14 @@ const Createuser: React.FC = () => {
                   className="sign-btn"
                   size="default"
                   expand="block"
-                // disabled={!agree}
+                  disabled={!agree}
                 >
                   Sign Up
                 </IonButton>
-
               </IonCol>
               <IonCol size="11" className="remember-forgot">
                 <div className="remember">
-                  <input type="checkbox" name="remember" />
+                  <input type="checkbox" checked={agree} name="remember" onChange={(e) => checkboxHandler()} />
                   <label htmlFor="remember">
                     I agree with Terms and Conditions
                   </label>

@@ -25,36 +25,35 @@ import LoginIcons from "./loginIcons";
 // }
 
 const Login: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const [passwordType, setPasswordType] = useState<any>("password");
+  const [loginData, setLogindata] = useState<any>({ email: '', password: '' });
 
   const history = useHistory();
 
   const [error, setError] = useState(false);
   const [message, setMessage] = useState<string>();
   const [showLoading, setShowLoading] = useState(false);
+  const [remember, setRemember] = useState(false);
 
-  const handleLogin = (loginData: any) => {
-    setShowLoading(true);
-    const request = new Service();
-    request.post(`users/login`, loginData)
-      .then((result: any) => {
-        if (result.err) {
-          setShowLoading(false);
-          setMessage(result.err.message);
-          setError(true);
-        } else {
-          setShowLoading(false);
-          sessionStorage.setItem("token", result.data.jwt_token);
-          sessionStorage.setItem("logged_in", "Y");
-          reset();
-          history.replace("/my/home");
-        }
-      });
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    if (remember) {
+      setShowLoading(true);
+      const request = new Service();
+      request.post(`users/login`, loginData)
+        .then((result: any) => {
+          if (result.err) {
+            setShowLoading(false);
+            setMessage("Invalid user credentials!");
+            setError(true);
+          } else {
+            setShowLoading(false);
+            sessionStorage.setItem("token", result.data.jwt_token);
+            sessionStorage.setItem("logged_in", "Y");
+            history.replace("/my/home");
+          }
+        });
+    }
   };
 
   return (
@@ -74,14 +73,13 @@ const Login: React.FC = () => {
             isOpen={showLoading}
             onDidDismiss={() => setShowLoading(false)}
             message={"Please wait..."}
-            duration={5000}
           />
         </IonCol>
       </IonRow>
       <IonCol size="12" className="sign-in">
         SIGN IN
       </IonCol>
-      <form onSubmit={handleSubmit(handleLogin)} className="formLogin">
+      <form onSubmit={handleLogin} className="formLogin">
         <IonRow>
           <IonCol>
             <IonItem className="input-border">
@@ -92,17 +90,13 @@ const Login: React.FC = () => {
               ></IonIcon>
               <IonInput
                 className="input-text"
-                value={""}
+                value={loginData.email}
+                onIonChange={(e) => setLogindata({ ...loginData, email: e.detail.value })}
                 type="email"
-                {...register("email", {
-                  required: true,
-                })}
+                required
                 placeholder="Email Address"
               ></IonInput>
             </IonItem>
-            {errors.email?.type === "required" && (
-              <span className="validation-errors">Email is required</span>
-            )}
           </IonCol>
           <IonCol>
             <IonItem className="input-border">
@@ -113,21 +107,25 @@ const Login: React.FC = () => {
               ></IonIcon>
               <IonInput
                 className="input-text"
-                value={""}
+                value={loginData.password}
+                onIonChange={(e) => setLogindata({ ...loginData, password: e.detail.value })}
                 placeholder="Password"
-                type="password"
-                {...register("password", { required: true })}
+                type={passwordType}
+                required
               ></IonInput>
-              <IonIcon slot="end" src="../assets/eye.svg"></IonIcon>
+              <IonIcon slot="end" src="../assets/eye.svg" onClick={() => {
+                if (passwordType === "password") {
+                  setPasswordType("text");
+                } else {
+                  setPasswordType("password");
+                }
+              }}></IonIcon>
             </IonItem>
-            {errors.password && (
-              <span className="validation-errors">Password is required</span>
-            )}
           </IonCol>
         </IonRow>
         <IonRow className="remember-forgot">
           <div className="remember">
-            <input type="checkbox" name="remember" />
+            <input type="checkbox" name="remember" checked={remember} onChange={(e) => setRemember(!remember)} />
             <label htmlFor="remember">Remember me</label>
           </div>
           <div>
@@ -136,7 +134,7 @@ const Login: React.FC = () => {
         </IonRow>
         <IonRow>
           <IonCol className="m-auto mt-67" size="11">
-            <IonButton type="submit" className="signin-btn" size="default" expand="block">
+            <IonButton type="submit" className="signin-btn" size="default" expand="block" disabled={!remember}>
               Sign In
             </IonButton>
           </IonCol>
