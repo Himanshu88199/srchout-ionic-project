@@ -271,7 +271,7 @@ const Createuser: React.FC = () => {
               <LoginIcons />
             </IonRow>
           </form>
-          <IonRow className="login-box">
+          <IonRow className="login-box" style={{ padding: "0px", paddingBottom:'90px' }}>
             <IonCol size="12" className="center">
               <span className="light-text">Already have an account?</span>
               <a href="/">

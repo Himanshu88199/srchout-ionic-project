@@ -35,7 +35,7 @@ const Home: React.FC<ScanNewProps> = ({ isFromHome }) => {
     <IonPage>
       {!isLoggedIn ? (
         <IonContent>
-          <IonGrid style={{ padding: "0px" }}>
+          <IonGrid style={{ padding: "0px", paddingBottom:'60px' }}>
             <IonRow className="login-background">
               <IonCol>
                 <div className="logo-outer">
