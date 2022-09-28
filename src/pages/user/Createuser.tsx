@@ -52,22 +52,6 @@ const Createuser: React.FC = () => {
   const [passwordType, setPasswordType] = useState<any>("password");
   const [showLoading, setShowLoading] = useState(false);
 
-
-  // const handleCreate = (userData: any) => {
-  //   delete userData["confirm_password"];
-
-  //   const request = new Service();
-  //   request.post(`users`, userData)
-  //     .then((result: any) => {
-  //       if (result.err) {
-  //         setMessage(result.err.message);
-  //         setError(true);
-  //       } else {
-  //         // reset();
-  //         setSuccess(true);
-  //       }
-  //     });
-  //   }
   const initialState = {
     phone: '+91',
     fname: '',
@@ -89,7 +73,7 @@ const Createuser: React.FC = () => {
     }
   };
   const handleCreate = (e: any) => {
-    console.log(formData);
+    //console.log(formData);
     e.preventDefault();
     if (!errors.fname && !errors.lname) {
       setShowLoading(true);

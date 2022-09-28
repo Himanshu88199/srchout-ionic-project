@@ -1,4 +1,4 @@
-import { IonCard, IonCardContent, IonCol, IonContent, IonGrid, IonItem, IonItemDivider, IonLabel, IonPage, IonRow, useIonViewWillEnter } from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonCol, IonContent, IonGrid, IonIcon, IonItem, IonItemDivider, IonLabel, IonPage, IonRow, useIonViewWillEnter } from "@ionic/react";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
   const fetchEvents = () => {
     const request = new Service();
 
-    request.get('events?type=personal')
+    request.get('events?count=3')
       .then((result: any) => {
         if (result.err) {
           setMessage(result.err.message);
@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
   const fetchTasks = () => {
     const request = new Service();
 
-    request.get('tasks?type=personal')
+    request.get('tasks?count=3')
       .then((result: any) => {
         if (result.err) {
           setMessage(result.err.message);
@@ -74,21 +74,36 @@ const Dashboard: React.FC = () => {
               <IonCard className="card">
                 <IonCardContent>
                   <IonGrid className="events">
-                    {eventsList.slice(0, 3).map((item: any, index: number) => {
-                      return (
-                        <span key={index} onClick={() => history.push(`/my/eventdetails?id=${item.id}`)}>
-                          <IonRow className="start dashboard-item-top">
-                            <p>Event:</p>
-                            <p className="dashboard-item-value">{item.name}</p>
-                          </IonRow>
-                          <IonRow className="start dashboard-item-bottom">
-                            <p>Date:</p>
-                            <p className="dashboard-item-value">{moment(item.event_at).format('lll')}</p>
-                          </IonRow>
-                        </span>
-                      )
-                    })}
-                    <IonLabel className="dashboard-more-btn" onClick={() => history.push("/my/events")}><p>more...</p></IonLabel>
+                    {eventsList.length === 0 ? (
+                      <IonRow className="start dashboard-item-top">
+                        <p style={{ fontWeight: '500' }}>No personal or hosted events.</p>
+                        <IonButton className="dashboard-add-btn" fill="clear" routerLink='/my/createevent' size="small">
+                          <IonIcon color="white" src="../../../assets/plus_icon.svg" />
+                        </IonButton>
+                      </IonRow>
+                    ) : (
+                      <>
+                        {eventsList.map((item: any, index: number) => {
+                          return (
+                            <span key={index} onClick={() => history.push(`/my/eventdetails?id=${item.id}`)}>
+                              <small style={{ float: 'right', fontWeight: '600', marginTop: '8px', backgroundColor: 'transparent', padding: 0, color: item.evnt_type === 'personal' ? 'gray' : 'red' }}>{item.evnt_type === 'personal' ? 'Hosted' : 'Invited'}</small>
+                              <IonRow className="start dashboard-item-top">
+                                <p>Event:</p>
+                                <p className="dashboard-item-value">{item.name}</p>
+                              </IonRow>
+
+                              <IonRow className="start dashboard-item-bottom">
+                                <p>Date:</p>
+                                <p className="dashboard-item-value">{moment(item.event_at).format('lll')}</p>
+                              </IonRow>
+                            </span>
+                          )
+                        })}
+                      </>
+                    )}
+                    {
+                      eventsList.length !== 0 && <IonLabel className="dashboard-more-btn" onClick={() => history.push("/my/events")}><p>more...</p></IonLabel>
+                    }
                   </IonGrid>
                 </IonCardContent>
               </IonCard>
@@ -106,21 +121,35 @@ const Dashboard: React.FC = () => {
               <IonCard className="dashboard-light-card">
                 <IonCardContent>
                   <IonGrid className="events">
-                    {tasksList.slice(0, 3).map((item: any, index: number) => {
-                      return (
-                        <span key={index} onClick={() => history.push(`/my/mytask`)}>
-                          <IonRow className="start dashboard-item-top">
-                            <p>Task:</p>
-                            <p className="dashboard-item-value">{item.name}</p>
-                          </IonRow>
-                          <IonRow className="start dashboard-item-bottom">
-                            <p>Due Date:</p>
-                            <p className="dashboard-item-value">{moment(item.due_date).format('lll')}</p>
-                          </IonRow>
-                        </span>
-                      )
-                    })}
-                    <IonLabel className="dashboard-more-btn" onClick={() => history.push("/my/mytask")}><p>more...</p></IonLabel>
+                    {tasksList.length === 0 ? (
+                      <IonRow className="start dashboard-item-top">
+                        <p style={{ fontWeight: '500' }}>No personal or assigned tasks.</p>
+                        <IonButton className="dashboard-add-btn" fill="clear" routerLink='/my/createpersonaltask' size="small">
+                          <IonIcon color="white" src="../../../assets/plus_icon.svg" />
+                        </IonButton>
+                      </IonRow>
+                    ) : (
+                      <>
+                        {tasksList.map((item: any, index: number) => {
+                          return (
+                            <span key={index} onClick={() => history.push(`/my/mytask`)}>
+                              <small style={{ float: 'right', fontWeight: '600', marginTop: '8px', backgroundColor: 'transparent', padding: 0, color: item.task_type === 'personal' ? 'gray' : 'red' }}>{item.task_type === 'personal' ? 'Personal' : 'Hosted'}</small>
+                              <IonRow className="start dashboard-item-top">
+                                <p>Task:</p>
+                                <p className="dashboard-item-value">{item.name}</p>
+                              </IonRow>
+                              <IonRow className="start dashboard-item-bottom">
+                                <p>Due Date:</p>
+                                <p className="dashboard-item-value">{moment(item.due_date).format('lll')}</p>
+                              </IonRow>
+                            </span>
+                          )
+                        })}
+                      </>
+                    )}
+                    {
+                      tasksList.length != 0 && <IonLabel className="dashboard-more-btn" onClick={() => history.push("/my/mytask")}><p>more...</p></IonLabel>
+                    }
                   </IonGrid>
                 </IonCardContent>
               </IonCard>

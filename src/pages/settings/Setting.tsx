@@ -24,6 +24,11 @@ const Setting: React.FC = () => {
                         </IonCol>
                     </IonRow>
                     <IonRow>
+                        <IonCol className='pl-2 setting-text' size='12' onClick={() => history.push('/my/profile')}>
+                            My Profile
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
                             Notification
                         </IonCol>
@@ -42,7 +47,7 @@ const Setting: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                            <a href="/ChangePassword" className='text-dec' >Change Password</a>
+                            <span onClick={() => history.push('/my/changepassword')} className='text-dec' >Change Password</span>
                         </IonCol>
                     </IonRow>
                     <IonRow className='mt-50'>
@@ -80,7 +85,7 @@ const Setting: React.FC = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol className='pl-2 setting-text' size='6'>
-                            <a href="/contactus" className='text-dec' >Contact Us</a>
+                            <span onClick={() => history.push('/my/contactus')} className='text-dec' >Contact Us</span>
                         </IonCol>
                     </IonRow>
                     <IonRow>
@@ -89,10 +94,8 @@ const Setting: React.FC = () => {
                         </IonCol>
                     </IonRow>
                     <IonRow>
-                        <IonCol>
-                            <IonButton size="small" fill="outline" type="button" className='logout' onClick={() => handleLogout()}>
-                                Log Out
-                            </IonButton>
+                        <IonCol className='m-auto mt-34' size='10.6'>
+                            <IonButton className='save-btn' size='small' expand="block" type="button" onClick={() => handleLogout()}>Log Out</IonButton>
                         </IonCol>
                     </IonRow>
                     <IonToast

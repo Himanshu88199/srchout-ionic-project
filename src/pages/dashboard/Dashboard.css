@@ -7,8 +7,8 @@
 
 .dashboard-item-bottom {
   border-bottom: 1px solid #70707050;
-  padding-bottom: 6px;
-  padding-top: 6px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 .dashboard-item-top {
@@ -24,6 +24,7 @@
   float: right;
   font-weight: bold;
 }
+
 .dashboard-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -31,6 +32,7 @@
   margin-bottom: 0.5rem;
   margin-top: 0;
 }
+
 .dashboard-light-card {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -38,7 +40,19 @@
   margin-bottom: 0.5rem;
   margin-top: 0;
 }
+
 .events {
   padding: 0;
   margin-top: -0.5rem;
+}
+
+.dashboard-add-btn {
+  color: white;
+  background-color: #4ca1d8;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  padding: 0;
+  margin-left: auto;
+  position: relative;
 }

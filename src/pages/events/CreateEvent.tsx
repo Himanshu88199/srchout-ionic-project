@@ -1,9 +1,7 @@
-import { IonButton, IonCol, IonContent, IonDatetime, IonIcon, IonInput, IonLabel, IonModal, IonPage, IonRow, IonTextarea, IonToast } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonInput, IonLabel, IonPage, IonRow, IonTextarea, IonToast } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { format, parseISO } from 'date-fns';
 import Header from '../Header';
 import './CreateEvent.css';
-import { calendar } from "ionicons/icons"
 import { useHistory, useLocation } from 'react-router';
 import { Advertisements } from '../Advertisements';
 import Service from '../../services/http';
@@ -26,11 +24,6 @@ const CreateEvent: React.FC = () => {
 
     const history = useHistory()
 
-    // const formatDateForDB = (date: string, time: string) => {
-    //     const dtArr = date.split('/');
-    //     const newDate = `${dtArr[1]}/${dtArr[0]}/${dtArr[2]}`;
-    //     return new Date(`${newDate} ${time}`).toISOString();
-    // };
     const createNewEvent = () => {
         const eventData = {
             name: eventName,
@@ -142,28 +135,6 @@ const CreateEvent: React.FC = () => {
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        {/* <IonRow>
-                            <IonCol size="7">
-                                <IonRow>
-                                    <IonCol size='12' className='text-grey2 pb-0 ml-12'>
-                                        Event Date:
-                                    </IonCol>
-                                    <IonCol className='pd-0' size='7'>
-                                        <IonInput required type="datetime-local" className='input-border-2' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
-                                    </IonCol>
-                                </IonRow>
-                            </IonCol>
-                            <IonCol size="5">
-                                <IonRow>
-                                    <IonCol size='12' className='text-grey2 pb-0 ml-12'>
-                                        Event Date:
-                                    </IonCol>
-                                    <IonCol className='pd-0' size='12'>
-                                        <IonInput required type="datetime-local" className='input-border-2' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
-                                    </IonCol>
-                                </IonRow>
-                            </IonCol>
-                        </IonRow> */}
                         <IonRow className='date-time'>
                             <IonCol>
                                 <IonLabel className='ml-12'>Event Date:</IonLabel>

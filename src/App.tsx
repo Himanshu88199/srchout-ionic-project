@@ -23,9 +23,6 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import Tabs from "./pages/Tabs";
-import ChangePassword from "./pages/settings/ChangePassword";
-import ContactUs from "./pages/settings/ContactUs";
-import MyProfile from "./pages/settings/MyProfile";
 import './pages/Tabs.css';
 import { StatusBar } from "@capacitor/status-bar";
 import { useEffect } from "react";
@@ -45,14 +42,8 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          {/* <Route exact path="/Home">
-          <Home />
-        </Route> */}
           <Route exact path="/" component={() => <Home isFromHome={true} />} />
           <Route exact path="/createuser" component={Createuser} />
-          <Route exact path="/contactus" component={ContactUs} />
-          <Route exact path="/myprofile" component={MyProfile} />
-          <Route exact path="/changepassword" component={ChangePassword} />
           <Route path="/my" render={() => (
             sessionStorage.getItem("logged_in") === "Y" ? (
               <Tabs />

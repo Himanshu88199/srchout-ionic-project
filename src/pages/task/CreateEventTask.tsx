@@ -1,6 +1,6 @@
-import { IonButton, IonCol, IonContent, IonInput, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToast } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonInput, IonLabel, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToast } from '@ionic/react';
 import { useEffect, useState } from 'react';
-import { useHistory, useParams, useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import Service from '../../services/http';
 import { Advertisements } from '../Advertisements';
 import Header from '../Header';
@@ -19,17 +19,16 @@ const CreateEventTask: React.FC = () => {
     const [message, setMessage] = useState("");
     const [success, setSuccess] = useState(false);
     const [attend, getAttendend] = useState([]);
-    const [eventDate, setEventDate] = useState("");
     const [taskAssignTo, setTaskAssignTo] = useState("");
-
-
+    const [taskDate, setTaskDate] = useState("");
+    const [taskTime, setTaskTime] = useState("");
 
     const handleCreateTask = (e: any) => {
         e.preventDefault();
         var taskData = {
             name: taskName,
             description: taskDesc,
-            due_date: eventDate,
+            due_date: `${taskDate}T${taskTime}`,
             task_type: "event",
             event_id: id,
             assigned_to: taskAssignTo,
@@ -44,8 +43,9 @@ const CreateEventTask: React.FC = () => {
                 } else {
                     setTaskName("");
                     setTaskDesc("");
-                    setEventDate("");
                     setTaskAssignTo("");
+                    setTaskDate("");
+                    setTaskTime("");
                     setSuccess(true);
                 }
             })
@@ -87,7 +87,7 @@ const CreateEventTask: React.FC = () => {
                                 Event Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border pd' value={eventName}></IonInput>
+                                <IonInput required className='input-border pd' value={eventName}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -95,7 +95,7 @@ const CreateEventTask: React.FC = () => {
                                 Task Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput className='input-border pd' value={taskName} onIonChange={(e) => setTaskName(e.detail.value!)}></IonInput>
+                                <IonInput required className='input-border pd' value={taskName} onIonChange={(e) => setTaskName(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -103,15 +103,17 @@ const CreateEventTask: React.FC = () => {
                                 Task Description:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonTextarea rows={6} className='input-border-2' value={taskDesc} onIonChange={(e) => setTaskDesc(e.detail.value!)}></IonTextarea>
+                                <IonTextarea required rows={6} className='input-border-2' value={taskDesc} onIonChange={(e) => setTaskDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
-                                Task Due Date:
+                        <IonRow className='date-time'>
+                            <IonCol>
+                                <IonLabel className='ml-12'>Task Due Date:</IonLabel>
+                                <IonInput required className='input-border col-50' value={taskDate} onIonChange={(e: any) => setTaskDate(e.detail.value)} type="date"></IonInput>
                             </IonCol>
-                            <IonCol className='pd-0' size='12'>
-                                <IonInput type="datetime-local" className='input-border pd' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)}></IonInput>
+                            <IonCol>
+                                <IonLabel className='ml-12'>Task Due Time:</IonLabel>
+                                <IonInput required className='input-border col-50' value={taskTime} onIonChange={(e: any) => setTaskTime(e.detail.value)} type="time"></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>

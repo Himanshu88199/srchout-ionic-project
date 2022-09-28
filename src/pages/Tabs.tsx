@@ -5,6 +5,9 @@ import CreateEvent from './events/CreateEvent';
 import EventDetails from './events/EventDetails';
 import MyEvent from './events/MyEvent';
 import Notifications from './Notifications';
+import ChangePassword from './settings/ChangePassword';
+import ContactUs from './settings/ContactUs';
+import MyProfile from './settings/MyProfile';
 import Setting from './settings/Setting';
 // import Createuser from './user/Createuser';
 
@@ -45,6 +48,15 @@ const Tabs: React.FC = () => {
                 </Route>
                 <Route exact path="/my/notifications">
                     <Notifications />
+                </Route>
+                <Route exact path="/my/profile">
+                    <MyProfile />
+                </Route>
+                <Route exact path="/my/changepassword" >
+                    <ChangePassword />
+                </Route>
+                <Route exact path="/my/contactus">
+                    <ContactUs />
                 </Route>
 
                 {/* <Route exact path="/app">

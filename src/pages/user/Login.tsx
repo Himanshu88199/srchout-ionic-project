@@ -9,20 +9,10 @@ import {
   IonRow,
 } from "@ionic/react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import Service from "../../services/http";
 import "./login.css";
 import LoginIcons from "./loginIcons";
-
-// const [name,setName] = useState("");
-// const [password,setName] = useState("");
-// const [name,setName] = useState("");
-
-// function validateEmail(email: string) {
-//   const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-//   return re.test(String(email).toLowerCase());
-// }
 
 const Login: React.FC = () => {
   const [passwordType, setPasswordType] = useState<any>("password");
@@ -37,23 +27,21 @@ const Login: React.FC = () => {
 
   const handleLogin = (e: any) => {
     e.preventDefault();
-    if (remember) {
-      setShowLoading(true);
-      const request = new Service();
-      request.post(`users/login`, loginData)
-        .then((result: any) => {
-          if (result.err) {
-            setShowLoading(false);
-            setMessage("Invalid user credentials!");
-            setError(true);
-          } else {
-            setShowLoading(false);
-            sessionStorage.setItem("token", result.data.jwt_token);
-            sessionStorage.setItem("logged_in", "Y");
-            history.replace("/my/home");
-          }
-        });
-    }
+    setShowLoading(true);
+    const request = new Service();
+    request.post(`users/login`, loginData)
+      .then((result: any) => {
+        if (result.err) {
+          setShowLoading(false);
+          setMessage("Invalid user credentials!");
+          setError(true);
+        } else {
+          setShowLoading(false);
+          sessionStorage.setItem("token", result.data.jwt_token);
+          sessionStorage.setItem("logged_in", "Y");
+          history.replace("/my/home");
+        }
+      });
   };
 
   return (
@@ -98,26 +86,6 @@ const Login: React.FC = () => {
               ></IonInput>
             </IonItem>
           </IonCol>
-          {/* <IonCol>
-            <IonItem className="input-border">
-              <IonIcon
-                className="mr-5"
-                slot="start"
-                src="../assets/lock.svg"
-              ></IonIcon>
-              <IonInput
-                className="input-text"
-                value={""}
-                placeholder="Password"
-                type="password"
-                {...register("password", { required: true })}
-              ></IonInput>
-              <IonIcon slot="end" src="../assets/eye.svg"></IonIcon>
-            </IonItem>
-            {errors.password && (
-              <span className="validation-errors">Password is required</span>
-            )}
-          </IonCol> */}
           <IonCol>
             <IonItem className="input-border">
               <IonIcon
@@ -154,7 +122,7 @@ const Login: React.FC = () => {
         </IonRow>
         <IonRow>
           <IonCol className="m-auto mt-40" size="11">
-            <IonButton type="submit" className="signin-btn" size="default" expand="block" disabled={!remember}>
+            <IonButton type="submit" className="signin-btn" size="default" expand="block">
               Sign In
             </IonButton>
           </IonCol>
