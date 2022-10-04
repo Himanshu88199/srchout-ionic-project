@@ -86,7 +86,7 @@ const Dashboard: React.FC = () => {
                         {eventsList.map((item: any, index: number) => {
                           return (
                             <span key={index} onClick={() => history.push(`/my/eventdetails?id=${item.id}`)}>
-                              <small style={{ float: 'right', fontWeight: '600', marginTop: '8px', backgroundColor: 'transparent', padding: 0, color: item.evnt_type === 'personal' ? 'gray' : 'red' }}>{item.evnt_type === 'personal' ? 'Hosted' : 'Invited'}</small>
+                              <small style={{ float: 'right', fontWeight: '400', marginTop: '8px', backgroundColor: 'transparent', padding: 0, fontSize: '11px', color: item.evnt_type === 'personal' ? '#671070' : '#228B22' }}>{item.evnt_type === 'personal' ? 'Hosted' : 'Invited'}</small>
                               <IonRow className="start dashboard-item-top">
                                 <p>Event:</p>
                                 <p className="dashboard-item-value">{item.name}</p>
@@ -133,7 +133,7 @@ const Dashboard: React.FC = () => {
                         {tasksList.map((item: any, index: number) => {
                           return (
                             <span key={index} onClick={() => history.push(`/my/mytask`)}>
-                              <small style={{ float: 'right', fontWeight: '600', marginTop: '8px', backgroundColor: 'transparent', padding: 0, color: item.task_type === 'personal' ? 'gray' : 'red' }}>{item.task_type === 'personal' ? 'Personal' : 'Hosted'}</small>
+                              <small style={{ float: 'right', fontWeight: '400', fontSize: '11px', marginTop: '8px', backgroundColor: 'transparent', padding: 0, color: item.task_type === 'personal' ? '#671070' : '#228B22' }}>{item.task_type === 'personal' ? 'Personal' : 'Hosted'}</small>
                               <IonRow className="start dashboard-item-top">
                                 <p>Task:</p>
                                 <p className="dashboard-item-value">{item.name}</p>

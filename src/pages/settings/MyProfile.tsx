@@ -1,4 +1,4 @@
-import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToast, IonToolbar, useIonViewWillEnter } from '@ionic/react';
+import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonText, IonTitle, IonToast, IonToolbar, useIonViewWillEnter } from '@ionic/react';
 import Header from '../Header';
 import './MyProfile.css';
 import PhoneInput from "react-phone-input-2"
@@ -95,22 +95,16 @@ const MyProfile: React.FC = () => {
       <IonPage className='pg-grey'>
         <Header />
         <IonContent>
-          <IonRow className='con'>
-            <IonCol className='center text-grey myprofile'>
-              MY PROFILE
-            </IonCol>
-            <IonCol className='edit'>
-              <img src="../assets/edit.svg" alt="" onClick={() => setEdit(true)} />
+          <IonRow>
+            <IonCol className='text-grey myprofile' size="12">
+              <IonText>MY PROFILE</IonText>
+              <img src="../assets/edit.svg" className="edit-icon" alt="" onClick={() => setEdit(true)} />
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol className='center'>
               <img src="../assets/profile.svg" alt="" />
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol className='camera'>
-              <img src="../assets/camera.png" alt="" width={25} />
+              <img src="../assets/camera.png" alt="" className="camera-icon" />
             </IonCol>
           </IonRow>
           <form onSubmit={handleSubmit}>

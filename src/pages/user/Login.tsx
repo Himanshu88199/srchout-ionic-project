@@ -52,7 +52,7 @@ const Login: React.FC = () => {
             isOpen={error}
             onDidDismiss={() => setError(false)}
             cssClass="my-custom-class"
-            header={"Error!"}
+            //header={"Wrong Password"}
             message={message}
             buttons={["Dismiss"]}
           />

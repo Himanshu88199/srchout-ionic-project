@@ -182,44 +182,48 @@ const EventDetails: React.FC = () => {
               <IonCol size="12">
                 <IonLabel className="dark-text"> Invitees :</IonLabel>
               </IonCol>
-              <IonRow>
-                {attendees.map((attend: any) => {
-                  return (
-                    <IonCol key={attend.id} className="pd-0 pb-0" size="12">
-                      {attend.fname} {attend.lname} - {attend.rsvp !== null ? (attend.rsvp === "yes" ? "Accepted" : "Declined") : "Undecided"}
-                    </IonCol>
-                  )
-                })}
-              </IonRow>
+              <IonCol>
+                <IonRow>
+                  {attendees.map((attend: any) => {
+                    return (
+                      <IonCol key={attend.id} className="pd-0 pb-0" size="12">
+                        {attend.fname} {attend.lname} - {attend.rsvp !== null ? (attend.rsvp === "yes" ? "Accepted" : "Declined") : "Undecided"}
+                      </IonCol>
+                    )
+                  })}
+                </IonRow>
+              </IonCol>
             </IonRow>
-            <IonRow className="text-grey2 mt-16">
+            <IonRow className="text-grey2 mt-16" style={{width:'100%'}}>
               <IonCol size="12">
                 <IonLabel className="dark-text"> Tasks :</IonLabel>
               </IonCol>
-              <IonRow>
-                {tasks.map((item: any, index: number) => {
-                  const assignee = attendees.filter((attend: any) => attend.id === item.assigned_to)[0];
-                  return (
-                    <IonCol key={index} className="pd-0 pb-0" size="12">
-                      {item.name} {assignee && `- ${assignee.fname} ${assignee.lname}`}
-                    </IonCol>
-                  )
-                })}
-              </IonRow>
-            </IonRow>
-            <IonRow className="btn-right">
-              <IonCol className="p-0">
-                <IonButton fill="clear" onClick={() => openModal()}>
-                  <IonIcon className="icon-size" src="../assets/users.svg" />
-                </IonButton>
-                <IonButton fill="clear" onClick={() => history.push(`/my/createeventtask?id=${id}&eventName=${eventData.name}`)}>
-                  <IonIcon className="icon-size-2" src="../assets/tick.svg" />
-                </IonButton>
-                <IonButton fill="clear" onClick={() => history.push("/my/createevent?id=" + id)}>
-                  <IonIcon className="icon-size-2" src="../assets/edit.svg" />
-                </IonButton>
+              <IonCol>
+                <IonRow>
+                  {tasks.map((item: any, index: number) => {
+                    const assignee = attendees.filter((attend: any) => attend.id === item.assigned_to)[0];
+                    return (
+                      <IonCol key={index} className="pd-0 pb-0" size="12">
+                        {item.name} {assignee && `- ${assignee.fname} ${assignee.lname}`}
+                      </IonCol>
+                    )
+                  })}
+                </IonRow>
               </IonCol>
             </IonRow>
+            <IonCol className="pd-0 events-icons" size="12" style={{ float: "right", marginTop: '10px' }}>
+              <img
+                className="user-img user"
+                src="../../../assets/users.svg"
+                alt=""
+                onClick={() => openModal()}
+              />
+              <img className="user-img" src="../../../assets/tick.svg" alt="" onClick={() => history.push(`/my/createeventtask?id=${id}&eventName=${eventData.name}`)} />
+              <img className="user-img" src="../../../assets/edit.svg" alt=""
+                onClick={() => history.push("/my/createevent?id=" + id)}
+              />
+            </IonCol>
+
           </IonRow>
           <IonModal
             isOpen={open}
@@ -228,9 +232,9 @@ const EventDetails: React.FC = () => {
             initialBreakpoint={1}
             backdropBreakpoint={0.2}
           >
-            <IonHeader>
+            <IonHeader className="modal-header">
               <IonToolbar color="primary">
-                <IonTitle>Add Attendees</IonTitle>
+                <IonTitle className="modal-title">Add Attendees</IonTitle>
                 <IonButton
                   size="small"
                   fill="clear"

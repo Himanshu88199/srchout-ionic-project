@@ -31,9 +31,7 @@ setupIonicReact();
 
 const App: React.FC = () => {
   function hide() {
-    StatusBar.setOverlaysWebView({ overlay: true }).then(() => {
-      console.log('overlay');
-    });
+    StatusBar.setBackgroundColor({color:'#324755'})
   }
   useEffect(() => {
     hide();

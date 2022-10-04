@@ -31,7 +31,7 @@ const MyEvent: React.FC = () => {
   const history = useHistory()
 
   const initialAttendeeData = {
-    phone: '+91',
+    phone: '+1',
     email: '',
     event_id: '',
     fname: '',
@@ -192,8 +192,8 @@ const MyEvent: React.FC = () => {
             backdropBreakpoint={0.2}
           >
             <IonHeader>
-              <IonToolbar color="primary">
-                <IonTitle>Add Attendees</IonTitle>
+              <IonToolbar color="primary" className="modal-header">
+                <IonTitle className="modal-title">Add Attendees</IonTitle>
                 <IonButton
                   size="small"
                   fill="clear"
@@ -269,9 +269,10 @@ const MyEvent: React.FC = () => {
               </form>
             </IonContent>
           </IonModal>
-          <IonButton className="add-btn" fill='clear' routerLink='/my/createevent' size="small">
-            <IonIcon color="#4ca1d8" src="../../../assets/plus_icon.svg" />
+          <IonButton className="add-btn" fill="clear" routerLink='/my/createevent' size="small">
+            <IonIcon color="white" src="../../../assets/plus_icon.svg" />
           </IonButton>
+
           <IonToast
             isOpen={errorAddAttendee}
             onDidDismiss={() => {

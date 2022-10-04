@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonContent, IonInput, IonLabel, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToast } from '@ionic/react';
+import { IonButton, IonCol, IonContent, IonInput, IonItem, IonLabel, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea, IonToast } from '@ionic/react';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import Service from '../../services/http';
@@ -87,7 +87,7 @@ const CreateEventTask: React.FC = () => {
                                 Event Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput required className='input-border pd' value={eventName}></IonInput>
+                                <IonItem className='input-border pd'>{eventName}</IonItem>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -108,11 +108,11 @@ const CreateEventTask: React.FC = () => {
                         </IonRow>
                         <IonRow className='date-time'>
                             <IonCol>
-                                <IonLabel className='ml-12'>Task Due Date:</IonLabel>
+                                <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Date:</IonLabel>
                                 <IonInput required className='input-border col-50' value={taskDate} onIonChange={(e: any) => setTaskDate(e.detail.value)} type="date"></IonInput>
                             </IonCol>
                             <IonCol>
-                                <IonLabel className='ml-12'>Task Due Time:</IonLabel>
+                                <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Time:</IonLabel>
                                 <IonInput required className='input-border col-50' value={taskTime} onIonChange={(e: any) => setTaskTime(e.detail.value)} type="time"></IonInput>
                             </IonCol>
                         </IonRow>

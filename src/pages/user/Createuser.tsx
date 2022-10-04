@@ -9,6 +9,7 @@ import {
   IonIcon,
   IonInput,
   IonItem,
+  IonItemOption,
   IonLabel,
   IonLoading,
   IonPage,
@@ -18,6 +19,7 @@ import {
   IonTitle,
   IonToast,
   IonToolbar,
+  useIonViewWillEnter,
 } from "@ionic/react";
 import Footer from "../../components/Footer";
 import React, { useState } from "react";
@@ -47,17 +49,18 @@ const Createuser: React.FC = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [phoneCode, codes] = useState<any>([]);
+  const [phoneCode, setCodes] = useState<any>([]);
   const [agree, setAgree] = useState(false);
   const [passwordType, setPasswordType] = useState<any>("password");
   const [showLoading, setShowLoading] = useState(false);
 
   const initialState = {
-    phone: '+91',
+    phone: '',
     fname: '',
     lname: '',
     email: '',
-    password: ''
+    password: '',
+    countrycode: ''
   };
   const [formData, setFormdata] = useState<any>(initialState);
   const onChangeHandler = (e: any) => {
@@ -99,10 +102,16 @@ const Createuser: React.FC = () => {
   };
   React.useEffect(() => {
     service.get("countrycodes").then((res: any) => {
-      codes(res.data);
+      //console.log(res.data)
+      setCodes(res.data);
     });
   }, []);
-
+  useIonViewWillEnter(() => {
+    service.get("countrycodes").then((res: any) => {
+      //console.log(res.data)
+      setCodes(res.data);
+    });
+  })
   return (
     <>
       <IonPage>
@@ -176,18 +185,41 @@ const Createuser: React.FC = () => {
                 )}
               </IonCol>
               <IonCol>
-                <PhoneInput
-                  country={"us"}
-                  onChange={phone => setFormdata({ ...formData, phone: phone })}
-                  containerStyle={{ margin: '5px', marginLeft: '1.2rem', border: '1px solid #707070', borderRadius: '9px', width: '87vw', height: '45px' }}
-                  inputStyle={{ width: '86vw', height: '42px', border: 'none', borderRadius: '9px' }}
-                  dropdownStyle={{ height: '200px' }}
-                  buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
-                  value={formData.phone}
-                  inputProps={{ name: 'phone', required: true }}
-                  placeholder="Phone Number"
-                >
-                </PhoneInput>
+                {/* <IonItem className="input-border">
+                  <IonCol size="3">
+                  <IonSelect value={formData.countrycode} onChange={onChangeHandler} name="countrycode">
+                    {phoneCode.map((item: any, index: number) =>
+                      <IonSelectOption key={index} value={item.dial_code}>{item.name}</IonSelectOption>
+                    )}
+                  </IonSelect>
+
+                  </IonCol>
+                  <IonCol>
+                  <IonInput
+                    value={formData.phone}
+                    onIonChange={onChangeHandler}
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone Number"
+                    required
+                  ></IonInput>
+
+                  </IonCol>
+                </IonItem> */}
+                <IonItem className="input-border">
+                  <PhoneInput
+                    country={"us"}
+                    onChange={phone => setFormdata({ ...formData, phone: phone })}
+                    containerStyle={{ marginLeft: '-7px', border: 'none', height: '42px', borderRadius: '9px' }}
+                    inputStyle={{ height: '42px', border: 'none', borderRadius: '9px' }}
+                    dropdownStyle={{ height: '200px' }}
+                    buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
+                    value={formData.phone}
+                    inputProps={{ name: 'phone', required: true }}
+                    placeholder="Phone Number"
+                  />
+
+                </IonItem>
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
@@ -255,7 +287,7 @@ const Createuser: React.FC = () => {
               <LoginIcons />
             </IonRow>
           </form>
-          <IonRow className="login-box" style={{ padding: "0px", paddingBottom:'90px' }}>
+          <IonRow className="login-box" style={{ padding: "0px", paddingBottom: '90px' }}>
             <IonCol size="12" className="center">
               <span className="light-text">Already have an account?</span>
               <a href="/">
