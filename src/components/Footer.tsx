@@ -19,7 +19,7 @@ import "./Footer.css";
 const Footer: React.FC = () => {
     return (
         <>
-            <IonRow className="bg-dark">
+            <IonRow className="bg-dark footer">
             </IonRow>
         </>
     );

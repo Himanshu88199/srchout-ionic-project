@@ -10,11 +10,13 @@
 }
 
 .icon-size-2 {
-  width: 15px;
+  width: 35px;
   height: 18px;
   /* margin-left: 34px; */
 }
-
+.icon-size-2 .user{
+  width: 30px;
+}
 .p-0 {
   padding-right: 0px;
 }

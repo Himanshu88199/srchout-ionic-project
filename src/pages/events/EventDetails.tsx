@@ -9,6 +9,7 @@ import "./EventDetails.css";
 import moment from 'moment';
 import { addOutline, closeCircleOutline } from "ionicons/icons";
 import Service from "../../services/http";
+import PhoneInput from "react-phone-input-2";
 
 const EventDetails: React.FC = () => {
   const history = useHistory();
@@ -24,21 +25,28 @@ const EventDetails: React.FC = () => {
     location: "",
     name: ""
   };
-  const newContact = {
-    phone: '',
+  const initialAttendeeData = {
+    phone: '+91',
     email: '',
     event_id: '',
     fname: '',
-    lname: '',
+    lname: ''
+  };
+  const [attendeeData, setAttendeeData] = useState(initialAttendeeData);
+  const initialErrors = {
+    fname: false,
+    lname: false,
   };
 
+  const [errors, setErrors] = useState(initialErrors);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
   const [eventData, setEventData] = useState(initialStateEvent);
   const [attendees, setAttendess] = useState<any>([]);
-  const [newAttendee, setNewAttendee] = useState(newContact);
   const [open, setOpen] = useState<any>(false);
   const [tasks, setTasks] = useState<any>([]);
+  const [errorAddAttendee, setErrorAddAteendee] = useState(false);
+  const [messageAddAttendee, setMessageAttendee] = useState("");
 
   const fetchEventById = (id: any) => {
     const request = new Service();
@@ -81,33 +89,44 @@ const EventDetails: React.FC = () => {
   }
   const closeModal = () => {
     setOpen(false);
+    setAttendeeData(initialAttendeeData);
   };
   const openModal = () => {
     setOpen(true);
+    setAttendeeData({
+      ...attendeeData,
+      event_id: id
+    });
   };
-
-  const addInContacts = () => {
-
-    const request = new Service();
-    newAttendee.event_id = id;
-    request.post(`guests`, newAttendee)
-      .then((result: any) => {
-        if (result.err) {
-          setMessage(result.err.message);
-          setError(true);
-        } else {
-          setNewAttendee(newContact);
-          fetchAttendees(id);
-          closeModal();
-        }
-      })
+  const submitFormAttendee = (e: any) => {
+    e.preventDefault();
+    //console.log(attendeeData);
+    if (!errors.fname && !errors.lname) {
+      const request = new Service();
+      request.post(`guests`, attendeeData)
+        .then((result: any) => {
+          if (result.err) {
+            setMessageAttendee(result.err.message);
+            setErrorAddAteendee(true);
+          } else {
+            setAttendeeData(initialAttendeeData);
+            fetchAttendees(id);
+            closeModal();
+          }
+        });
+    }
   };
-
-  const changeContacthandler = (e: any) => {
-    setNewAttendee({
-      ...newAttendee,
+  const onChangeHandler = (e: any) => {
+    setAttendeeData({
+      ...attendeeData,
       [e.target.name]: e.detail.value
     });
+    if (e.target.name === "fname" || e.target.name === "lname") {
+      setErrors({
+        ...errors,
+        [e.target.name]: !(/^[A-Za-z ]+$/.test(e.target.value))
+      })
+    }
   };
   useEffect(() => {
     fetchEventById(id);
@@ -163,55 +182,59 @@ const EventDetails: React.FC = () => {
               <IonCol size="12">
                 <IonLabel className="dark-text"> Invitees :</IonLabel>
               </IonCol>
-              <IonRow>
-                {attendees.map((attend: any) => {
-                  return (
-                    <IonCol key={attend.id} className="pd-0 pb-0" size="12">
-                      {attend.fname} {attend.lname} - {attend.rsvp !== null ? (attend.rsvp === "yes" ? "Accepted" : "Declined") : "Undecided"}
-                    </IonCol>
-                  )
-                })}
-              </IonRow>
+              <IonCol>
+                <IonRow>
+                  {attendees.map((attend: any) => {
+                    return (
+                      <IonCol key={attend.id} className="pd-0 pb-0" size="12">
+                        {attend.fname} {attend.lname} - {attend.rsvp !== null ? (attend.rsvp === "yes" ? "Accepted" : "Declined") : "Undecided"}
+                      </IonCol>
+                    )
+                  })}
+                </IonRow>
+              </IonCol>
             </IonRow>
-            <IonRow className="text-grey2 mt-16">
+            <IonRow className="text-grey2 mt-16" style={{width:'100%'}}>
               <IonCol size="12">
                 <IonLabel className="dark-text"> Tasks :</IonLabel>
               </IonCol>
-              <IonRow>
-                {tasks.map((item: any, index: number) => {
-                  const assignee = attendees.filter((attend: any) => attend.id === item.assigned_to)[0];
-                  return (
-                    <IonCol key={index} className="pd-0 pb-0" size="12">
-                      {item.name} {assignee && `- ${assignee.fname} ${assignee.lname}`}
-                    </IonCol>
-                  )
-                })}
-              </IonRow>
-            </IonRow>
-            <IonRow className="btn-right">
-              <IonCol className="p-0">
-                <IonButton fill="clear" onClick={() => openModal()}>
-                  <IonIcon className="icon-size" src="../assets/users.svg" />
-                </IonButton>
-                <IonButton fill="clear" onClick={() => history.push(`/my/createeventtask?id=${id}&eventName=${eventData.name}`)}>
-                  <IonIcon className="icon-size-2" src="../assets/tick.svg" />
-                </IonButton>
-                <IonButton fill="clear" onClick={() => history.push("/my/createevent?id=" + id)}>
-                  <IonIcon className="icon-size-2" src="../assets/edit.svg" />
-                </IonButton>
+              <IonCol>
+                <IonRow>
+                  {tasks.map((item: any, index: number) => {
+                    const assignee = attendees.filter((attend: any) => attend.id === item.assigned_to)[0];
+                    return (
+                      <IonCol key={index} className="pd-0 pb-0" size="12">
+                        {item.name} {assignee && `- ${assignee.fname} ${assignee.lname}`}
+                      </IonCol>
+                    )
+                  })}
+                </IonRow>
               </IonCol>
             </IonRow>
+            <IonCol className="pd-0 events-icons" size="12" style={{ float: "right", marginTop: '10px' }}>
+              <img
+                className="user-img user"
+                src="../../../assets/users.svg"
+                alt=""
+                onClick={() => openModal()}
+              />
+              <img className="user-img" src="../../../assets/tick.svg" alt="" onClick={() => history.push(`/my/createeventtask?id=${id}&eventName=${eventData.name}`)} />
+              <img className="user-img" src="../../../assets/edit.svg" alt=""
+                onClick={() => history.push("/my/createevent?id=" + id)}
+              />
+            </IonCol>
+
           </IonRow>
           <IonModal
             isOpen={open}
             onDidDismiss={closeModal}
-            breakpoints={[0, 0.2, 0.5, 1]}
-            initialBreakpoint={0.5}
+            breakpoints={[0, 0.5, 1]}
+            initialBreakpoint={1}
             backdropBreakpoint={0.2}
           >
-            <IonHeader>
+            <IonHeader className="modal-header">
               <IonToolbar color="primary">
-                <IonTitle>Add Attendees</IonTitle>
+                <IonTitle className="modal-title">Add Attendees</IonTitle>
                 <IonButton
                   size="small"
                   fill="clear"
@@ -227,115 +250,76 @@ const EventDetails: React.FC = () => {
               </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
-              <IonGrid>
+              <form onSubmit={submitFormAttendee}>
                 <IonRow>
-                  <IonCol>
-                    <IonItem hidden>
-                      <IonLabel position="floating">
-                        {" "}
-                        event_id:
-                      </IonLabel>
-                      <IonInput
-                        placeholder="event_id"
-                        value={id}
-                      ></IonInput>
-                    </IonItem>
-
-                    <IonItem>
-                      <IonLabel position="floating">
-                        {" "}
-                        First Name:
-                      </IonLabel>
-                      <IonInput
-                        placeholder="First Name"
-                        value={newAttendee.fname}
-                        onIonChange={changeContacthandler}
-                        name="fname"
-                      ></IonInput>
-                    </IonItem>
-
-                    <IonItem>
-                      <IonLabel position="floating">
-                        {" "}
-                        Last Name:
-                      </IonLabel>
-                      <IonInput
-                        placeholder="Last Name"
-                        value={newAttendee.lname}
-                        onIonChange={changeContacthandler}
-                        name="lname"
-                      ></IonInput>
-                    </IonItem>
+                  <IonCol size="12" className="text-grey2 pb-0">
+                    First Name
+                  </IonCol>
+                  <IonCol className="pd-0" size="12">
+                    <IonInput required type="text" className="input-border" value={attendeeData.fname} name="fname" onIonChange={onChangeHandler}></IonInput>
+                    {errors.fname && (
+                      <small style={{ color: 'red' }}>First Name Invalid</small>
+                    )}
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol>
-                    <IonItem>
-                      <IonLabel position="floating">
-                        {" "}
-                        Phone:
-                      </IonLabel>
-                      <IonInput
-                        placeholder="Phone"
-                        value={newAttendee.phone}
-                        onIonChange={changeContacthandler}
-                        name="phone"
-                      ></IonInput>
-                    </IonItem>
+                  <IonCol size="12" className="text-grey2 pb-0">
+                    Last Name
+                  </IonCol>
+                  <IonCol className="pd-0" size="12">
+                    <IonInput required type="text" className="input-border" value={attendeeData.lname} name="lname" onIonChange={onChangeHandler}></IonInput>
+                    {errors.lname && (
+                      <small style={{ color: 'red' }}>Last Name Invalid</small>
+                    )}
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol>
-                    <IonItem>
-                      <IonLabel position="floating">
-                        {" "}
-                        Email:
-                      </IonLabel>
-                      <IonInput
-                        placeholder="Email"
-                        value={newAttendee.email}
-                        onIonChange={changeContacthandler}
-                        name="email"
-                      ></IonInput>
-                    </IonItem>
+                  <IonCol size="12" className="text-grey2 pb-0">
+                    Phone
                   </IonCol>
-                </IonRow>
-                <IonRow className="text-center">
-                  <IonCol>
-                    <IonButton
-                      size="small"
-                      onClick={addInContacts}
+                  <IonCol className="pd-0" size="12">
+                    <PhoneInput
+                      country={"us"}
+                      onChange={phone => setAttendeeData({ ...attendeeData, phone: phone })}
+                      containerStyle={{ border: '1px solid #707070', borderRadius: '9px', width: '87vw', height: '45px' }}
+                      inputStyle={{ width: '86vw', height: '42px', border: 'none', borderRadius: '9px' }}
+                      dropdownStyle={{ height: '200px' }}
+                      buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
+                      value={attendeeData.phone}
+                      inputProps={{ name: 'phone', required: true }}
+                      placeholder="Phone Number"
                     >
-                      <IonIcon icon={addOutline} />
+                    </PhoneInput>
+                  </IonCol>
+                </IonRow>
+                <IonRow>
+                  <IonCol size="12" className="text-grey2 pb-0">
+                    Email
+                  </IonCol>
+                  <IonCol className="pd-0" size="12">
+                    <IonInput required type="email" className="input-border" value={attendeeData.email} name="email" onIonChange={onChangeHandler}></IonInput>
+                  </IonCol>
+                </IonRow>
+                <IonRow className="save-btn-row">
+                  <IonCol className="m-auto">
+                    <IonButton className="sign-btn" size="small" expand="block" type="submit">
                       Add
                     </IonButton>
                   </IonCol>
                 </IonRow>
-                {/* <IonRow>
-                  <IonCol>
-                    <ul>
-                      {list.length > 0 &&
-                        list.map((item, index) => (
-                          <li key={item.name + index}>
-                            {item.name}({item.phone}){" "}
-                          </li>
-                        ))}
-                    </ul>
-                  </IonCol>
-                </IonRow> */}
-              </IonGrid>
+              </form>
             </IonContent>
           </IonModal>
         </IonContent>
-        {/* <IonToast
-          isOpen={error}
+        <IonToast
+          isOpen={errorAddAttendee}
           onDidDismiss={() => {
-            setError(false);
+            setErrorAddAteendee(false);
           }}
-          message={message}
-          duration={200}
-          color="danger"
-        /> */}
+          message={messageAddAttendee}
+          duration={400}
+          color="dark"
+        />
         <Advertisements />
       </IonPage>
     </>

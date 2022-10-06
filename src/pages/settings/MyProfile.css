@@ -1,23 +1,16 @@
 .myprofile {
-  margin: 10px auto;
-  /* margin-left: 8rem; */
   width: 100%;
-  margin-left: 2.5rem;
+  text-align: center;
 }
-.edit {
-  margin-left: 4rem;
-  width: 20%;
+.edit-icon {
+  float: right;
+  width: 20px;
+  height: 20px;
 }
 
-.con {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  align-items: center;
-  margin-left: 6rem;
-}
-.camera {
-  position: absolute;
-  left: 58%;
-  top: 20%;
+.camera-icon {
+  position: relative;
+  width: 20px;
+  top: -20px;
+  left: -20px;
 }

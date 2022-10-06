@@ -42,9 +42,12 @@ const CreatePersonalTask: React.FC = () => {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
+  const [taskDate, setTaskDate] = useState("");
+  const [taskTime, setTaskTime] = useState("");
 
   const submitCreateTask = () => {
     const request = new Service();
+    taskData.due_date = `${taskDate}T${taskTime}`;
     request.post(`tasks`, taskData)
       .then((result: any) => {
         if (result.err) {
@@ -60,7 +63,7 @@ const CreatePersonalTask: React.FC = () => {
     const data = {
       "name": taskData.name,
       "description": taskData.description,
-      "due_date": taskData.due_date,
+      "due_date": `${taskDate}T${taskTime}`,
       "category": taskData.category
     };
 
@@ -99,12 +102,17 @@ const CreatePersonalTask: React.FC = () => {
           setError(true);
         } else {
           setTaskData(result.data);
+          const td = result.data.due_date.split('T');
+          setTaskDate(td[0]);
+          setTaskTime(td[1]);
         }
       })
   };
 
   useEffect(() => {
     setTaskData(initialTaskData);
+    setTaskDate("");
+    setTaskTime("");
     if (id) {
       fetchTaskDetail(id);
     }
@@ -123,7 +131,7 @@ const CreatePersonalTask: React.FC = () => {
                 Task Name:
               </IonCol>
               <IonCol className="pd-0" size="12">
-                <IonInput className="input-border" value={taskData.name} name="name" onIonChange={onChangeHandler}></IonInput>
+                <IonInput required className="input-border" value={taskData.name} name="name" onIonChange={onChangeHandler}></IonInput>
               </IonCol>
             </IonRow>
             <IonRow>
@@ -131,15 +139,17 @@ const CreatePersonalTask: React.FC = () => {
                 Task Description:
               </IonCol>
               <IonCol className="pd-0" size="12">
-                <IonTextarea rows={3} className="input-border-2" value={taskData.description} name="description" onIonChange={onChangeHandler}></IonTextarea>
+                <IonTextarea required rows={3} className="input-border-2" value={taskData.description} name="description" onIonChange={onChangeHandler}></IonTextarea>
               </IonCol>
             </IonRow>
-            <IonRow>
-              <IonCol size="12" className="text-grey2 pb-0 ml-10">
-                Task Due Date:
+            <IonRow className='date-time'>
+              <IonCol>
+                <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Date:</IonLabel>
+                <IonInput required className='input-border col-50' value={taskDate} onIonChange={(e: any) => setTaskDate(e.detail.value)} type="date"></IonInput>
               </IonCol>
-              <IonCol className="pd-0" size="12">
-                <IonInput type="datetime-local" className="input-border" value={moment(taskData.due_date).format("YYYY-MM-DDTkk:mm")} name="due_date" onIonChange={onChangeHandler}></IonInput>
+              <IonCol>
+                <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Time:</IonLabel>
+                <IonInput required className='input-border col-50' value={taskTime} onIonChange={(e: any) => setTaskTime(e.detail.value)} type="time"></IonInput>
               </IonCol>
             </IonRow>
             <IonRow>
@@ -147,7 +157,7 @@ const CreatePersonalTask: React.FC = () => {
                 Category:
               </IonCol>
               <IonCol className="pd-0" size="12">
-                <IonInput className="input-border" value={taskData.category} name="category" onIonChange={onChangeHandler}></IonInput>
+                <IonInput required className="input-border" value={taskData.category} name="category" onIonChange={onChangeHandler}></IonInput>
               </IonCol>
             </IonRow>
             <IonRow className="save-btn-row">
