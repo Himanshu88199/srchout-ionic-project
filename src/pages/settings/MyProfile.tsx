@@ -92,7 +92,7 @@ const MyProfile: React.FC = () => {
   });
   return (
     <>
-      <IonPage className='pg-grey'>
+      <IonPage className='pg-grey' style={{ paddingBottom: '0px' }}>
         <Header />
         <IonContent>
           <IonRow>
@@ -126,15 +126,17 @@ const MyProfile: React.FC = () => {
                 )}
               </IonCol>
               <IonCol>
-                <PhoneInput country={"us"}
-                  disabled={!edit}
-                  onChange={phone => setProfile({ ...profile, phone: phone })}
-                  value={profile.phone}
-                  containerStyle={{ margin: '5px', marginLeft: '1.2rem', border: '1px solid #707070', borderRadius: '9px', width: '87vw', height: '45px' }}
-                  inputStyle={{ width: '86vw', height: '42px', border: 'none', borderRadius: '9px', color: edit ? '#000' : 'dimgrey' }}
-                  dropdownStyle={{ height: '200px' }}
-                  buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
-                />
+                <IonItem className='input-border'>
+                  <PhoneInput country={"us"}
+                    disabled={!edit}
+                    onChange={phone => setProfile({ ...profile, phone: phone })}
+                    value={profile.phone}
+                    containerStyle={{ marginLeft: '-7px', border: 'none', height: '42px', borderRadius: '9px' }}
+                    inputStyle={{ width: '86vw', height: '42px', border: 'none', borderRadius: '9px', color: edit ? '#000' : 'dimgrey' }}
+                    dropdownStyle={{ height: '200px' }}
+                    buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
+                  />
+                </IonItem>
               </IonCol>
               <IonCol>
                 <IonItem className='input-border'>
@@ -165,7 +167,6 @@ const MyProfile: React.FC = () => {
           duration={400}
           color="dark"
         />
-
       </IonPage>
     </>
   );

@@ -1,5 +1,5 @@
 import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+import { IonApp, IonRouterOutlet, setupIonicReact, useIonRouter } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./pages/Home";
 import Createuser from "./pages/user/Createuser";
@@ -25,30 +25,33 @@ import "./theme/variables.css";
 import Tabs from "./pages/Tabs";
 import './pages/Tabs.css';
 import { StatusBar } from "@capacitor/status-bar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { App as IonicApp } from '@capacitor/app';
+import { Preferences } from '@capacitor/preferences';
 
 setupIonicReact();
 
 const App: React.FC = () => {
+  const ionRouter = useIonRouter();
+
+  IonicApp.addListener('backButton', () => {
+    if (!ionRouter.canGoBack()) {
+      IonicApp.exitApp();
+    }
+  });
   function hide() {
-    StatusBar.setBackgroundColor({color:'#324755'})
+    StatusBar.setBackgroundColor({ color: '#324755' })
   }
   useEffect(() => {
     hide();
-  }, [])
+  }, []);
   return (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
           <Route exact path="/" component={() => <Home isFromHome={true} />} />
           <Route exact path="/createuser" component={Createuser} />
-          <Route path="/my" render={() => (
-            sessionStorage.getItem("logged_in") === "Y" ? (
-              <Tabs />
-            ) : (
-              <Redirect to="/" />
-            )
-          )} />
+          <Route path="/my" render={() => (<Tabs />)} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp >
