@@ -6,6 +6,13 @@ import { Advertisements } from '../Advertisements';
 import Header from '../Header';
 import './CreateEventTask.css';
 
+const initialFormErrors = {
+    name: false,
+    description: false,
+    date: false,
+    time: false,
+    assigned_to: false
+}
 const CreateEventTask: React.FC = () => {
     const history = useHistory();
     const { search } = useLocation();
@@ -22,33 +29,63 @@ const CreateEventTask: React.FC = () => {
     const [taskAssignTo, setTaskAssignTo] = useState("");
     const [taskDate, setTaskDate] = useState("");
     const [taskTime, setTaskTime] = useState("");
+    const [formErrors, setFormErrors] = useState(initialFormErrors);
 
-    const handleCreateTask = (e: any) => {
-        e.preventDefault();
-        var taskData = {
-            name: taskName,
-            description: taskDesc,
-            due_date: `${taskDate}T${taskTime}`,
-            task_type: "event",
-            event_id: id,
-            assigned_to: taskAssignTo,
-        };
+    const handleCreateTask = () => {
+        if (taskName === '' || taskDesc === '' || taskDate === '' || taskTime === '' || taskAssignTo === '') {
+            var obj = initialFormErrors;
+            if (taskName === '') {
+                obj.name = true;
+            } else {
+                obj.name = false;
+            }
+            if (taskDesc === '') {
+                obj.description = true;
+            } else {
+                obj.description = false;
+            }
+            if (taskDate === '') {
+                obj.date = true;
+            } else {
+                obj.date = false;
+            }
+            if (taskTime === '') {
+                obj.time = true;
+            } else {
+                obj.time = false;
+            }
+            if (taskAssignTo === '') {
+                obj.assigned_to = true;
+            } else {
+                obj.assigned_to = false;
+            }
+            setFormErrors(obj);
+        } else {
+            var taskData = {
+                name: taskName,
+                description: taskDesc,
+                due_date: `${taskDate}T${taskTime}`,
+                task_type: "event",
+                event_id: id,
+                assigned_to: taskAssignTo,
+            };
 
-        const request = new Service();
-        request.post(`tasks`, taskData)
-            .then((result: any) => {
-                if (result.err) {
-                    setMessage(result.err.message);
-                    setError(true);
-                } else {
-                    setTaskName("");
-                    setTaskDesc("");
-                    setTaskAssignTo("");
-                    setTaskDate("");
-                    setTaskTime("");
-                    setSuccess(true);
-                }
-            })
+            const request = new Service();
+            request.post(`tasks`, taskData)
+                .then((result: any) => {
+                    if (result.err) {
+                        setMessage(result.err.message);
+                        setError(true);
+                    } else {
+                        setTaskName("");
+                        setTaskDesc("");
+                        setTaskAssignTo("");
+                        setTaskDate("");
+                        setTaskTime("");
+                        setSuccess(true);
+                    }
+                })
+        }
     };
 
     const fetchAttendies = () => {
@@ -64,13 +101,19 @@ const CreateEventTask: React.FC = () => {
                 }
             })
     };
-
+    const onChangeError=(e:any)=>{
+        setFormErrors({
+            ...formErrors,
+            [e.target.name]:e.detail.value.length<=0
+        });
+    };
     const assignHandler = (e: any) => {
         setTaskAssignTo(e.detail.value);
     };
     useEffect(() => {
         fetchAttendies();
     }, [id]);
+    //console.log(formErrors);
     return (
         <>
             <IonPage className='pg-grey'>
@@ -81,61 +124,74 @@ const CreateEventTask: React.FC = () => {
                             CREATE EVENT TASK
                         </IonCol>
                     </IonRow>
-                    <form onSubmit={handleCreateTask}>
-                        <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
-                                Event Name:
-                            </IonCol>
-                            <IonCol className='pd-0' size='12'>
-                                <IonItem className='input-border pd'>{eventName}</IonItem>
-                            </IonCol>
-                        </IonRow>
-                        <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
-                                Task Name:
-                            </IonCol>
-                            <IonCol className='pd-0' size='12'>
-                                <IonInput required className='input-border pd' value={taskName} onIonChange={(e) => setTaskName(e.detail.value!)}></IonInput>
-                            </IonCol>
-                        </IonRow>
-                        <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
-                                Task Description:
-                            </IonCol>
-                            <IonCol className='pd-0' size='12'>
-                                <IonTextarea required rows={6} className='input-border-2' value={taskDesc} onIonChange={(e) => setTaskDesc(e.detail.value!)}></IonTextarea>
-                            </IonCol>
-                        </IonRow>
-                        <IonRow className='date-time'>
-                            <IonCol>
-                                <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Date:</IonLabel>
-                                <IonInput required className='input-border col-50' value={taskDate} onIonChange={(e: any) => setTaskDate(e.detail.value)} type="date"></IonInput>
-                            </IonCol>
-                            <IonCol>
-                                <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Time:</IonLabel>
-                                <IonInput required className='input-border col-50' value={taskTime} onIonChange={(e: any) => setTaskTime(e.detail.value)} type="time"></IonInput>
-                            </IonCol>
-                        </IonRow>
-                        <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
-                                Assign Task To:
-                            </IonCol>
-                            <IonCol className='pd-0' size='12'>
-                                <IonSelect className='input-border pd' placeholder="Select Assignees" value={taskAssignTo} onIonChange={(e: any) => assignHandler(e)}>
-                                    {attend.map((item: any, index: number) => {
-                                        return (
-                                            <IonSelectOption key={index} value={item.id}>{item.fname} {item.lname}</IonSelectOption>
-                                        )
-                                    })}
-                                </IonSelect>
-                            </IonCol>
-                        </IonRow>
-                        <IonRow>
-                            <IonCol className='m-auto mt-34' size='10.7'>
-                                <IonButton className='save-btn' size='default' expand="block" type="submit">Save</IonButton>
-                            </IonCol>
-                        </IonRow>
-                    </form>
+                    <IonRow>
+                        <IonCol size='12' className='text-grey2 pb-0 ml-10'>
+                            Event Name:
+                        </IonCol>
+                        <IonCol className='pd-0' size='12'>
+                            <IonItem className='input-border pd'>{eventName}</IonItem>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol size='12' className='text-grey2 pb-0 ml-10'>
+                            Task Name:
+                        </IonCol>
+                        <IonCol className='pd-0' size='12'>
+                            <IonInput required className='input-border pd' value={taskName} onIonChange={(e) => {onChangeError(e);setTaskName(e.detail.value!)}} name="name"></IonInput>
+                            {
+                                formErrors.name && <small style={{ color: 'red' }} className="ml-10">Task Name is required</small>
+                            }
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol size='12' className='text-grey2 pb-0 ml-10'>
+                            Task Description:
+                        </IonCol>
+                        <IonCol className='pd-0' size='12'>
+                            <IonTextarea required rows={6} className='input-border-2' value={taskDesc} onIonChange={(e) => {onChangeError(e);setTaskDesc(e.detail.value!)}} name="description"></IonTextarea>
+                            {
+                                formErrors.description && <small style={{ color: 'red' }} className="ml-10">Task Description is required</small>
+                            }
+                        </IonCol>
+                    </IonRow>
+                    <IonRow className='date-time'>
+                        <IonCol>
+                            <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Date:</IonLabel>
+                            <IonInput required className='input-border col-50' value={taskDate} onIonChange={(e: any) => {onChangeError(e);setTaskDate(e.detail.value)}} type="date" name='date'></IonInput>
+                            {
+                                formErrors.date && <small style={{ color: 'red' }} className="ml-10">Task Date is required</small>
+                            }
+                        </IonCol>
+                        <IonCol>
+                            <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Time:</IonLabel>
+                            <IonInput required className='input-border col-50' value={taskTime} onIonChange={(e: any) => {onChangeError(e);setTaskTime(e.detail.value)}} type="time" name='time'></IonInput>
+                            {
+                                formErrors.time && <small style={{ color: 'red' }} className="ml-10">Task Time is required</small>
+                            }
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol size='12' className='text-grey2 pb-0 ml-10'>
+                            Assign Task To:
+                        </IonCol>
+                        <IonCol className='pd-0' size='12'>
+                            <IonSelect className='input-border pd' placeholder="Select Assignees" value={taskAssignTo} onIonChange={(e: any) => {onChangeError(e);assignHandler(e)}} name="assigned_to">
+                                {attend.map((item: any, index: number) => {
+                                    return (
+                                        <IonSelectOption key={index} value={item.id}>{item.fname} {item.lname}</IonSelectOption>
+                                    )
+                                })}
+                            </IonSelect>
+                            {
+                                formErrors.assigned_to && <small style={{ color: 'red' }} className="ml-10">Task Assigned to is required</small>
+                            }
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol className='m-auto mt-34' size='10.7'>
+                            <IonButton className='save-btn' size='default' expand="block" type="button" onClick={() => handleCreateTask()}>Save</IonButton>
+                        </IonCol>
+                    </IonRow>
                     <IonToast
                         isOpen={success}
                         onDidDismiss={() => {

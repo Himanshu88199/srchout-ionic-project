@@ -1,3 +1,4 @@
+import { Preferences } from '@capacitor/preferences';
 import { IonButton, IonCheckbox, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonRow, IonTitle, IonToast, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
@@ -8,9 +9,8 @@ const Setting: React.FC = () => {
     const history = useHistory();
     const [success, setSuccess] = useState(false);
 
-    const handleLogout = () => {
-        sessionStorage.removeItem('token');
-        sessionStorage.removeItem('logged_in');
+    const handleLogout = async () => {
+        await Preferences.remove({ key: 'token' });
         history.push("/");
     }
     return (

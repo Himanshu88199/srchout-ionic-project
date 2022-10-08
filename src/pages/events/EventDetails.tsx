@@ -211,7 +211,7 @@ const EventDetails: React.FC = () => {
                 </IonRow>
               </IonCol>
             </IonRow>
-            <IonCol className="pd-0 events-icons" size="12" style={{ float: "right", marginTop: '10px' }}>
+            <IonCol className="pd-0 events-icons" size="12" style={{ float: "right", marginTop: '20px' }}>
               <img
                 className="user-img user"
                 src="../../../assets/users.svg"
@@ -228,9 +228,9 @@ const EventDetails: React.FC = () => {
           <IonModal
             isOpen={open}
             onDidDismiss={closeModal}
-            breakpoints={[0, 0.5, 1]}
-            initialBreakpoint={1}
-            backdropBreakpoint={0.2}
+            // breakpoints={[0, 0.5, 1]}
+            // initialBreakpoint={1}
+            // backdropBreakpoint={0.2}
           >
             <IonHeader className="modal-header">
               <IonToolbar color="primary">

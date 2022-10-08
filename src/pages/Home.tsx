@@ -1,17 +1,15 @@
+import { Preferences } from "@capacitor/preferences";
 import {
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonImg,
   IonPage,
   IonRow,
-  IonTitle,
-  IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
-import { useState } from "react";
-import { Redirect } from "react-router";
+import { useEffect, useState } from "react";
+import { Redirect, useHistory } from "react-router";
 import Footer from "../components/Footer";
 import "./Home.css";
 import Login from "./user/Login";
@@ -21,21 +19,25 @@ interface ScanNewProps {
 }
 
 const Home: React.FC<ScanNewProps> = ({ isFromHome }) => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState<any>(null);
+  const history = useHistory();
+  const fun = async () => {
+    const creds = await Preferences.get({ key: 'token' });
+    setToken(creds.value);
+  };
 
   useIonViewWillEnter(() => {
-    var status = sessionStorage.getItem('logged_in');
-    if (status === "Y") {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
+    fun();
+    if (token)
+    history.replace('/my/home')
+  else
+    history.replace('/')
   });
   return (
     <IonPage>
-      {!isLoggedIn ? (
+      {token === null ? (
         <IonContent>
-          <IonGrid style={{ padding: "0px", paddingBottom:'60px' }}>
+          <IonGrid style={{ padding: "0px", paddingBottom: '60px' }}>
             <IonRow className="login-background">
               <IonCol>
                 <div className="logo-outer">

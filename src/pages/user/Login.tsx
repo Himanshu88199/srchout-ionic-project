@@ -13,6 +13,7 @@ import { useHistory } from "react-router";
 import Service from "../../services/http";
 import "./login.css";
 import LoginIcons from "./loginIcons";
+import { Preferences } from '@capacitor/preferences';
 
 const Login: React.FC = () => {
   const [passwordType, setPasswordType] = useState<any>("password");
@@ -30,20 +31,18 @@ const Login: React.FC = () => {
     setShowLoading(true);
     const request = new Service();
     request.post(`users/login`, loginData)
-      .then((result: any) => {
+      .then(async (result: any) => {
         if (result.err) {
           setShowLoading(false);
           setMessage("Invalid user credentials!");
           setError(true);
         } else {
           setShowLoading(false);
-          sessionStorage.setItem("token", result.data.jwt_token);
-          sessionStorage.setItem("logged_in", "Y");
+          await Preferences.set({ key: 'token', value: result.data.jwt_token });
           history.replace("/my/home");
         }
       });
   };
-
   return (
     <>
       <IonRow>

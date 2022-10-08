@@ -187,9 +187,9 @@ const MyEvent: React.FC = () => {
           <IonModal
             isOpen={open}
             onDidDismiss={closeModal}
-            breakpoints={[0, 0.5, 1]}
-            initialBreakpoint={1}
-            backdropBreakpoint={0.2}
+            //breakpoints={[0, 0.5, 1]}
+            //initialBreakpoint={1}
+            //backdropBreakpoint={0.2}
           >
             <IonHeader>
               <IonToolbar color="primary" className="modal-header">

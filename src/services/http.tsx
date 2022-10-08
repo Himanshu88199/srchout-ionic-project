@@ -1,25 +1,31 @@
+import { Preferences } from "@capacitor/preferences";
+
 function joinUrl(baseUrl: string, url: string) {
     return `${baseUrl}/${url}`;
 }
 interface LooseObject {
     [key: string]: any
 };
-
+async function getToken() {
+    const token = await Preferences.get({ key: 'token' });
+    return token.value;
+}
 class Service {
     request(url: string, method = "POST", data = null) {
         const baseUrl = 'https://taskerr-api.herokuapp.com/api/v1';
         url = joinUrl(baseUrl, url);
-        const token = sessionStorage.getItem("token");
-
-        let options: LooseObject = {
-            method: method,
-            headers: {
-                "api-token": token,
-                "Content-Type": "application/json",
-            }
-        };
-        if (data) options.body = JSON.stringify(data);
-        return fetch(url, options);
+        return Preferences.get({ key: 'token' })
+            .then((token) => {
+                let options: LooseObject = {
+                    method: method,
+                    headers: {
+                        "api-token": token.value,
+                        "Content-Type": "application/json",
+                    }
+                };
+                if (data) options.body = JSON.stringify(data);
+                return fetch(url, options);
+            });
     }
 
     get(url: string) {

@@ -9,9 +9,9 @@
   position: relative;
   margin-left: auto !important;
   margin-right: auto !important;
-  margin-top: 35px;
-  height: 65px;
-  width: 65px;
+  margin-top: 65px;
+  height: 81px;
+  width: 81px;
   border-radius: 50%;
   background: #eeeeee;
 }
@@ -24,19 +24,19 @@
 }
 
 .empty {
-  padding: 20px 0px;
-  margin-top: 15px;
+  padding: 25px 0px;
+  margin-top: 25px;
   border-top-left-radius: 60px;
   border-top-right-radius: 60px;
   background: #ffffff;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  left: 13px;
+  width: 55px;
+  height: 55px;
+  position: relative;
   top: 12px;
+  margin: auto !important;
 }
 
 .sign-with {
