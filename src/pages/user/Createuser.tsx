@@ -29,6 +29,8 @@ import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import Service from "../../services/http";
 import PhoneInput from "react-phone-input-2";
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
 
 const Createuser: React.FC = () => {
   const service = new Service();
@@ -206,20 +208,20 @@ const Createuser: React.FC = () => {
 
                   </IonCol>
                 </IonItem> */}
-                <IonItem className="input-border">
-                  <PhoneInput
-                    country={"us"}
-                    onChange={phone => setFormdata({ ...formData, phone: phone })}
-                    containerStyle={{ marginLeft: '-7px', border: 'none', height: '42px', borderRadius: '9px' }}
-                    inputStyle={{ height: '42px', border: 'none', borderRadius: '9px' }}
-                    dropdownStyle={{ height: '200px' }}
-                    buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
-                    value={formData.phone}
-                    inputProps={{ name: 'phone', required: true }}
-                    placeholder="Phone Number"
-                  />
+                {/* <IonItem className="input-border"> */}
+                <PhoneInput
+                  country={"us"}
+                  onChange={phone => setFormdata({ ...formData, phone: phone })}
+                  containerStyle={{ marginLeft: '18px', border: 'none', height: '42px', borderRadius: '9px', }}
+                  inputStyle={{ height: '45px', width: '90%', border: '1px solid #707070', borderRadius: '9px' }}
+                  dropdownStyle={{ height: '500px' }}
+                  buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
+                  value={formData.phone}
+                  inputProps={{ name: 'phone', required: true }}
+                  placeholder="Phone Number"
+                />
 
-                </IonItem>
+                {/* </IonItem> */}
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
@@ -246,13 +248,22 @@ const Createuser: React.FC = () => {
                     name="password"
                     placeholder="Password"
                   ></IonInput>
-                  <IonIcon onClick={() => {
+                  {/* <IonIcon onClick={() => {
                     if (passwordType === "password") {
                       setPasswordType("text");
                     } else {
                       setPasswordType("password");
                     }
-                  }} slot="end" src="../assets/eye.svg"></IonIcon>
+                  }} slot="end" src="../assets/eye.svg"></IonIcon> */}
+
+                  {
+                    passwordType !== "password" ? (
+                      <AiOutlineEye className="eye" onClick={() => setPasswordType("password")} />
+                    ) : (
+                      <AiOutlineEyeInvisible className="eye" onClick={() => setPasswordType("text")} />
+                    )
+                  }
+
                 </IonItem>
                 {errors.password && (
                   <span className="validation-errors">

@@ -14,6 +14,7 @@ import Service from "../../services/http";
 import "./login.css";
 import LoginIcons from "./loginIcons";
 import { Preferences } from '@capacitor/preferences';
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login: React.FC = () => {
   const [passwordType, setPasswordType] = useState<any>("password");
@@ -100,13 +101,20 @@ const Login: React.FC = () => {
                 type={passwordType}
                 required
               ></IonInput>
-              <IonIcon slot="end" src="../assets/eye.svg" onClick={() => {
+              {/* <IonIcon slot="end" src="../assets/eye.svg" onClick={() => {
                 if (passwordType === "password") {
                   setPasswordType("text");
                 } else {
                   setPasswordType("password");
                 }
-              }}></IonIcon>
+              }}></IonIcon> */}
+              {
+                passwordType !== "password" ? (
+                  <AiOutlineEye className="eye" onClick={() => setPasswordType("password")} />
+                ) : (
+                  <AiOutlineEyeInvisible className="eye" onClick={() => setPasswordType("text")} />
+                )
+              }
             </IonItem>
           </IonCol>
         </IonRow>

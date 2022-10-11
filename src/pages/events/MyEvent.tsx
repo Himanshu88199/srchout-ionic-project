@@ -187,9 +187,9 @@ const MyEvent: React.FC = () => {
           <IonModal
             isOpen={open}
             onDidDismiss={closeModal}
-            //breakpoints={[0, 0.5, 1]}
-            //initialBreakpoint={1}
-            //backdropBreakpoint={0.2}
+          //breakpoints={[0, 0.5, 1]}
+          //initialBreakpoint={1}
+          //backdropBreakpoint={0.2}
           >
             <IonHeader>
               <IonToolbar color="primary" className="modal-header">
@@ -236,13 +236,13 @@ const MyEvent: React.FC = () => {
                   <IonCol size="12" className="text-grey2 pb-0">
                     Phone
                   </IonCol>
-                  <IonCol className="pd-0" size="12">
+                  <IonCol >
                     <PhoneInput
                       country={"us"}
                       onChange={phone => setAttendeeData({ ...attendeeData, phone: phone })}
                       containerStyle={{ border: '1px solid #707070', borderRadius: '9px', width: '87vw', height: '45px' }}
                       inputStyle={{ width: '86vw', height: '42px', border: 'none', borderRadius: '9px' }}
-                      dropdownStyle={{ height: '200px' }}
+                      dropdownStyle={{ height: '500px', backgroundColor: '#ffffff' }}
                       buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
                       value={attendeeData.phone}
                       inputProps={{ name: 'phone', required: true }}
