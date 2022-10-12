@@ -148,5 +148,8 @@
 
 .modal-header .float-right-button {
   float: right;
+}
 
+.modal-header {
+  --ion-color-primary: #324755;
 }
