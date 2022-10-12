@@ -6,10 +6,20 @@
   padding-bottom: 0px !important;
 }
 
-
-
 .save-btn-row {
   padding-bottom: 100px;
 }
 
+.time-input {
+  margin-left: -0.2rem;
+  width: 38vw;
+}
 
+.time-label {
+  margin-left: -0.2rem;
+}
+
+.date-input {
+  width: 47vw;
+  margin-left: 1.2rem;
+}

@@ -153,3 +153,7 @@
 .modal-header {
   --ion-color-primary: #324755;
 }
+
+.ml-5 {
+  padding-left: 10px;
+}

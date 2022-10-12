@@ -144,43 +144,43 @@ const EventDetails: React.FC = () => {
           <IonRow className="bg-light-grey">
             <IonRow className="text-grey2  mt-11">
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Event :</IonLabel>
+                <IonLabel className="dark-text"> Event : </IonLabel>
                 <IonText>{eventData.name}</IonText>
               </IonCol>
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Location :</IonLabel>
+                <IonLabel className="dark-text"> Location : </IonLabel>
                 <IonText>{eventData.location}</IonText>
               </IonCol>
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Date :</IonLabel>
+                <IonLabel className="dark-text"> Date : </IonLabel>
                 <IonText>{moment(eventData.event_at).format('ll')}</IonText>
               </IonCol>
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Time :</IonLabel>
+                <IonLabel className="dark-text"> Time : </IonLabel>
                 <IonText>{moment(eventData.event_at).format("hh:mm a")}</IonText>
               </IonCol>
             </IonRow>
             <IonRow className="text-grey2 mt-9">
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Total Invitees :</IonLabel>
+                <IonLabel className="dark-text"> Total Invitees : </IonLabel>
                 <IonText>{attendees.length}</IonText>
               </IonCol>
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Accepted :</IonLabel>
+                <IonLabel className="dark-text"> Accepted : </IonLabel>
                 <IonText>{attendees.filter((attend: any) => attend.rvsp === "yes").length}</IonText>
               </IonCol>
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Declined :</IonLabel>
+                <IonLabel className="dark-text"> Declined : </IonLabel>
                 <IonText>{attendees.filter((attend: any) => attend.rvsp === "no").length}</IonText>
               </IonCol>
               <IonCol className="pd-0 " size="12">
-                <IonLabel className="dark-text"> Undecided :</IonLabel>
+                <IonLabel className="dark-text"> Undecided : </IonLabel>
                 <IonText>{attendees.filter((attend: any) => attend.rvsp == null).length}</IonText>
               </IonCol>
             </IonRow>
             <IonRow className="text-grey2 mt-8">
               <IonCol size="12">
-                <IonLabel className="dark-text"> Invitees :</IonLabel>
+                <IonLabel className="dark-text"> Invitees : </IonLabel>
               </IonCol>
               <IonCol>
                 <IonRow>
@@ -194,7 +194,7 @@ const EventDetails: React.FC = () => {
                 </IonRow>
               </IonCol>
             </IonRow>
-            <IonRow className="text-grey2 mt-16" style={{width:'100%'}}>
+            <IonRow className="text-grey2 mt-16" style={{ width: '100%' }}>
               <IonCol size="12">
                 <IonLabel className="dark-text"> Tasks :</IonLabel>
               </IonCol>
@@ -228,13 +228,13 @@ const EventDetails: React.FC = () => {
           <IonModal
             isOpen={open}
             onDidDismiss={closeModal}
-            // breakpoints={[0, 0.5, 1]}
-            // initialBreakpoint={1}
-            // backdropBreakpoint={0.2}
+          // breakpoints={[0, 0.5, 1]}
+          // initialBreakpoint={1}
+          // backdropBreakpoint={0.2}
           >
             <IonHeader className="modal-header">
               <IonToolbar color="primary">
-                <IonTitle className="modal-title">Add Attendees</IonTitle>
+                {/* <IonTitle className="modal-title">Add Attendees</IonTitle> */}
                 <IonButton
                   size="small"
                   fill="clear"
@@ -250,9 +250,14 @@ const EventDetails: React.FC = () => {
               </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
+              <IonRow>
+                <IonCol className='center text-grey'>
+                  ADD ATTENDEES
+                </IonCol>
+              </IonRow>
               <form onSubmit={submitFormAttendee}>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-5">
                     First Name
                   </IonCol>
                   <IonCol className="pd-0" size="12">
@@ -263,7 +268,7 @@ const EventDetails: React.FC = () => {
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-5">
                     Last Name
                   </IonCol>
                   <IonCol className="pd-0" size="12">
@@ -274,7 +279,7 @@ const EventDetails: React.FC = () => {
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-5">
                     Phone
                   </IonCol>
                   <IonCol className="pd-0" size="12">
@@ -293,7 +298,7 @@ const EventDetails: React.FC = () => {
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-5">
                     Email
                   </IonCol>
                   <IonCol className="pd-0" size="12">
