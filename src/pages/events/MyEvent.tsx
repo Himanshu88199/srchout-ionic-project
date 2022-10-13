@@ -193,7 +193,7 @@ const MyEvent: React.FC = () => {
           >
             <IonHeader>
               <IonToolbar color="primary" className="modal-header">
-                <IonTitle className="modal-title">Add Attendees</IonTitle>
+                {/* <IonTitle className="modal-title">Add Attendees</IonTitle> */}
                 <IonButton
                   size="small"
                   fill="clear"
@@ -209,6 +209,11 @@ const MyEvent: React.FC = () => {
               </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
+              <IonRow>
+                <IonCol className='center text-grey'>
+                  ADD ATTENDEES
+                </IonCol>
+              </IonRow>
               <form onSubmit={submitFormAttendee}>
                 <IonRow>
                   <IonCol size="12" className="text-grey2 pb-0">

@@ -145,11 +145,11 @@ const CreatePersonalTask: React.FC = () => {
             <IonRow className='date-time'>
               <IonCol>
                 <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Date:</IonLabel>
-                <IonInput required className='input-border col-50' value={taskDate} onIonChange={(e: any) => setTaskDate(e.detail.value)} type="date"></IonInput>
+                <IonInput required className='input-border col-50 date-input' value={taskDate} onIonChange={(e: any) => setTaskDate(e.detail.value)} type="date"></IonInput>
               </IonCol>
               <IonCol>
-                <IonLabel className='text-grey2 pb-0 ml-10'>Task Due Time:</IonLabel>
-                <IonInput required className='input-border col-50' value={taskTime} onIonChange={(e: any) => setTaskTime(e.detail.value)} type="time"></IonInput>
+                <IonLabel className='text-grey2 pb-0 time-label'>Task Due Time:</IonLabel>
+                <IonInput required className='input-border col-50 time-input' value={taskTime} onIonChange={(e: any) => setTaskTime(e.detail.value)} type="time"></IonInput>
               </IonCol>
             </IonRow>
             <IonRow>

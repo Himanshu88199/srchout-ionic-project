@@ -137,12 +137,12 @@ const CreateEvent: React.FC = () => {
                         </IonRow>
                         <IonRow className='date-time'>
                             <IonCol>
-                                <IonLabel className='text-grey2 pb-0 ml-12'>Event Date:</IonLabel>
-                                <IonInput required className='input-border col-50' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)} type="date"></IonInput>
+                                <IonLabel className='text-grey2 pb-0 ml-12 '>Event Date:</IonLabel>
+                                <IonInput required className='input-border col-50 date-input' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)} type="date"></IonInput>
                             </IonCol>
                             <IonCol>
-                                <IonLabel className='text-grey2 pb-0 ml-12'>Event Time:</IonLabel>
-                                <IonInput required className='input-border col-50' value={eventTime} onIonChange={(e: any) => setEventTime(e.detail.value)} type="time"></IonInput>
+                                <IonLabel className='text-grey2 pb-0 time-label'>Event Time:</IonLabel>
+                                <IonInput required className='input-border col-50 time-input' value={eventTime} onIonChange={(e: any) => setEventTime(e.detail.value)} type="time"></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
