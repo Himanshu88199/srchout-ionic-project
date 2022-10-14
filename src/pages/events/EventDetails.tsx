@@ -345,8 +345,9 @@ const EventDetails: React.FC = () => {
                   <IonCol size="12" className="text-grey2 pb-0 ml-5">
                     Phone
                   </IonCol>
-                  <IonCol className="pd-0" size="12">
+                  <IonCol className="pd-0 pd-p" size="12">
                     <PhoneInput
+                      countryCodeEditable={false}
                       country={"us"}
                       onChange={(phone) =>
                         setAttendeeData({ ...attendeeData, phone: phone })
