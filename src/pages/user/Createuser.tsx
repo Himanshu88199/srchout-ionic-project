@@ -29,8 +29,8 @@ import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
 import Service from "../../services/http";
 import PhoneInput from "react-phone-input-2";
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-
+//import PhoneInput from "react-phone-number-input";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Createuser: React.FC = () => {
   const service = new Service();
@@ -42,7 +42,7 @@ const Createuser: React.FC = () => {
     lname: false,
     countrycode: false,
     email: false,
-    password: false
+    password: false,
   };
 
   const [errors, setErrors] = useState(initialErrors);
@@ -57,24 +57,24 @@ const Createuser: React.FC = () => {
   const [showLoading, setShowLoading] = useState(false);
 
   const initialState = {
-    phone: '',
-    fname: '',
-    lname: '',
-    email: '',
-    password: '',
-    countrycode: ''
+    phone: "",
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+    countrycode: "",
   };
   const [formData, setFormdata] = useState<any>(initialState);
   const onChangeHandler = (e: any) => {
     setFormdata({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
     if (e.target.name === "fname" || e.target.name === "lname") {
       setErrors({
         ...errors,
-        [e.target.name]: !(/^[A-Za-z ]+$/.test(e.target.value))
-      })
+        [e.target.name]: !/^[A-Za-z ]+$/.test(e.target.value),
+      });
     }
   };
   const handleCreate = (e: any) => {
@@ -83,7 +83,8 @@ const Createuser: React.FC = () => {
     if (!errors.fname && !errors.lname) {
       setShowLoading(true);
       const request = new Service();
-      request.post(`users`, formData)
+      request
+        .post(`users`, formData)
         .then((result: any) => {
           if (result.err) {
             //console.log(result.err.data);
@@ -93,7 +94,8 @@ const Createuser: React.FC = () => {
             setFormdata(initialState);
             setSuccess(true);
           }
-        }).finally(() => {
+        })
+        .finally(() => {
           setShowLoading(false);
         });
     }
@@ -113,7 +115,7 @@ const Createuser: React.FC = () => {
       //console.log(res.data)
       setCodes(res.data);
     });
-  })
+  });
   return (
     <>
       <IonPage>
@@ -148,7 +150,6 @@ const Createuser: React.FC = () => {
                 onDidDismiss={() => setShowLoading(false)}
                 message={"Please wait..."}
               />
-
             </IonCol>
           </IonRow>
           <IonRow>
@@ -211,13 +212,31 @@ const Createuser: React.FC = () => {
                 {/* <IonItem className="input-border"> */}
                 <PhoneInput
                   country={"us"}
-                  onChange={phone => setFormdata({ ...formData, phone: phone })}
-                  containerStyle={{ marginLeft: '18px', border: 'none', height: '42px', borderRadius: '9px', }}
-                  inputStyle={{ height: '45px', width: '90%', border: '1px solid #707070', borderRadius: '9px' }}
-                  dropdownStyle={{ height: '500px' }}
-                  buttonStyle={{ height: '30px', margin: '7px', borderRadius: '9px' }}
+                  onChange={(phone) =>
+                    setFormdata({ ...formData, phone: phone })
+                  }
+                  countryCodeEditable={false}
+                  containerStyle={{
+                    marginLeft: "18px",
+                    border: "none",
+                    height: "42px",
+                    borderRadius: "9px",
+                  }}
+                  inputStyle={{
+                    height: "45px",
+                    width: "90%",
+                    border: "1px solid #707070",
+                    borderRadius: "9px",
+                    marginLeft: "1px",
+                  }}
+                  dropdownStyle={{ height: "500px" }}
+                  buttonStyle={{
+                    height: "30px",
+                    margin: "7px",
+                    borderRadius: "9px",
+                  }}
                   value={formData.phone}
-                  inputProps={{ name: 'phone', required: true }}
+                  inputProps={{ name: "phone", required: true }}
                   placeholder="Phone Number"
                 />
 
@@ -256,19 +275,20 @@ const Createuser: React.FC = () => {
                     }
                   }} slot="end" src="../assets/eye.svg"></IonIcon> */}
 
-                  {
-                    passwordType !== "password" ? (
-                      <AiOutlineEye className="eye" onClick={() => setPasswordType("password")} />
-                    ) : (
-                      <AiOutlineEyeInvisible className="eye" onClick={() => setPasswordType("text")} />
-                    )
-                  }
-
+                  {passwordType !== "password" ? (
+                    <AiOutlineEye
+                      className="eye"
+                      onClick={() => setPasswordType("password")}
+                    />
+                  ) : (
+                    <AiOutlineEyeInvisible
+                      className="eye"
+                      onClick={() => setPasswordType("text")}
+                    />
+                  )}
                 </IonItem>
                 {errors.password && (
-                  <span className="validation-errors">
-                    Password Invalid
-                  </span>
+                  <span className="validation-errors">Password Invalid</span>
                 )}
               </IonCol>
               <IonCol className="m-auto mt-56" size="11">
@@ -284,7 +304,12 @@ const Createuser: React.FC = () => {
               </IonCol>
               <IonCol size="11" className="remember-forgot">
                 <div className="remember">
-                  <input type="checkbox" checked={agree} name="remember" onChange={(e) => checkboxHandler()} />
+                  <input
+                    type="checkbox"
+                    checked={agree}
+                    name="remember"
+                    onChange={(e) => checkboxHandler()}
+                  />
                   <label htmlFor="remember">
                     I agree with Terms and Conditions
                   </label>
@@ -298,7 +323,10 @@ const Createuser: React.FC = () => {
               <LoginIcons />
             </IonRow>
           </form>
-          <IonRow className="login-box" style={{ padding: "0px", paddingBottom: '90px' }}>
+          <IonRow
+            className="login-box"
+            style={{ padding: "0px", paddingBottom: "90px" }}
+          >
             <IonCol size="12" className="center">
               <span className="light-text">Already have an account?</span>
               <a href="/">

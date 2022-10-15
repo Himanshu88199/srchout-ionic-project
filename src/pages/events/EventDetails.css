@@ -14,7 +14,7 @@
   height: 18px;
   /* margin-left: 34px; */
 }
-.icon-size-2 .user{
+.icon-size-2 .user {
   width: 30px;
 }
 .p-0 {
@@ -54,4 +54,8 @@
 
 .mt-16 {
   margin-top: 10px;
+}
+
+.pd-p {
+  margin-left: 2px;
 }
