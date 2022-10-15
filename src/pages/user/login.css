@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
+.sign-in {
+  font-size: 16px;
+  color: #707070;
+  text-align: center;
+  font-weight: 700;
+  /* height: 36px; */
+  padding-top: 0%;
+  font-family: "Montserrat", sans-serif;
+  /* font-family: "Courier New", Courier, monospace; */
+}
+
+.text-center {
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.input-border {
+  border: 1px solid #707070;
+  border-radius: 9px;
+  width: 87vw;
+  height: 48px;
+  font-size: 14px;
+  margin: auto;
+  margin-top: 3px;
+  box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.13);
+}
+
+.input-border input {
+  font-family: "Montserrat", sans-serif;
+}
+.input-text {
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.item-native {
+  padding-left: 0;
+}
+
+.sign-with {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #808080;
+}
+
+.remember-forgot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  color: #808080;
+  width: 88vw;
+  margin: auto;
+  font-size: 14px;
+}
+
+.remember {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.mt-51 {
+  margin-top: 51px;
+}
+
+.remember-forgot a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #808080;
+  font-family: "Montserrat", sans-serif;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.mt-40 {
+  margin-top: 30px;
+}
+
+.validation-errors {
+  color: red;
+  margin-left: 1.9rem;
+  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
+}
+
+.center span {
+  margin-left: 0;
+}
+
+.signin-btn {
+  text-transform: capitalize;
+  height: 45px;
+  --border-radius: 10px;
+}

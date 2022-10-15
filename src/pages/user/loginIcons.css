@@ -1,0 +1,22 @@
+.round-logo-buttons {
+  padding: 0 !important;
+  border-radius: 50%;
+  height: 50px;
+  margin: 0px 20px;
+  width: 50px;
+  --border-color: rgba(112, 112, 112, 1);
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.logo-size {
+  height: 35px !important;
+  width: 35px !important;
+}
+
+.round-logo-buttons .button-native {
+  padding-inline-start: 0 !important;
+  padding-inline-end: 0 !important;
+}

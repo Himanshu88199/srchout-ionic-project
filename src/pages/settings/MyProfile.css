@@ -1,0 +1,18 @@
+.myprofile {
+  width: 100%;
+  text-align: center;
+}
+
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 25px;
+}
+
+.camera-icon {
+  position: absolute;
+  width: 20px;
+  bottom: 20px;
+  left: 60%;
+}

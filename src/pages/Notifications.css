@@ -1,0 +1,14 @@
+.notification-text {
+  font-size: 13px;
+  font-weight: 400px;
+  color: rgba(50, 71, 85, 1);
+}
+
+.line-height {
+  line-height: 25px;
+}
+
+.notification-text span {
+  color: rgba(50, 71, 85, 1);
+  margin: 0;
+}

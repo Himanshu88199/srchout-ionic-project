@@ -1,0 +1,52 @@
+.text-right {
+  text-align: right;
+}
+
+.pr-2 {
+  padding-right: 27px;
+}
+
+.pl-2 {
+  padding-left: 27px;
+}
+
+.setting-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 27.07px;
+  color: rgba(128, 128, 128, 1);
+}
+
+.text-dec {
+  color: rgba(128, 128, 128, 1);
+  text-decoration: none;
+}
+
+.mt-50 {
+  margin-top: 15px;
+}
+
+.ad {
+  width: 100%;
+  margin-top: 2rem;
+  border: 1px solid #707070;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  color: #707070;
+}
+
+.logout {
+  margin-left: 2.5rem;
+  margin-top: 2rem;
+  --border-radius: 10px;
+  --background: #4ca1db;
+  color: #fff;
+  width: 80%;
+  height: 40px;
+}
