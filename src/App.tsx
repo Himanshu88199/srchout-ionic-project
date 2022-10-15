@@ -47,6 +47,7 @@ const App: React.FC = () => {
   }, []);
   return (
     <IonApp>
+      
       <IonReactRouter>
         <IonRouterOutlet>
           <Route exact path="/" component={() => <Home isFromHome={true} />} />
