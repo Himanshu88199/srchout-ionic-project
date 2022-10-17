@@ -49,8 +49,9 @@ const CreateEventTask: React.FC = () => {
       taskName === "" ||
       taskDesc === "" ||
       taskDate === "" ||
-      taskTime === "" ||
-      taskAssignTo === ""
+      taskTime === ""
+      // ||
+      // taskAssignTo === ""
     ) {
       var obj = initialFormErrors;
       if (taskName === "") {
@@ -74,7 +75,7 @@ const CreateEventTask: React.FC = () => {
         obj.time = false;
       }
       if (taskAssignTo === "") {
-        obj.assigned_to = true;
+        obj.assigned_to = false;
       } else {
         obj.assigned_to = false;
       }
@@ -86,7 +87,7 @@ const CreateEventTask: React.FC = () => {
         due_date: `${taskDate}T${taskTime}`,
         task_type: "event",
         event_id: id,
-        assigned_to: taskAssignTo,
+        //assigned_to: taskAssignTo,
       };
 
       const request = new Service();
@@ -258,11 +259,11 @@ const CreateEventTask: React.FC = () => {
                   );
                 })}
               </IonSelect>
-              {formErrors.assigned_to && (
+              {/* {formErrors.assigned_to && (
                 <small style={{ color: "red" }} className="ml-10">
                   Task Assigned to is required
                 </small>
-              )}
+              )} */}
             </IonCol>
           </IonRow>
           <IonRow>

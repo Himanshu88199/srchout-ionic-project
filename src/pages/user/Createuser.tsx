@@ -21,6 +21,7 @@ import {
   IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
+
 import Footer from "../../components/Footer";
 import React, { useState } from "react";
 import "./Createuser.css";
@@ -211,6 +212,7 @@ const Createuser: React.FC = () => {
                 </IonItem> */}
                 {/* <IonItem className="input-border"> */}
                 <PhoneInput
+                  placeholder="phone number"
                   country={"us"}
                   onChange={(phone) =>
                     setFormdata({ ...formData, phone: phone })
@@ -237,7 +239,6 @@ const Createuser: React.FC = () => {
                   }}
                   value={formData.phone}
                   inputProps={{ name: "phone", required: true }}
-                  placeholder="Phone Number"
                 />
 
                 {/* </IonItem> */}
