@@ -181,10 +181,9 @@ const MyProfile: React.FC = () => {
                   inputStyle={{
                     width: "86.5vw",
                     height: "45px",
-                    //border: "1px solid #707070",
+                    border: "1px solid #707070",
                     borderRadius: "9px",
                     color: edit ? "#000" : "dimgrey",
-                    border: "2px solid red",
                   }}
                   dropdownStyle={{ height: "500px" }}
                   buttonStyle={{
