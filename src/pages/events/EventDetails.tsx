@@ -307,7 +307,7 @@ const EventDetails: React.FC = () => {
               <form onSubmit={submitFormAttendee}>
                 <IonRow>
                   <IonCol size="12" className="text-grey2 pb-0 ml-5">
-                    First Name
+                    First Name:
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
@@ -325,7 +325,7 @@ const EventDetails: React.FC = () => {
                 </IonRow>
                 <IonRow>
                   <IonCol size="12" className="text-grey2 pb-0 ml-5">
-                    Last Name
+                    Last Name:
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
@@ -343,15 +343,17 @@ const EventDetails: React.FC = () => {
                 </IonRow>
                 <IonRow>
                   <IonCol size="12" className="text-grey2 pb-0 ml-5">
-                    Phone
+                    Phone:
                   </IonCol>
                   <IonCol className="pd-0 pd-p" size="12">
                     <PhoneInput
+                       
                       countryCodeEditable={false}
                       country={"us"}
                       onChange={(phone) =>
                         setAttendeeData({ ...attendeeData, phone: phone })
                       }
+                    
                       containerStyle={{
                         border: "1px solid #707070",
                         borderRadius: "9px",
@@ -378,7 +380,7 @@ const EventDetails: React.FC = () => {
                 </IonRow>
                 <IonRow>
                   <IonCol size="12" className="text-grey2 pb-0 ml-5">
-                    Email
+                    Email:
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput

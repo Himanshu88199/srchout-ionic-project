@@ -71,10 +71,10 @@ const Dashboard: React.FC = () => {
       <IonPage className="pg-grey">
         <Header />
         <IonContent>
-          <IonRow>
+          <IonRow className="xyz">
             <IonCol className="col">
-              <IonItem>
-                <IonLabel className="dashboard-heading">EVENTS</IonLabel>
+              <IonItem className="newcol">
+                <IonLabel className="dashboard-heading ">EVENTS</IonLabel>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -159,9 +159,9 @@ const Dashboard: React.FC = () => {
               </IonCard>
             </IonCol>
           </IonRow>
-          <IonRow>
+          <IonRow className=" xyz1">
             <IonCol className="col1">
-              <IonItem>
+              <IonItem className="item">
                 <IonLabel className="dashboard-heading">TASKS</IonLabel>
               </IonItem>
             </IonCol>
