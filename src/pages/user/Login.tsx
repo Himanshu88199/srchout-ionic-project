@@ -8,7 +8,7 @@ import {
   IonLoading,
   IonRow,
 } from "@ionic/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Service from "../../services/http";
 import "./login.css";
@@ -16,9 +16,14 @@ import LoginIcons from "./loginIcons";
 import { Preferences } from '@capacitor/preferences';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
+
+
+
 const Login: React.FC = () => {
   const [passwordType, setPasswordType] = useState<any>("password");
   const [loginData, setLogindata] = useState<any>({ email: '', password: '' });
+  const rememberToken =localStorage.getItem("token");
+
 
   const history = useHistory();
 
@@ -27,23 +32,44 @@ const Login: React.FC = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [remember, setRemember] = useState(false);
 
+ 
+  useEffect(()=>{
+    let temp = localStorage.getItem("loginData");
+    if(temp==null || temp=="")
+    temp = JSON.stringify({email:"",password:""})
+    else setRemember( true)
+    setLogindata(JSON.parse(temp));
+  },[])
+
   const handleLogin = (e: any) => {
     e.preventDefault();
-    setShowLoading(true);
-    const request = new Service();
-    request.post(`users/login`, loginData)
-      .then(async (result: any) => {
-        if (result.err) {
-          setShowLoading(false);
-          setMessage("Invalid user credentials!");
-          setError(true);
-        } else {
-          setShowLoading(false);
-          await Preferences.set({ key: 'token', value: result.data.jwt_token });
-          history.replace("/my/home");
-        }
-      });
+    
+      setShowLoading(true);
+      const request = new Service();
+      request.post(`users/login`, loginData)
+        .then(async (result: any) => {
+          if (result.err) {
+            setShowLoading(false);
+            setMessage("Invalid user credentials!");
+            setError(true);
+          } else {
+            setShowLoading(false);
+            await Preferences.set({ key: 'token', value: result.data.jwt_token });
+            console.log(remember);
+            if(remember)
+            {
+              localStorage.setItem("token",result.data.jwt_token);
+              localStorage.setItem("loginData",JSON.stringify(loginData));
+            }
+            else {
+              localStorage.setItem("loginData","");
+            }
+            history.replace("/my/home");
+          }
+        });
   };
+
+
   return (
     <>
       <IonRow>
@@ -121,7 +147,7 @@ const Login: React.FC = () => {
         <IonRow className="remember-forgot">
           <div className="remember">
             <input type="checkbox" name="remember" checked={remember} onChange={(e) => setRemember(!remember)} />
-            <label htmlFor="remember">Remember me</label>
+            <label htmlFor="remember" >Remember me</label>
           </div>
           <div>
             <a href="">Forgot Password</a>
