@@ -23,6 +23,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useEffect, useState } from "react";
 import Service from "../../services/http";
+import { Redirect } from "react-router";
 
 const MyProfile: React.FC = () => {
   const request = new Service();
@@ -165,6 +166,7 @@ const MyProfile: React.FC = () => {
               <IonCol>
                 {/* <IonItem className='input-border'> */}
                 <PhoneInput
+                  placeholder="phone number"
                   country={"us"}
                   countryCodeEditable={false}
                   disabled={!edit}
@@ -179,9 +181,10 @@ const MyProfile: React.FC = () => {
                   inputStyle={{
                     width: "86.5vw",
                     height: "45px",
-                    border: "1px solid #707070",
+                    //border: "1px solid #707070",
                     borderRadius: "9px",
                     color: edit ? "#000" : "dimgrey",
+                    border: "2px solid red",
                   }}
                   dropdownStyle={{ height: "500px" }}
                   buttonStyle={{
