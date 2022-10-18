@@ -297,6 +297,7 @@ const MyEvent: React.FC = () => {
                   </IonCol>
                   <IonCol>
                     <PhoneInput
+                      countryCodeEditable={false}
                       country={"us"}
                       onChange={(phone) =>
                         setAttendeeData({ ...attendeeData, phone: phone })

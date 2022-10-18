@@ -199,7 +199,7 @@ const CreateEventTask: React.FC = () => {
               </IonLabel>
               <IonInput
                 required
-                className="input-border col-50"
+                className="input-border col-50 col52"
                 value={taskDate}
                 onIonChange={(e: any) => {
                   onChangeError(e);
@@ -207,6 +207,7 @@ const CreateEventTask: React.FC = () => {
                 }}
                 type="date"
                 name="date"
+                size={200}
               ></IonInput>
               {formErrors.date && (
                 <small style={{ color: "red" }} className="ml-10">
@@ -220,7 +221,7 @@ const CreateEventTask: React.FC = () => {
               </IonLabel>
               <IonInput
                 required
-                className="input-border col-50"
+                className="input-border col-50 col51"
                 value={taskTime}
                 onIonChange={(e: any) => {
                   onChangeError(e);
