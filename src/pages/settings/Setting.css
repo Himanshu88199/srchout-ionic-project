@@ -6,8 +6,8 @@
   padding-right: 27px;
 }
 
-.pl-2 {
-  padding-left: 27px;
+.pl-2{
+  margin-left: 35px;
 }
 
 .setting-text {
@@ -15,6 +15,7 @@
   font-size: 14px;
   line-height: 27.07px;
   color: rgba(128, 128, 128, 1);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.79);
 }
 
 .text-dec {
@@ -23,8 +24,9 @@
 }
 
 .mt-50 {
-  margin-top: 15px;
+  margin-top: 40px;
 }
+
 
 .ad {
   width: 100%;

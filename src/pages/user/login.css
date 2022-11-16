@@ -57,7 +57,8 @@
   color: #808080;
   width: 88vw;
   margin: auto;
-  font-size: 14px;
+  font-size: 13px;
+  margin-top: 10px;
 }
 
 .remember {
@@ -72,9 +73,10 @@
 
 .remember-forgot a {
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   color: #808080;
   font-family: "Montserrat", sans-serif;
+  margin-top: 10px;
 }
 
 .m-auto {
@@ -86,10 +88,24 @@
 }
 
 .validation-errors {
-  color: red;
-  margin-left: 1.9rem;
+  /* color: red;
+  margin-left: auto;
+  font-size: 14px;
   font-weight: 300;
   font-family: "Montserrat", sans-serif;
+  width: 87vw;
+  display: flex; */
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+    color: red;
+    width: 88vw;
+    margin: auto;
+    font-size: 13px;
+    margin-top: 5px;
+  
+
 }
 
 .center span {

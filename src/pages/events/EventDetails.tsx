@@ -229,7 +229,7 @@ const EventDetails: React.FC = () => {
             </IonRow>
             <IonRow className="text-grey2 mt-16" style={{ width: "100%" }}>
               <IonCol size="12">
-                <IonLabel className="dark-text"> Tasks :</IonLabel>
+                <IonLabel className="dark-text"> Tasks:</IonLabel>
               </IonCol>
               <IonCol>
                 <IonRow>
@@ -311,7 +311,7 @@ const EventDetails: React.FC = () => {
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
-                      required
+                      
                       type="text"
                       className="input-border"
                       value={attendeeData.fname}
@@ -329,7 +329,7 @@ const EventDetails: React.FC = () => {
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
-                      required
+                      
                       type="text"
                       className="input-border"
                       value={attendeeData.lname}
@@ -341,11 +341,11 @@ const EventDetails: React.FC = () => {
                     )}
                   </IonCol>
                 </IonRow>
-                <IonRow>
+                <IonRow  style={{display:"flex"}}>
                   <IonCol size="12" className="text-grey2 pb-0 ml-5">
                     Phone
                   </IonCol>
-                  <IonCol className="pd-0 pd-p" size="12">
+                  <IonCol className="pd-0 pd-p" size="12" >
                     <PhoneInput
                       countryCodeEditable={false}
                       country={"us"}
@@ -357,12 +357,14 @@ const EventDetails: React.FC = () => {
                         borderRadius: "9px",
                         width: "87vw",
                         height: "45px",
+                        
                       }}
                       inputStyle={{
                         width: "86vw",
                         height: "42px",
                         border: "none",
                         borderRadius: "9px",
+                        
                       }}
                       dropdownStyle={{ height: "200px" }}
                       buttonStyle={{
@@ -371,7 +373,7 @@ const EventDetails: React.FC = () => {
                         borderRadius: "9px",
                       }}
                       value={attendeeData.phone}
-                      inputProps={{ name: "phone", required: true }}
+                      inputProps={{ name: "phone"}}
                       placeholder="Phone Number"
                     ></PhoneInput>
                   </IonCol>
@@ -382,7 +384,7 @@ const EventDetails: React.FC = () => {
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
-                      required
+                      
                       type="email"
                       className="input-border"
                       value={attendeeData.email}

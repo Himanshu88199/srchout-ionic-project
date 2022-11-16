@@ -14,7 +14,7 @@
   font-weight: 700;
   margin: 0.8rem 0rem;
   margin-bottom: 0.5rem;
-  margin-top: -9px;
+  margin-top: -4px;
 }
 
 .events {
@@ -82,11 +82,11 @@
   margin-left: 10px;
   margin-top: -1rem;
   padding: 0.5rem;
-  width: 35px;
+  width: 37px;
 }
 
 .user {
-  width: 40px;
+  width: 50px;
 }
 
 .user-img:hover {

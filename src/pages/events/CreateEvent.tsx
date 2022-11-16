@@ -120,37 +120,38 @@ const CreateEvent: React.FC = () => {
                     </IonRow>
                     <form onSubmit={handleSaveEvent}>
                         <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-12' >
+                            <IonCol size='12' className='text-grey2 pb-0 ml-10' >
                                 Event Name:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput required className='input-border pd' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
+                                <IonInput  className='input-border pd' value={eventName} onIonChange={(e) => setEventName(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-12'>
+                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
                                 Event Description:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
                                 <IonTextarea rows={3} className='input-border-2' value={eventDesc} onIonChange={(e) => setEventDesc(e.detail.value!)}></IonTextarea>
                             </IonCol>
                         </IonRow>
-                        <IonRow className='date-time'>
+                        {/* <IonRow className='date-time'> */}
+                        <IonRow class="double-input">
                             <IonCol>
-                                <IonLabel className='text-grey2 pb-0 ml-12 '>Event Date:</IonLabel>
-                                <IonInput required className='input-border col-50 date-input' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)} type="date"></IonInput>
+                                <IonLabel className='text-grey2 pb-0'>Event Date:</IonLabel>
+                                <IonInput  className='input-border col-50 col52' value={eventDate} onIonChange={(e: any) => setEventDate(e.detail.value)} type="date"></IonInput>
                             </IonCol>
                             <IonCol>
                                 <IonLabel className='text-grey2 pb-0 time-label'>Event Time:</IonLabel>
-                                <IonInput required className='input-border col-50 time-input' value={eventTime} onIonChange={(e: any) => setEventTime(e.detail.value)} type="time"></IonInput>
+                                <IonInput  className='input-border col-50 col52' value={eventTime} onIonChange={(e: any) => setEventTime(e.detail.value)} type="time"></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
-                            <IonCol size='12' className='text-grey2 pb-0 ml-12'>
+                            <IonCol size='12' className='text-grey2 pb-0 ml-10'>
                                 Event Location:
                             </IonCol>
                             <IonCol className='pd-0' size='12'>
-                                <IonInput required className='input-border pd' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
+                                <IonInput  className='input-border pd' value={eventLoc} onIonChange={(e) => setEventLoc(e.detail.value!)}></IonInput>
                             </IonCol>
                         </IonRow>
                         <IonRow>
@@ -158,6 +159,7 @@ const CreateEvent: React.FC = () => {
                                 <IonButton className='save-btn' size='default' expand="block" type="submit">Save</IonButton>
                             </IonCol>
                         </IonRow>
+                        
                     </form>
                     <IonToast
                         isOpen={success}

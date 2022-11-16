@@ -107,7 +107,7 @@ const Login: React.FC = () => {
                 value={loginData.email}
                 onIonChange={(e) => setLogindata({ ...loginData, email: e.detail.value })}
                 type="email"
-                required
+                
                 placeholder="Email Address"
               ></IonInput>
             </IonItem>
@@ -125,7 +125,7 @@ const Login: React.FC = () => {
                 onIonChange={(e) => setLogindata({ ...loginData, password: e.detail.value })}
                 placeholder="Password"
                 type={passwordType}
-                required
+                
               ></IonInput>
               {/* <IonIcon slot="end" src="../assets/eye.svg" onClick={() => {
                 if (passwordType === "password") {

@@ -166,7 +166,7 @@ const Createuser: React.FC = () => {
                     name="fname"
                     type="text"
                     placeholder="First Name"
-                    required
+                
                   ></IonInput>
                 </IonItem>
                 {errors.fname && (
@@ -181,7 +181,7 @@ const Createuser: React.FC = () => {
                     name="lname"
                     type="text"
                     placeholder="Last Name"
-                    required
+                    
                   ></IonInput>
                 </IonItem>
                 {errors.lname && (
@@ -189,6 +189,8 @@ const Createuser: React.FC = () => {
                 )}
               </IonCol>
               <IonCol>
+              <IonItem className="input-border">
+            
                 {/* <IonItem className="input-border">
                   <IonCol size="3">
                   <IonSelect value={formData.countrycode} onChange={onChangeHandler} name="countrycode">
@@ -212,36 +214,45 @@ const Createuser: React.FC = () => {
                 </IonItem> */}
                 {/* <IonItem className="input-border"> */}
                 <PhoneInput
+                
                   country={"us"}
                   onChange={(phone) =>
                     setFormdata({ ...formData, phone: phone })
                   }
                   countryCodeEditable={false}
                   containerStyle={{
-                    marginLeft: "18px",
+                    width:"99.5%",
+                    marginLeft: "0px",
                     border: "none",
                     height: "42px",
                     borderRadius: "9px",
+                    display: "flex",
+                    // justifyContent:"center",
                   }}
+                  
                   inputStyle={{
                     height: "45px",
-                    width: "90%",
-                    border: "1px solid #707070",
+                    width: "100%",
+                    border: "none",
                     borderRadius: "9px",
                     marginLeft: "1px",
+                    paddingLeft:"42px",
                   }}
                   dropdownStyle={{ height: "500px" }}
                   buttonStyle={{
                     height: "30px",
                     margin: "7px",
                     borderRadius: "9px",
+                    left:"-7px",
+                    overflow:"visible",
                   }}
                   value={formData.phone}
-                  inputProps={{ name: "phone", required: true }}
+                  inputProps={{ name: "phone"}}
                   placeholder="phone number"
                 />
 
                 {/* </IonItem> */}
+                </IonItem>
               </IonCol>
               <IonCol>
                 <IonItem className="input-border">
@@ -249,7 +260,6 @@ const Createuser: React.FC = () => {
                     value={formData.email}
                     onIonChange={onChangeHandler}
                     name="email"
-                    required
                     placeholder="Email Address"
                     type="email"
                   ></IonInput>
@@ -264,7 +274,6 @@ const Createuser: React.FC = () => {
                     value={formData.password}
                     onIonChange={onChangeHandler}
                     type={passwordType}
-                    required
                     name="password"
                     placeholder="Password"
                   ></IonInput>
@@ -342,3 +351,5 @@ const Createuser: React.FC = () => {
   );
 };
 export default Createuser;
+
+

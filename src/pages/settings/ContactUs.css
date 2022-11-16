@@ -1,5 +1,8 @@
 .ml-10 {
-  margin-left: 5vw;
+  margin-left: 6vw;
+}
+.ml-11{
+  margin-left: 3vw;
 }
 
 .mt-43 {
@@ -9,9 +12,18 @@
 .mt-32 {
   margin-top: 32px;
 }
-
+.heading-center{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  font-size: 13px;
+  margin-top: 5px;
+  width: 88vw !important;
+}
+  
 .pd input {
-  margin-left: 0.5rem;
+  margin-left: 0rem;
 }
 
 .text-grey2 {
@@ -30,6 +42,7 @@
   margin-top: 3px;
   box-shadow: 0px 2.5px 5px rgba(0, 0, 0, 0.13);
   padding: 0.5rem;
+  padding-left: 0px;
 }
 .sign-btn {
   height: 50px;

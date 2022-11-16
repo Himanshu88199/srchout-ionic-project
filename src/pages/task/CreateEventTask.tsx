@@ -153,7 +153,7 @@ const CreateEventTask: React.FC = () => {
             </IonCol>
             <IonCol className="pd-0" size="12">
               <IonInput
-                required
+                
                 className="input-border pd"
                 value={taskName}
                 onIonChange={(e) => {
@@ -175,7 +175,7 @@ const CreateEventTask: React.FC = () => {
             </IonCol>
             <IonCol className="pd-0" size="12">
               <IonTextarea
-                required
+                
                 rows={6}
                 className="input-border-2"
                 value={taskDesc}
@@ -184,7 +184,7 @@ const CreateEventTask: React.FC = () => {
                   setTaskDesc(e.detail.value!);
                 }}
                 name="description"
-              ></IonTextarea>
+                ></IonTextarea>
               {formErrors.description && (
                 <small style={{ color: "red" }} className="ml-10">
                   Task Description is required
@@ -192,13 +192,14 @@ const CreateEventTask: React.FC = () => {
               )}
             </IonCol>
           </IonRow>
-          <IonRow className="date-time">
+          <IonRow class="double-input">
+          {/* <IonRow className="date-time"> */}
             <IonCol>
-              <IonLabel className="text-grey2 pb-0 ml-10">
+              <IonLabel className="text-grey2 pb-0">
                 Task Due Date:
               </IonLabel>
               <IonInput
-                required
+                
                 className="input-border col-50 col52"
                 value={taskDate}
                 onIonChange={(e: any) => {
@@ -216,11 +217,11 @@ const CreateEventTask: React.FC = () => {
               )}
             </IonCol>
             <IonCol>
-              <IonLabel className="text-grey2 pb-0 ml-10">
+              <IonLabel className="text-grey2 pb-0">
                 Task Due Time:
               </IonLabel>
               <IonInput
-                required
+                
                 className="input-border col-50 col51"
                 value={taskTime}
                 onIonChange={(e: any) => {
@@ -237,6 +238,8 @@ const CreateEventTask: React.FC = () => {
               )}
             </IonCol>
           </IonRow>
+
+          {/* </IonRow> */}
           <IonRow>
             <IonCol size="12" className="text-grey2 pb-0 ml-10">
               Assign Task To:

@@ -24,67 +24,48 @@ const Setting: React.FC = () => {
                         </IonCol>
                     </IonRow>
                     <IonRow>
-                        <IonCol className='pl-2 setting-text' size='12' onClick={() => history.push('/my/profile')}>
+                        <IonCol className='pl-2 setting-text' size='10' onClick={() => history.push('/my/profile')}>
                             My Profile
                         </IonCol>
                     </IonRow>
+               
                     <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
-                            Notification
-                        </IonCol>
-                        <IonCol class='text-right pr-2 setting-text' size='6'>
-                            On/Off
-                        </IonCol>
-                    </IonRow>
-
-                    <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
-                            Sound
-                        </IonCol>
-                        <IonCol class='text-right pr-2 setting-text' size='6'>
-                            On/Off
-                        </IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
-                            <span onClick={() => history.push('/my/changepassword')} className='text-dec' >Change Password</span>
-                        </IonCol>
-                    </IonRow>
-                    <IonRow className='mt-50'>
-                        <IonCol className='pl-2 setting-text' size='6'>
+                        <IonCol className='pl-2 setting-text' size='5'>
                             Subscription
                         </IonCol>
-                        <IonCol class='text-right pr-2 setting-text' size='6'>
+                        <IonCol class='text-right pr-2 setting-text' size='5'>
                             Free
                         </IonCol>
                     </IonRow>
+
+                    <IonRow className='mt-50'>
+                        <IonCol className='pl-2 setting-text' size='10'>
+                            <span onClick={() => history.push('/my/changepassword')} className='text-dec' >Change Password</span>
+                        </IonCol>
+                    </IonRow>
                     <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
+                        <IonCol className='pl-2 setting-text' size='10'>
                             <a href="" className='text-dec' >Help</a>
                         </IonCol>
                     </IonRow>
                     <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
+                        <IonCol className='pl-2 setting-text' size='10'>
                             <a href="" className='text-dec' >Tell your friends</a>
                         </IonCol>
                     </IonRow>
                     <IonRow className='mt-50'>
-                        <IonCol className='pl-2 setting-text' size='6'>
+                        <IonCol className='pl-2 setting-text' size='10'>
                             <a href="" className='text-dec' >Privacy Policy</a>
                         </IonCol>
                     </IonRow>
                     <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
+                        <IonCol className='pl-2 setting-text' size='10'>
                             <a href="" className='text-dec' >Terms and Conditions</a>
                         </IonCol>
                     </IonRow>
-                    <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
-                            <a href="" className='text-dec' >Delete my account</a>
-                        </IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol className='pl-2 setting-text' size='6'>
+
+                    <IonRow  className='mt-50'>
+                        <IonCol className='pl-2 setting-text' size='10'>
                             <span onClick={() => history.push('/my/contactus')} className='text-dec' >Contact Us</span>
                         </IonCol>
                     </IonRow>
@@ -93,10 +74,10 @@ const Setting: React.FC = () => {
                             Advertisements
                         </IonCol>
                     </IonRow>
-                    <IonRow>
-                        <IonCol className='m-auto mt-34' size='10.6'>
-                            <IonButton className='save-btn' size='small' expand="block" type="button" onClick={() => handleLogout()}>Log Out</IonButton>
-                        </IonCol>
+                    <IonRow >
+                    <IonCol className='pl-2 setting-text' size='10'>
+                    <a href="" className='text-dec save-btn' onClick={() => handleLogout()} >Sign out</a>
+                    </IonCol>
                     </IonRow>
                     <IonToast
                         isOpen={success}

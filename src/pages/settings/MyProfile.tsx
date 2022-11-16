@@ -135,7 +135,7 @@ const MyProfile: React.FC = () => {
                 <IonItem className="input-border">
                   <IonInput
                     disabled={!edit}
-                    required
+                    
                     value={profile.fname}
                     onIonChange={changeHandler}
                     name="fname"
@@ -152,7 +152,7 @@ const MyProfile: React.FC = () => {
                 <IonItem className="input-border">
                   <IonInput
                     disabled={!edit}
-                    required
+                    
                     value={profile.lname}
                     onIonChange={changeHandler}
                     name="lname"
@@ -173,10 +173,12 @@ const MyProfile: React.FC = () => {
                   onChange={(phone) => setProfile({ ...profile, phone: phone })}
                   value={profile.phone}
                   containerStyle={{
-                    marginLeft: "20px",
                     border: "none",
                     height: "42px",
                     borderRadius: "9px",
+                    display:"flex",
+                    justifyContent:"center",
+                    margin: "auto",
                   }}
                   inputStyle={{
                     width: "86.5vw",
@@ -184,12 +186,14 @@ const MyProfile: React.FC = () => {
                     border: "1px solid #707070",
                     borderRadius: "9px",
                     color: edit ? "#000" : "dimgrey",
+                    paddingLeft:"60px",
                   }}
                   dropdownStyle={{ height: "500px" }}
                   buttonStyle={{
                     height: "30px",
                     margin: "7px",
                     borderRadius: "9px",
+                    left:"30px",
                   }}
                 />
                 {/* </IonItem> */}
@@ -198,7 +202,7 @@ const MyProfile: React.FC = () => {
                 <IonItem className="input-border">
                   <IonInput
                     disabled={!edit}
-                    required
+                    
                     value={profile.email}
                     onIonChange={changeHandler}
                     name="email"

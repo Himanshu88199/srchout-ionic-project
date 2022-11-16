@@ -256,12 +256,11 @@ const MyEvent: React.FC = () => {
               </IonRow>
               <form onSubmit={submitFormAttendee}>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-11 md">
                     First Name
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
-                      required
                       type="text"
                       className="input-border"
                       value={attendeeData.fname}
@@ -274,12 +273,11 @@ const MyEvent: React.FC = () => {
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-11 md">
                     Last Name
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
-                      required
                       type="text"
                       className="input-border"
                       value={attendeeData.lname}
@@ -292,11 +290,12 @@ const MyEvent: React.FC = () => {
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-11 md">
                     Phone
                   </IonCol>
                   <IonCol>
                     <PhoneInput
+                    
                       countryCodeEditable={false}
                       country={"us"}
                       onChange={(phone) =>
@@ -307,6 +306,8 @@ const MyEvent: React.FC = () => {
                         borderRadius: "9px",
                         width: "87vw",
                         height: "45px",
+                        fontSize: "14px",
+                        margin: "auto",
                       }}
                       inputStyle={{
                         width: "86vw",
@@ -323,19 +324,23 @@ const MyEvent: React.FC = () => {
                         margin: "7px",
                         borderRadius: "9px",
                       }}
+
+                    
+
+
                       value={attendeeData.phone}
-                      inputProps={{ name: "phone", required: true }}
+                      inputProps={{ name: "phone"}}
                       placeholder="Phone Number"
                     ></PhoneInput>
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  <IonCol size="12" className="text-grey2 pb-0">
+                  <IonCol size="12" className="text-grey2 pb-0 ml-11 md">
                     Email
                   </IonCol>
                   <IonCol className="pd-0" size="12">
                     <IonInput
-                      required
+                      
                       type="email"
                       className="input-border"
                       value={attendeeData.email}
